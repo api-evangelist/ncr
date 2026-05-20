@@ -23,6 +23,10 @@ maintainers:
     email: kin@apievangelist.com
 apis: []
 common:
+  - type: GitHubOrganization
+    url: https://github.com/NCR-Corporation
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/ncr-corporation
   - type: Website
     url: https://www.ncr.com
   - type: Website
