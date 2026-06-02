@@ -2,6 +2,7 @@ aid: ncr
 url: https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/apis.yml
 name: NCR
 tags:
+  - Restaurant
   - Retail
   - Banking
   - ATM
@@ -10,7 +11,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-03-24'
-modified: '2026-04-28'
+modified: '2026-06-02'
 position: Consuming
 description: >-
   NCR Corporation separated in October 2023 into two independent public companies: NCR
