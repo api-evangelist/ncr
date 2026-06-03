@@ -1,0 +1,10 @@
+{
+  "channel": "Web",
+  "comments": "Customer request",
+  "customer": "example",
+  "orderLines": [
+    "example"
+  ],
+  "id": "500123",
+  "status": "ACTIVE"
+}

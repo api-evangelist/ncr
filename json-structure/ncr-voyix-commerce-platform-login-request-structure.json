@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "LoginRequest schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-login-request-structure.json",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "example": "jsmith"
+    },
+    "password": {
+      "type": "string",
+      "example": "s3cr3t-passw0rd"
+    }
+  },
+  "required": [
+    "username",
+    "password"
+  ],
+  "name": "LoginRequest"
+}

@@ -1,0 +1,106 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: NCR Voyix
+providerId: ncr
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Commerce
+  - Point of Sale
+  - Payments
+description: >-
+  FOCUS-aligned FinOps for NCR Voyix: enterprise commerce-platform subscriptions
+  (per terminal/lane, per site, per application) combined with transaction-based
+  payment processing take rates, billed under negotiated contracts.
+sources:
+  - https://developer.ncrvoyix.com/
+  - https://www.ncrvoyix.com/
+  - https://www.techimply.com/profile/ncr-voyix
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: NCR Voyix Corporation
+serviceCategory: Commerce + Point of Sale + Payments
+billingModel:
+  pricingCategory: Subscription + Take Rate
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Adjustment
+    - Refund
+    - Credit
+focusColumns:
+  ServiceName: NCR Voyix Commerce Platform
+  ServiceCategory: Commerce
+  ServiceSubcategory: Point of Sale
+  ProviderName: NCR Voyix
+  PublisherName: NCR Voyix Corporation
+  InvoiceIssuerName: NCR Voyix Corporation
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: platform_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - application
+      - organization
+  - name: pos_terminals
+    unit: seat
+    aggregation: max
+    dimensions:
+      - site
+      - terminal_type
+  - name: sites
+    unit: instance-month
+    aggregation: max
+    dimensions:
+      - region
+  - name: payment_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - card_brand
+      - channel
+  - name: payment_volume
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - currency
+      - channel
+  - name: api_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - service
+principles:
+  - name: Visibility
+    description: >-
+      Track consumption through NCR Voyix back-office reporting and the platform
+      APIs (Order, Catalog, Sites). Use the nep-correlation-id header to trace
+      individual API calls across services for usage attribution.
+  - name: Allocation
+    description: >-
+      Attribute spend by organization (nep-organization) and site
+      (nep-enterprise-unit / enterprise unit). POS-terminal and site meters
+      naturally allocate cost to physical locations and brands.
+  - name: Optimization
+    description: >-
+      Negotiate committed-use enterprise pricing, consolidate terminals/lanes
+      per site, and use the 90-day developer Test Drive sandbox to validate
+      integrations before incurring production charges.
+  - name: Accountability
+    description: >-
+      Commerce and finance owners review monthly invoices against contracted
+      terminal counts, site counts, and payment take rates; engage NCR Voyix
+      account management for true-ups and adjustments.

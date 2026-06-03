@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemPrice",
+  "description": "ItemPrice schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-schema/ncr-voyix-commerce-platform-item-price-schema.json",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "example": 1
+    },
+    "price": {
+      "type": "number",
+      "format": "double",
+      "example": 9.99
+    },
+    "currency": {
+      "type": "string",
+      "example": "USD"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-06-02T14:30:00Z"
+    },
+    "status": {
+      "$ref": "#/components/schemas/Status"
+    },
+    "priceId": {
+      "type": "object",
+      "properties": {
+        "itemCode": {
+          "type": "string"
+        },
+        "priceCode": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "price"
+  ]
+}

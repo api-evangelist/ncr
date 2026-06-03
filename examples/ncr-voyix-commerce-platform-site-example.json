@@ -1,0 +1,11 @@
+{
+  "siteName": "Downtown Store",
+  "enterpriseUnitName": "Downtown Store",
+  "referenceId": "example",
+  "address": "example",
+  "coordinates": "example",
+  "currency": "USD",
+  "timeZone": "America/New_York",
+  "status": "ACTIVE",
+  "id": "500123"
+}

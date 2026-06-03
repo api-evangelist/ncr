@@ -1,0 +1,90 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: NCR Voyix
+providerId: ncr
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Commerce
+  - Point of Sale
+  - Retail
+  - Restaurant
+  - Enterprise
+description: >-
+  NCR Voyix prices its commerce solutions as enterprise, contact-sales
+  engagements: the price for the Commerce Platform and its software
+  applications (retail and restaurant POS, ecommerce, payments) is quoted per
+  deal and is not published on the website. Developers can self-serve a 90-day
+  Test Drive trial of the platform APIs (Order, Catalog, Sites, Security,
+  Provisioning) at no cost via developer.ncrvoyix.com. Published entry points
+  from third-party review aggregators indicate solution pricing starts in the
+  low hundreds of dollars per month (e.g. ~$108/month entry, Aloha Cloud Pro
+  ~$175/month per terminal), but these are indicative, not authoritative.
+  Contact NCR Voyix sales for a binding quote.
+sources:
+  - https://developer.ncrvoyix.com/
+  - https://www.ncrvoyix.com/
+  - https://www.techimply.com/profile/ncr-voyix
+  - https://loman.ai/blog/NCR-Aloha-pricing
+plans:
+  - id: ncr-developer-test-drive
+    name: Developer Test Drive
+    type: freemium
+    description: A 90-day free trial of the NCR Voyix Business Services Platform APIs.
+    entries:
+      - label: Trial period
+        name: trial_period
+        type: quota
+        metric: month
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$0'
+        userMultiplied: false
+      - label: Sandbox API access
+        name: sandbox_api_access
+        type: flat
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: '1'
+        price: '$0'
+        userMultiplied: false
+    elements:
+      - name: Sandbox environment access
+      - name: Order, Catalog, Sites, Security, and Provisioning APIs
+      - name: Tutorials and quick-start guides
+  - id: ncr-commerce-platform-enterprise
+    name: Commerce Platform (Enterprise)
+    type: enterprise
+    description: Production NCR Voyix Commerce Platform and software applications, quoted per engagement.
+    entries:
+      - label: Platform and applications
+        name: platform_subscription
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: '1'
+        price: custom
+        userMultiplied: false
+      - label: POS terminal / lane
+        name: pos_terminal
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: 'see vendor sales (indicative ~$175/month per terminal for Aloha Cloud Pro)'
+        userMultiplied: true
+    elements:
+      - name: Unified-commerce POS for retail and restaurants
+      - name: Ecommerce and digital ordering
+      - name: Payments processing
+      - name: Production Business Services Platform API access

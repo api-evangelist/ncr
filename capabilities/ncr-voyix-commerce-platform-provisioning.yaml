@@ -1,0 +1,161 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "NCR Voyix Commerce Platform APIs — Provisioning"
+  description: >-
+    Provisioning surface of the NCR Voyix Commerce Platform. 3 operations. Lead operation: NCR Voyix Create User.
+    Self-contained Naftiko capability covering one NCR Voyix business surface.
+  tags:
+    - NCR Voyix
+    - Commerce Platform
+    - Provisioning
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      NCR_VOYIX_SECRET_KEY: NCR_VOYIX_SECRET_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "ncr-voyix-commerce-platform-provisioning"
+      baseUri: "https://api.ncr.com"
+      description: "NCR Voyix Commerce Platform APIs — Provisioning business capability. AccessKey (HMAC) authenticated. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "AccessKey {{env.NCR_VOYIX_SECRET_KEY}}"
+        placement: header
+      resources:
+        - name: "provisioning-users-post"
+          path: "/provisioning/users"
+          operations:
+            - name: "createUser"
+              method: POST
+              description: "NCR Voyix Create User"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "provisioning-users-put"
+          path: "/provisioning/users"
+          operations:
+            - name: "updateCurrentUser"
+              method: PUT
+              description: "NCR Voyix Update Current User"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "provisioning-user-profiles-get"
+          path: "/provisioning/user-profiles"
+          operations:
+            - name: "getCurrentUserProfile"
+              method: GET
+              description: "NCR Voyix Get Current User Profile"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "ncr-voyix-commerce-platform-provisioning-rest"
+      port: 8080
+      description: "REST adapter for NCR Voyix Commerce Platform APIs — Provisioning. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/provisioning/users"
+          name: "provisioning-users"
+          description: "NCR Voyix Create User"
+          operations:
+            - method: POST
+              name: "createUser"
+              description: "NCR Voyix Create User"
+              call: "ncr-voyix-commerce-platform-provisioning.createUser"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/provisioning/users"
+          name: "provisioning-users"
+          description: "NCR Voyix Update Current User"
+          operations:
+            - method: PUT
+              name: "updateCurrentUser"
+              description: "NCR Voyix Update Current User"
+              call: "ncr-voyix-commerce-platform-provisioning.updateCurrentUser"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/provisioning/user-profiles"
+          name: "provisioning-user-profiles"
+          description: "NCR Voyix Get Current User Profile"
+          operations:
+            - method: GET
+              name: "getCurrentUserProfile"
+              description: "NCR Voyix Get Current User Profile"
+              call: "ncr-voyix-commerce-platform-provisioning.getCurrentUserProfile"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      namespace: "ncr-voyix-commerce-platform-provisioning-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for NCR Voyix Commerce Platform APIs — Provisioning. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "create-user"
+          description: "NCR Voyix Create User"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "ncr-voyix-commerce-platform-provisioning.createUser"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-current-user"
+          description: "NCR Voyix Update Current User"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-provisioning.updateCurrentUser"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-current-user-profile"
+          description: "NCR Voyix Get Current User Profile"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-provisioning.getCurrentUserProfile"
+          outputParameters:
+            - type: object
+              mapping: "$."

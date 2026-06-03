@@ -1,0 +1,8 @@
+{
+  "channel": "Web",
+  "comments": "Customer request",
+  "customer": "example",
+  "orderLines": [
+    "example"
+  ]
+}

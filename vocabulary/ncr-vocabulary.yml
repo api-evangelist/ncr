@@ -1,0 +1,311 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "NCR Voyix"
+  description: >-
+    Unified taxonomy for the NCR Voyix Commerce Platform (Business Services
+    Platform), mapping the operational dimension (REST operations across
+    Catalog, Category, Selling, Order, Site, Security, and Provisioning) to the
+    capability dimension (Naftiko REST + MCP capabilities) and the personas who
+    use them. Derived from the publicly published NCR Voyix sample applications.
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+  apis:
+    - name: "NCR Voyix Commerce Platform APIs"
+      namespace: "ncr-voyix-commerce-platform"
+      version: "1.0"
+      baseUrl: "https://api.ncr.com"
+      status: active
+  resources:
+    - name: items
+      api: ncr-voyix-commerce-platform
+      actions: [list, create, get, update]
+    - name: item-prices
+      api: ncr-voyix-commerce-platform
+      actions: [create, update, get-multiple]
+    - name: item-attributes
+      api: ncr-voyix-commerce-platform
+      actions: [update, get-multiple]
+    - name: item-details
+      api: ncr-voyix-commerce-platform
+      actions: [get, search]
+    - name: category-nodes
+      api: ncr-voyix-commerce-platform
+      actions: [list, create, update, get, ancestors]
+    - name: groups
+      api: ncr-voyix-commerce-platform
+      actions: [list, create, update, get]
+    - name: carts
+      api: ncr-voyix-commerce-platform
+      actions: [create, get, update, delete, add-item, update-item, remove-item]
+    - name: orders
+      api: ncr-voyix-commerce-platform
+      actions: [create, get, update, find]
+    - name: sites
+      api: ncr-voyix-commerce-platform
+      actions: [create, get, update, find, find-nearby, by-reference-id]
+    - name: authentication
+      api: ncr-voyix-commerce-platform
+      actions: [login, authorize, set-password, effective-roles]
+    - name: users
+      api: ncr-voyix-commerce-platform
+      actions: [create, update, get-profile]
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: search
+      httpMethod: POST
+      pattern: query
+    - name: find
+      httpMethod: POST
+      pattern: query
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: put
+      httpMethod: PUT
+      pattern: write
+    - name: update
+      httpMethod: PATCH
+      pattern: write
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - name: authenticate
+      httpMethod: POST
+      pattern: write
+  schemas:
+    catalog:
+      - Item
+      - ItemInput
+      - ItemPrice
+      - ItemPriceInput
+      - ItemPage
+      - ItemCodeList
+      - LocalizedText
+    category:
+      - CategoryNode
+      - Group
+    selling:
+      - Cart
+      - CartLine
+      - CartLineInput
+      - ProductId
+      - Quantity
+    order:
+      - Order
+      - OrderInput
+      - OrderLine
+      - OrderSearch
+      - Customer
+    site:
+      - Site
+      - SiteInput
+      - SiteSearch
+      - Address
+      - Coordinates
+    security:
+      - LoginRequest
+      - TokenResponse
+    provisioning:
+      - User
+      - UserInput
+      - UserProfile
+    core:
+      - Status
+  parameters:
+    pagination:
+      - pageSize
+      - sortField
+      - sortDirection
+    identifiers:
+      - itemCode
+      - priceCode
+      - cartId
+      - lineId
+      - orderId
+      - siteId
+      - referenceId
+      - nodeId
+      - groupId
+    filters:
+      - itemStatus
+      - merchandiseCategoryId
+      - groupCode
+      - shortDescriptionPattern
+      - parentId
+      - titlePattern
+    scoping:
+      - nep-organization
+      - nep-enterprise-unit
+    geo:
+      - coordinates
+      - radius
+      - numSites
+  enums:
+    states:
+      - ACTIVE
+      - INACTIVE
+    sortDirections:
+      - ASC
+      - DESC
+    nodeTypes:
+      - CATEGORY
+      - DEPARTMENT
+    channels:
+      - Web
+  authentication:
+    scheme: AccessKey (HMAC)
+    algorithm: HMAC SHA-512
+    placement: Authorization header
+    description: >-
+      AccessKey authentication signs each request with a Base64 SHA-512 HMAC
+      over the method, encoded path/query, Content-Type, optional Content-MD5,
+      and nep-* headers, keyed by the secret key + ISO-8601 date. Requests are
+      scoped with nep-organization and nep-enterprise-unit headers.
+    usedBy:
+      - ncr-voyix-commerce-platform
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+  workflows:
+    - name: Catalog
+      file: capabilities/ncr-voyix-commerce-platform-catalog.yaml
+      description: Manage catalog items, prices, attributes, and item-details search.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 11
+      personas: [Catalog Manager, Merchandiser]
+      domains: [Merchandising]
+    - name: Category
+      file: capabilities/ncr-voyix-commerce-platform-category.yaml
+      description: Manage the category-node hierarchy and merchandising groups.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 7
+      personas: [Merchandiser]
+      domains: [Merchandising]
+    - name: Selling
+      file: capabilities/ncr-voyix-commerce-platform-selling.yaml
+      description: Create and manage Selling Service shopping carts and line items.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 8
+      personas: [Commerce Developer]
+      domains: [Commerce]
+    - name: Order
+      file: capabilities/ncr-voyix-commerce-platform-order.yaml
+      description: Create, retrieve, update, and search orders.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 4
+      personas: [Commerce Developer, Store Operator]
+      domains: [Commerce]
+    - name: Site
+      file: capabilities/ncr-voyix-commerce-platform-site.yaml
+      description: Provision and look up sites (locations), including geospatial search.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 6
+      personas: [Operations Admin]
+      domains: [Operations]
+    - name: Security
+      file: capabilities/ncr-voyix-commerce-platform-security.yaml
+      description: Authenticate users, exchange authorization tokens, and manage passwords/roles.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 4
+      personas: [Platform Admin]
+      domains: [Identity]
+    - name: Provisioning
+      file: capabilities/ncr-voyix-commerce-platform-provisioning.yaml
+      description: Create platform users and manage user profiles.
+      apis: [ncr-voyix-commerce-platform]
+      tools: 3
+      personas: [Platform Admin]
+      domains: [Identity]
+  personas:
+    - id: catalog-manager
+      name: Catalog Manager
+      description: Maintains the product catalog, items, and pricing.
+      workflows: [Catalog]
+    - id: merchandiser
+      name: Merchandiser
+      description: Organizes items into categories and merchandising groups.
+      workflows: [Catalog, Category]
+    - id: commerce-developer
+      name: Commerce Developer
+      description: Builds purchasing flows on carts and orders.
+      workflows: [Selling, Order]
+    - id: store-operator
+      name: Store Operator
+      description: Manages orders at a site.
+      workflows: [Order]
+    - id: operations-admin
+      name: Operations Admin
+      description: Provisions and configures sites/locations.
+      workflows: [Site]
+    - id: platform-admin
+      name: Platform Admin
+      description: Manages platform users, authentication, and authorization.
+      workflows: [Security, Provisioning]
+  domains:
+    - name: Merchandising
+      resources: [items, item-prices, item-attributes, item-details, category-nodes, groups]
+      workflows: [Catalog, Category]
+    - name: Commerce
+      resources: [carts, orders]
+      workflows: [Selling, Order]
+    - name: Operations
+      resources: [sites]
+      workflows: [Site]
+    - name: Identity
+      resources: [authentication, users]
+      workflows: [Security, Provisioning]
+  namespaces:
+    - consumed: ncr-voyix-commerce-platform-catalog
+      rest: ncr-voyix-commerce-platform-catalog-rest
+      mcp: ncr-voyix-commerce-platform-catalog-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: ncr-voyix-commerce-platform-order
+      rest: ncr-voyix-commerce-platform-order-rest
+      mcp: ncr-voyix-commerce-platform-order-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: ncr-voyix-commerce-platform-site
+      rest: ncr-voyix-commerce-platform-site-rest
+      mcp: ncr-voyix-commerce-platform-site-mcp
+      restPort: 8080
+      mcpPort: 9090
+  binds:
+    - key: NCR_VOYIX_SECRET_KEY
+      workflows: [Catalog, Category, Selling, Order, Site, Security, Provisioning]
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: items
+    operations: [listCatalogItems, createCatalogItems, getCatalogItem, putCatalogItem]
+    workflows: [Catalog]
+    personas: [Catalog Manager, Merchandiser]
+  - resource: orders
+    operations: [createOrder, getOrderById, updateOrderById, findOrders]
+    workflows: [Order]
+    personas: [Commerce Developer, Store Operator]
+  - resource: carts
+    operations: [createCart, getCartById, updateCart, deleteCart, addItemToCart, updateItemInCart, removeItemFromCart]
+    workflows: [Selling]
+    personas: [Commerce Developer]
+  - resource: sites
+    operations: [createSite, getSiteById, updateSite, findSitesByCriteria, findNearbySites, getSiteByReferenceId]
+    workflows: [Site]
+    personas: [Operations Admin]
+  - resource: authentication
+    operations: [authenticateUser, exchangeToken, setUserPassword, getSelfEffectiveRoles]
+    workflows: [Security]
+    personas: [Platform Admin]
+  - resource: users
+    operations: [createUser, updateCurrentUser, getCurrentUserProfile]
+    workflows: [Provisioning]
+    personas: [Platform Admin]

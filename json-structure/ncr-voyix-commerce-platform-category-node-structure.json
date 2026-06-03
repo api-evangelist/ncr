@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "CategoryNode schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-category-node-structure.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "500123"
+    },
+    "version": {
+      "type": "int32",
+      "example": 1
+    },
+    "name": {
+      "$ref": "#/components/schemas/LocalizedText"
+    },
+    "parentId": {
+      "type": "string",
+      "example": "example"
+    },
+    "nodeType": {
+      "type": "string",
+      "enum": [
+        "CATEGORY",
+        "DEPARTMENT"
+      ],
+      "example": "CATEGORY"
+    },
+    "status": {
+      "$ref": "#/components/schemas/Status"
+    }
+  },
+  "name": "CategoryNode"
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "Site schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-site-structure.json",
+  "type": "object",
+  "properties": {
+    "siteName": {
+      "type": "string",
+      "example": "Downtown Store"
+    },
+    "enterpriseUnitName": {
+      "type": "string",
+      "example": "Downtown Store"
+    },
+    "referenceId": {
+      "type": "string",
+      "example": "example"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    },
+    "coordinates": {
+      "$ref": "#/components/schemas/Coordinates"
+    },
+    "currency": {
+      "type": "string",
+      "example": "USD"
+    },
+    "timeZone": {
+      "type": "string",
+      "example": "America/New_York"
+    },
+    "status": {
+      "$ref": "#/components/schemas/Status"
+    },
+    "id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "siteName",
+    "enterpriseUnitName",
+    "status"
+  ],
+  "name": "Site"
+}

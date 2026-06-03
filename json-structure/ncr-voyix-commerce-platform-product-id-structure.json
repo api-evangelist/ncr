@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "ProductId schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-product-id-structure.json",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "example": "example"
+    },
+    "value": {
+      "type": "string",
+      "example": "Cheeseburger"
+    }
+  },
+  "name": "ProductId"
+}

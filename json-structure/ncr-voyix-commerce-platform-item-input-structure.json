@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "ItemInput schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-item-input-structure.json",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "int32",
+      "description": "Optimistic-concurrency version; must increase on each update.",
+      "example": 1
+    },
+    "itemId": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "shortDescription": {
+      "$ref": "#/components/schemas/LocalizedText"
+    },
+    "longDescription": {
+      "$ref": "#/components/schemas/LocalizedText"
+    },
+    "status": {
+      "$ref": "#/components/schemas/Status"
+    },
+    "merchandiseCategory": {
+      "type": "string",
+      "example": "example"
+    },
+    "departmentId": {
+      "type": "string",
+      "example": "example"
+    }
+  },
+  "required": [
+    "version",
+    "status"
+  ],
+  "name": "ItemInput"
+}

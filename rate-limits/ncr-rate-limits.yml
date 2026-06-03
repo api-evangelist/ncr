@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: NCR Voyix
+providerId: ncr
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Commerce
+  - Point of Sale
+description: >-
+  The NCR Voyix Business Services Platform does not publish specific numeric
+  per-second / per-minute request-rate limits in its public developer
+  documentation; limits are applied per organization and per service at the
+  platform gateway and may be raised by working with NCR Voyix. The platform
+  documents a correlation header (nep-correlation-id) that is echoed back in
+  responses and propagated across downstream services to aid tracing and
+  throttling diagnostics. Consumers should implement exponential backoff and
+  honor Retry-After on 429 responses. Both production (api.ncr.com) and staging
+  (gateway-staging.ncrcloud.com) are subject to gateway throttling.
+sources:
+  - https://developer.ncrvoyix.com/portals/dev-portal/help-center/documentation/663
+  - https://developer.ncrvoyix.com/portals/dev-portal/help-center/documentation/platform-integration-guide
+headers:
+  correlationId: nep-correlation-id
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+limits:
+  - name: Per-organization gateway throttling (production)
+    scope: account/region/service
+    metric: varies
+    limit: 'not publicly documented; per-organization and per-service limits enforced at the api.ncr.com gateway'
+    notes: Contact NCR Voyix to confirm or raise service-specific limits for production workloads.
+  - name: Per-organization gateway throttling (staging)
+    scope: account/region/service
+    metric: varies
+    limit: 'sandbox/staging limits apply at gateway-staging.ncrcloud.com'
+    notes: Staging is intended for development and Test Drive trials; do not load-test against it.
+policies:
+  - name: Exponential backoff
+    description: On a 429 response, retry with exponential backoff and jitter; honor the Retry-After header when present.
+  - name: Request correlation
+    description: >-
+      Supply a unique nep-correlation-id header on each request. It is echoed in
+      the response and forwarded to downstream services, enabling end-to-end
+      tracing of throttling and errors.
+  - name: Scoping
+    description: >-
+      Rate accounting is scoped by organization (nep-organization) and, for
+      site-scoped operations, by enterprise unit (nep-enterprise-unit).
+  - name: Raise via support
+    description: >-
+      Production service limits are adjustable; engage NCR Voyix support to
+      raise limits for high-volume integrations.

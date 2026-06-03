@@ -1,0 +1,7 @@
+{
+  "productId": "example",
+  "quantity": "example",
+  "voidReason": "Customer request",
+  "lineId": "line-001",
+  "unitPrice": 9.99
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "ItemCodeList schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-item-code-list-structure.json",
+  "type": "object",
+  "properties": {
+    "itemIds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemCode"
+        ]
+      }
+    }
+  },
+  "required": [
+    "itemIds"
+  ],
+  "name": "ItemCodeList"
+}

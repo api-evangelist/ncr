@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Customer",
+  "description": "Customer schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-schema/ncr-voyix-commerce-platform-customer-schema.json",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "jsmith@example.com"
+    },
+    "firstName": {
+      "type": "string",
+      "example": "Downtown Store"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Downtown Store"
+    }
+  }
+}

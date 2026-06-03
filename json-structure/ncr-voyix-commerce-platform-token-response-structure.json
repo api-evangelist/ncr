@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "TokenResponse schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-token-response-structure.json",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "example": "eyJhbGciOiJIUzI1Ni1.abc123.def456"
+    },
+    "expiresAt": {
+      "type": "datetime",
+      "example": "2026-06-02T14:30:00Z"
+    }
+  },
+  "name": "TokenResponse"
+}

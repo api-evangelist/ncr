@@ -1,0 +1,305 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ncrv": "https://developer.ncrvoyix.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Address": "ncrv:Address",
+    "CartLineInput": "ncrv:CartLineInput",
+    "CartLine": "ncrv:CartLine",
+    "Cart": "ncrv:Cart",
+    "CategoryNode": "ncrv:CategoryNode",
+    "Coordinates": "ncrv:Coordinates",
+    "Customer": "ncrv:Customer",
+    "Group": "ncrv:Group",
+    "ItemCodeList": "ncrv:ItemCodeList",
+    "ItemInput": "ncrv:ItemInput",
+    "ItemPage": "ncrv:ItemPage",
+    "ItemPriceInput": "ncrv:ItemPriceInput",
+    "ItemPrice": "ncrv:ItemPrice",
+    "Item": "ncrv:Item",
+    "LocalizedText": "ncrv:LocalizedText",
+    "LoginRequest": "ncrv:LoginRequest",
+    "OrderInput": "ncrv:OrderInput",
+    "OrderLine": "ncrv:OrderLine",
+    "Order": "ncrv:Order",
+    "OrderSearch": "ncrv:OrderSearch",
+    "ProductId": "ncrv:ProductId",
+    "Quantity": "ncrv:Quantity",
+    "SiteInput": "ncrv:SiteInput",
+    "Site": "ncrv:Site",
+    "SiteSearch": "ncrv:SiteSearch",
+    "TokenResponse": "ncrv:TokenResponse",
+    "UserInput": "ncrv:UserInput",
+    "UserProfile": "ncrv:UserProfile",
+    "User": "ncrv:User",
+    "address1": {
+      "@id": "ncrv:address1",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "ncrv:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "ncrv:state",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "ncrv:postalCode",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "ncrv:country",
+      "@type": "xsd:string"
+    },
+    "productId": {
+      "@id": "ncrv:productId",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "ncrv:quantity",
+      "@type": "xsd:string"
+    },
+    "voidReason": {
+      "@id": "ncrv:voidReason",
+      "@type": "xsd:string"
+    },
+    "lineId": {
+      "@id": "ncrv:lineId",
+      "@type": "xsd:string"
+    },
+    "unitPrice": {
+      "@id": "ncrv:unitPrice",
+      "@type": "xsd:double"
+    },
+    "cartId": {
+      "@id": "ncrv:cartId",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "ncrv:status",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "ncrv:items",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "totals": {
+      "@id": "ncrv:totals",
+      "@type": "@id"
+    },
+    "total": {
+      "@id": "ncrv:total",
+      "@type": "xsd:double"
+    },
+    "currency": {
+      "@id": "ncrv:currency",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "ncrv:id",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "schema:version",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "parentId": {
+      "@id": "ncrv:parentId",
+      "@type": "xsd:string"
+    },
+    "nodeType": {
+      "@id": "ncrv:nodeType",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "ncrv:latitude",
+      "@type": "xsd:double"
+    },
+    "longitude": {
+      "@id": "ncrv:longitude",
+      "@type": "xsd:double"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "ncrv:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "ncrv:lastName",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "ncrv:title",
+      "@type": "xsd:string"
+    },
+    "itemCodes": {
+      "@id": "ncrv:itemCodes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemIds": {
+      "@id": "ncrv:itemIds",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemCode": {
+      "@id": "ncrv:itemCode",
+      "@type": "xsd:string"
+    },
+    "itemId": {
+      "@id": "ncrv:itemId",
+      "@type": "@id"
+    },
+    "shortDescription": {
+      "@id": "ncrv:shortDescription",
+      "@type": "xsd:string"
+    },
+    "longDescription": {
+      "@id": "ncrv:longDescription",
+      "@type": "xsd:string"
+    },
+    "merchandiseCategory": {
+      "@id": "ncrv:merchandiseCategory",
+      "@type": "xsd:string"
+    },
+    "departmentId": {
+      "@id": "ncrv:departmentId",
+      "@type": "xsd:string"
+    },
+    "pageContent": {
+      "@id": "ncrv:pageContent",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "ncrv:price",
+      "@type": "xsd:double"
+    },
+    "effectiveDate": {
+      "@id": "ncrv:effectiveDate",
+      "@type": "xsd:dateTime"
+    },
+    "priceId": {
+      "@id": "ncrv:priceId",
+      "@type": "@id"
+    },
+    "priceCode": {
+      "@id": "ncrv:priceCode",
+      "@type": "xsd:string"
+    },
+    "values": {
+      "@id": "ncrv:values",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "locale": {
+      "@id": "ncrv:locale",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "ncrv:value",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "ncrv:username",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "ncrv:password",
+      "@type": "xsd:string"
+    },
+    "channel": {
+      "@id": "ncrv:channel",
+      "@type": "xsd:string"
+    },
+    "comments": {
+      "@id": "ncrv:comments",
+      "@type": "xsd:string"
+    },
+    "customer": {
+      "@id": "ncrv:customer",
+      "@type": "xsd:string"
+    },
+    "orderLines": {
+      "@id": "ncrv:orderLines",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerEmail": {
+      "@id": "ncrv:customerEmail",
+      "@type": "xsd:string"
+    },
+    "returnFullOrders": {
+      "@id": "ncrv:returnFullOrders",
+      "@type": "xsd:boolean"
+    },
+    "type": {
+      "@id": "ncrv:type",
+      "@type": "xsd:string"
+    },
+    "unitOfMeasure": {
+      "@id": "ncrv:unitOfMeasure",
+      "@type": "xsd:string"
+    },
+    "unitOfMeasureLabel": {
+      "@id": "ncrv:unitOfMeasureLabel",
+      "@type": "xsd:string"
+    },
+    "siteName": {
+      "@id": "ncrv:siteName",
+      "@type": "xsd:string"
+    },
+    "enterpriseUnitName": {
+      "@id": "ncrv:enterpriseUnitName",
+      "@type": "xsd:string"
+    },
+    "referenceId": {
+      "@id": "ncrv:referenceId",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "ncrv:address",
+      "@type": "xsd:string"
+    },
+    "coordinates": {
+      "@id": "ncrv:coordinates",
+      "@type": "xsd:string"
+    },
+    "timeZone": {
+      "@id": "ncrv:timeZone",
+      "@type": "xsd:string"
+    },
+    "criteria": {
+      "@id": "ncrv:criteria",
+      "@type": "@id"
+    },
+    "fields": {
+      "@id": "ncrv:fields",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "token": {
+      "@id": "ncrv:token",
+      "@type": "xsd:string"
+    },
+    "expiresAt": {
+      "@id": "ncrv:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "organization": {
+      "@id": "ncrv:organization",
+      "@type": "xsd:string"
+    }
+  }
+}

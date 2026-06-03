@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "Address schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-address-structure.json",
+  "type": "object",
+  "properties": {
+    "address1": {
+      "type": "string",
+      "example": "example"
+    },
+    "city": {
+      "type": "string",
+      "example": "example"
+    },
+    "state": {
+      "type": "string",
+      "example": "example"
+    },
+    "postalCode": {
+      "type": "string",
+      "example": "example"
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    }
+  },
+  "name": "Address"
+}

@@ -7,6 +7,7 @@ tags:
   - Banking
   - ATM
   - Point of Sale
+  - Commerce
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -17,15 +18,73 @@ description: >-
   NCR Corporation separated in October 2023 into two independent public companies: NCR
   Voyix, a global provider of digital commerce solutions for retailers and restaurants,
   and NCR Atleos, a leader in expanding self-directed banking through ATM networks. NCR
-  Voyix maintains a developer portal at developer.ncrvoyix.com.
+  Voyix operates the Voyix Commerce Platform, an API-based cloud architecture (the
+  Business Services Platform) that powers unified-commerce POS, ecommerce, and payments
+  for retail and restaurants. Developers access it at developer.ncrvoyix.com using
+  AccessKey (HMAC SHA-512) authentication against api.ncr.com.
 specificationVersion: '0.19'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-apis: []
+apis:
+  - aid: ncr:ncr-voyix-commerce-platform
+    name: NCR Voyix Commerce Platform APIs
+    description: >-
+      REST APIs for the NCR Voyix Commerce Platform (Business Services Platform) covering
+      Catalog (items, item-prices, item-attributes, item-details search), Category and Group
+      management, Selling Service shopping carts, Order creation/lookup/search, Site (location)
+      provisioning and geospatial search, Security (authentication, authorization, passwords,
+      roles), and Provisioning (users and user profiles). Requests are signed with AccessKey
+      (HMAC SHA-512) authentication and scoped with nep-organization and nep-enterprise-unit
+      headers against api.ncr.com (production) / gateway-staging.ncrcloud.com (staging).
+    humanURL: https://developer.ncrvoyix.com/
+    baseURL: https://api.ncr.com
+    tags:
+      - REST
+      - Commerce
+      - Retail
+      - Restaurant
+      - Catalog
+      - Order
+      - Site
+      - Point of Sale
+    properties:
+      - type: Documentation
+        url: https://developer.ncrvoyix.com/
+      - type: OpenAPI
+        url: openapi/ncr-voyix-commerce-platform-openapi.yml
+      - type: Postman
+        url: postman/ncr-bsp-hmac-examples.postman_collection.json
+      - type: GettingStarted
+        url: https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+      - type: APIExplorer
+        url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+      - type: CodeExamples
+        url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+        title: Retail Demo App (JavaScript)
+      - type: CodeExamples
+        url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+        title: Hospitality Sample App (Python)
+      - type: CodeExamples
+        url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+        title: BSP HMAC Authentication Examples
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-catalog.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-category.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-selling.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-order.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-site.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-security.yaml
+      - type: NaftikoCapability
+        url: capabilities/ncr-voyix-commerce-platform-provisioning.yaml
 common:
   - type: GitHubOrganization
-    url: https://github.com/NCR-Corporation
+    url: https://github.com/NCRVoyix-Corporation
   - type: LinkedIn
     url: https://www.linkedin.com/company/ncr-corporation
   - type: Website
@@ -36,3 +95,24 @@ common:
     url: https://www.ncratleos.com/
   - type: DeveloperPortal
     url: https://developer.ncrvoyix.com/
+  - type: Documentation
+    url: https://www.docs.ncr.com/
+  - type: Authentication
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+    title: AccessKey (HMAC SHA-512) Authentication
+  - type: Rules
+    url: rules/ncr-voyix-commerce-platform-spectral-rules.yml
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/ncr-voyix-commerce-platform-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/ncr-vocabulary.yml
+  - type: Plans
+    url: plans/ncr-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ncr-rate-limits.yml
+  - type: FinOps
+    url: finops/ncr-finops.yml

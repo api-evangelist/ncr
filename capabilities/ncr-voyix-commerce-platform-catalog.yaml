@@ -1,0 +1,633 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "NCR Voyix Commerce Platform APIs — Catalog"
+  description: >-
+    Catalog surface of the NCR Voyix Commerce Platform. 11 operations. Lead operation: NCR Voyix List Catalog Items.
+    Self-contained Naftiko capability covering one NCR Voyix business surface.
+  tags:
+    - NCR Voyix
+    - Commerce Platform
+    - Catalog
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      NCR_VOYIX_SECRET_KEY: NCR_VOYIX_SECRET_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "ncr-voyix-commerce-platform-catalog"
+      baseUri: "https://api.ncr.com"
+      description: "NCR Voyix Commerce Platform APIs — Catalog business capability. AccessKey (HMAC) authenticated. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "AccessKey {{env.NCR_VOYIX_SECRET_KEY}}"
+        placement: header
+      resources:
+        - name: "catalog-items-get"
+          path: "/catalog/items"
+          operations:
+            - name: "listCatalogItems"
+              method: GET
+              description: "NCR Voyix List Catalog Items"
+              inputParameters:
+                - name: "itemStatus"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by item status."
+                - name: "pageSize"
+                  in: query
+                  type: integer
+                  required: false
+                  description: "pageSize"
+                - name: "sortField"
+                  in: query
+                  type: string
+                  required: false
+                  description: "sortField"
+                - name: "sortDirection"
+                  in: query
+                  type: string
+                  required: false
+                  description: "sortDirection"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-items-put"
+          path: "/catalog/items"
+          operations:
+            - name: "createCatalogItems"
+              method: PUT
+              description: "NCR Voyix Create Catalog Items"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-items-itemcode-get"
+          path: "/catalog/items/{itemCode}"
+          operations:
+            - name: "getCatalogItem"
+              method: GET
+              description: "NCR Voyix Get Catalog Item"
+              inputParameters:
+                - name: "itemCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item code (spaces are not permitted)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-items-itemcode-put"
+          path: "/catalog/items/{itemCode}"
+          operations:
+            - name: "putCatalogItem"
+              method: PUT
+              description: "NCR Voyix Create or Update Catalog Item"
+              inputParameters:
+                - name: "itemCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item code (spaces are not permitted)."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-prices-put"
+          path: "/catalog/item-prices"
+          operations:
+            - name: "createCatalogItemPrices"
+              method: PUT
+              description: "NCR Voyix Create or Update Item Prices"
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-prices-itemcode-pricecode-put"
+          path: "/catalog/item-prices/{itemCode}/{priceCode}"
+          operations:
+            - name: "updateItemPriceByItemCode"
+              method: PUT
+              description: "NCR Voyix Update Item Price by Item Code"
+              inputParameters:
+                - name: "itemCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item code (spaces are not permitted)."
+                - name: "priceCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier for the item price."
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-prices-get-multiple-post"
+          path: "/catalog/item-prices/get-multiple"
+          operations:
+            - name: "getMultipleItemPrices"
+              method: POST
+              description: "NCR Voyix Get Multiple Item Prices"
+              inputParameters:
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-attributes-get-multiple-post"
+          path: "/catalog/item-attributes/get-multiple"
+          operations:
+            - name: "getMultipleItemAttributes"
+              method: POST
+              description: "NCR Voyix Get Multiple Item Attributes"
+              inputParameters:
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-attributes-itemcode-put"
+          path: "/catalog/item-attributes/{itemCode}"
+          operations:
+            - name: "updateItemAttributesByItemCode"
+              method: PUT
+              description: "NCR Voyix Update Item Attributes by Item Code"
+              inputParameters:
+                - name: "itemCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item code (spaces are not permitted)."
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Request body payload."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-details-itemcode-get"
+          path: "/catalog/item-details/{itemCode}"
+          operations:
+            - name: "getItemDetailsByItemCode"
+              method: GET
+              description: "NCR Voyix Get Item Details by Item Code"
+              inputParameters:
+                - name: "itemCode"
+                  in: path
+                  type: string
+                  required: true
+                  description: "The catalog item code (spaces are not permitted)."
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "catalog-item-details-search-get"
+          path: "/catalog/item-details/search"
+          operations:
+            - name: "searchItemDetails"
+              method: GET
+              description: "NCR Voyix Search Item Details"
+              inputParameters:
+                - name: "nep-enterprise-unit"
+                  in: header
+                  type: string
+                  required: true
+                  description: "Identifier of the enterprise unit (site/location) the request applies to."
+                - name: "shortDescriptionPattern"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Wildcard pattern matched against the item short description."
+                - name: "merchandiseCategoryId"
+                  in: query
+                  type: string
+                  required: false
+                  description: "merchandiseCategoryId"
+                - name: "groupCode"
+                  in: query
+                  type: string
+                  required: false
+                  description: "groupCode"
+                - name: "itemStatus"
+                  in: query
+                  type: string
+                  required: false
+                  description: "itemStatus"
+                - name: "sortField"
+                  in: query
+                  type: string
+                  required: false
+                  description: "sortField"
+                - name: "sortDirection"
+                  in: query
+                  type: string
+                  required: false
+                  description: "sortDirection"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "ncr-voyix-commerce-platform-catalog-rest"
+      port: 8080
+      description: "REST adapter for NCR Voyix Commerce Platform APIs — Catalog. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/catalog/items"
+          name: "catalog-items"
+          description: "NCR Voyix List Catalog Items"
+          operations:
+            - method: GET
+              name: "listCatalogItems"
+              description: "NCR Voyix List Catalog Items"
+              call: "ncr-voyix-commerce-platform-catalog.listCatalogItems"
+              with:
+                "itemStatus": "rest.itemStatus"
+                "pageSize": "rest.pageSize"
+                "sortField": "rest.sortField"
+                "sortDirection": "rest.sortDirection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/items"
+          name: "catalog-items"
+          description: "NCR Voyix Create Catalog Items"
+          operations:
+            - method: PUT
+              name: "createCatalogItems"
+              description: "NCR Voyix Create Catalog Items"
+              call: "ncr-voyix-commerce-platform-catalog.createCatalogItems"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/items/{itemcode}"
+          name: "catalog-items"
+          description: "NCR Voyix Get Catalog Item"
+          operations:
+            - method: GET
+              name: "getCatalogItem"
+              description: "NCR Voyix Get Catalog Item"
+              call: "ncr-voyix-commerce-platform-catalog.getCatalogItem"
+              with:
+                "itemCode": "rest.itemCode"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/items/{itemcode}"
+          name: "catalog-items"
+          description: "NCR Voyix Create or Update Catalog Item"
+          operations:
+            - method: PUT
+              name: "putCatalogItem"
+              description: "NCR Voyix Create or Update Catalog Item"
+              call: "ncr-voyix-commerce-platform-catalog.putCatalogItem"
+              with:
+                "itemCode": "rest.itemCode"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-prices"
+          name: "catalog-item-prices"
+          description: "NCR Voyix Create or Update Item Prices"
+          operations:
+            - method: PUT
+              name: "createCatalogItemPrices"
+              description: "NCR Voyix Create or Update Item Prices"
+              call: "ncr-voyix-commerce-platform-catalog.createCatalogItemPrices"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-prices/{itemcode}/{pricecode}"
+          name: "catalog-item-prices"
+          description: "NCR Voyix Update Item Price by Item Code"
+          operations:
+            - method: PUT
+              name: "updateItemPriceByItemCode"
+              description: "NCR Voyix Update Item Price by Item Code"
+              call: "ncr-voyix-commerce-platform-catalog.updateItemPriceByItemCode"
+              with:
+                "itemCode": "rest.itemCode"
+                "priceCode": "rest.priceCode"
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-prices/get-multiple"
+          name: "catalog-item-prices-get-multiple"
+          description: "NCR Voyix Get Multiple Item Prices"
+          operations:
+            - method: POST
+              name: "getMultipleItemPrices"
+              description: "NCR Voyix Get Multiple Item Prices"
+              call: "ncr-voyix-commerce-platform-catalog.getMultipleItemPrices"
+              with:
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-attributes/get-multiple"
+          name: "catalog-item-attributes-get-multiple"
+          description: "NCR Voyix Get Multiple Item Attributes"
+          operations:
+            - method: POST
+              name: "getMultipleItemAttributes"
+              description: "NCR Voyix Get Multiple Item Attributes"
+              call: "ncr-voyix-commerce-platform-catalog.getMultipleItemAttributes"
+              with:
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-attributes/{itemcode}"
+          name: "catalog-item-attributes"
+          description: "NCR Voyix Update Item Attributes by Item Code"
+          operations:
+            - method: PUT
+              name: "updateItemAttributesByItemCode"
+              description: "NCR Voyix Update Item Attributes by Item Code"
+              call: "ncr-voyix-commerce-platform-catalog.updateItemAttributesByItemCode"
+              with:
+                "itemCode": "rest.itemCode"
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-details/{itemcode}"
+          name: "catalog-item-details"
+          description: "NCR Voyix Get Item Details by Item Code"
+          operations:
+            - method: GET
+              name: "getItemDetailsByItemCode"
+              description: "NCR Voyix Get Item Details by Item Code"
+              call: "ncr-voyix-commerce-platform-catalog.getItemDetailsByItemCode"
+              with:
+                "itemCode": "rest.itemCode"
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/catalog/item-details/search"
+          name: "catalog-item-details-search"
+          description: "NCR Voyix Search Item Details"
+          operations:
+            - method: GET
+              name: "searchItemDetails"
+              description: "NCR Voyix Search Item Details"
+              call: "ncr-voyix-commerce-platform-catalog.searchItemDetails"
+              with:
+                "nep-enterprise-unit": "rest.nep-enterprise-unit"
+                "shortDescriptionPattern": "rest.shortDescriptionPattern"
+                "merchandiseCategoryId": "rest.merchandiseCategoryId"
+                "groupCode": "rest.groupCode"
+                "itemStatus": "rest.itemStatus"
+                "sortField": "rest.sortField"
+                "sortDirection": "rest.sortDirection"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      namespace: "ncr-voyix-commerce-platform-catalog-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for NCR Voyix Commerce Platform APIs — Catalog. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "list-catalog-items"
+          description: "NCR Voyix List Catalog Items"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.listCatalogItems"
+          with:
+            "itemStatus": "tools.itemStatus"
+            "pageSize": "tools.pageSize"
+            "sortField": "tools.sortField"
+            "sortDirection": "tools.sortDirection"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-catalog-items"
+          description: "NCR Voyix Create Catalog Items"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.createCatalogItems"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-catalog-item"
+          description: "NCR Voyix Get Catalog Item"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.getCatalogItem"
+          with:
+            "itemCode": "tools.itemCode"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "put-catalog-item"
+          description: "NCR Voyix Create or Update Catalog Item"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.putCatalogItem"
+          with:
+            "itemCode": "tools.itemCode"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "create-catalog-item-prices"
+          description: "NCR Voyix Create or Update Item Prices"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.createCatalogItemPrices"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-item-price-item-code"
+          description: "NCR Voyix Update Item Price by Item Code"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.updateItemPriceByItemCode"
+          with:
+            "itemCode": "tools.itemCode"
+            "priceCode": "tools.priceCode"
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-multiple-item-prices"
+          description: "NCR Voyix Get Multiple Item Prices"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "ncr-voyix-commerce-platform-catalog.getMultipleItemPrices"
+          with:
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-multiple-item-attributes"
+          description: "NCR Voyix Get Multiple Item Attributes"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: false
+          call: "ncr-voyix-commerce-platform-catalog.getMultipleItemAttributes"
+          with:
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "update-item-attributes-item-code"
+          description: "NCR Voyix Update Item Attributes by Item Code"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.updateItemAttributesByItemCode"
+          with:
+            "itemCode": "tools.itemCode"
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-item-details-item-code"
+          description: "NCR Voyix Get Item Details by Item Code"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.getItemDetailsByItemCode"
+          with:
+            "itemCode": "tools.itemCode"
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "search-item-details"
+          description: "NCR Voyix Search Item Details"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "ncr-voyix-commerce-platform-catalog.searchItemDetails"
+          with:
+            "nep-enterprise-unit": "tools.nep-enterprise-unit"
+            "shortDescriptionPattern": "tools.shortDescriptionPattern"
+            "merchandiseCategoryId": "tools.merchandiseCategoryId"
+            "groupCode": "tools.groupCode"
+            "itemStatus": "tools.itemStatus"
+            "sortField": "tools.sortField"
+            "sortDirection": "tools.sortDirection"
+          outputParameters:
+            - type: object
+              mapping: "$."

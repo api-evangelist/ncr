@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "Coordinates schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-coordinates-structure.json",
+  "type": "object",
+  "properties": {
+    "latitude": {
+      "type": "double",
+      "example": 9.99
+    },
+    "longitude": {
+      "type": "double",
+      "example": 9.99
+    }
+  },
+  "name": "Coordinates"
+}

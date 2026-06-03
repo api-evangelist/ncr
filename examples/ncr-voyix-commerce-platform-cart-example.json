@@ -1,0 +1,11 @@
+{
+  "cartId": "cart-a1b2c3d4",
+  "status": "ACTIVE",
+  "items": [
+    "example"
+  ],
+  "totals": {
+    "total": 9.99,
+    "currency": "USD"
+  }
+}

@@ -1,0 +1,2530 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs
+  description: >-
+    REST APIs for the NCR Voyix Commerce Platform (Business Services Platform),
+    the API-based cloud architecture that powers NCR Voyix unified-commerce
+    solutions for retailers and restaurants. This specification covers the core
+    commerce surfaces exercised by the publicly published NCR Voyix sample
+    applications: Catalog (items, item-prices, item-attributes, item-details
+    search), Category and Group management, Selling Service carts, Order
+    creation and lookup, Site (location) provisioning, Security
+    (authentication, authorization, passwords), and Provisioning (users and
+    user profiles). Requests are signed with HMAC SHA-512 AccessKey
+    authentication and scoped with the nep-organization and nep-enterprise-unit
+    headers. Paths and schemas were reconstructed from the NCR Voyix sample
+    applications (NCRVoyix-Corporation/ncr-retail-demo,
+    NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac);
+    consult developer.ncrvoyix.com for the authoritative contract.
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Catalog
+  description: Item, item-price, and item-attribute management plus item-details search.
+- name: Category
+  description: Catalog category-node hierarchy and group management.
+- name: Selling
+  description: Selling Service shopping carts and cart line items.
+- name: Order
+  description: Order creation, lookup, update, and search.
+- name: Site
+  description: Site (location) provisioning, lookup, and geospatial search.
+- name: Security
+  description: Authentication, authorization, and user password management.
+- name: Provisioning
+  description: Platform user creation and user profile management.
+paths:
+  /catalog/items:
+    get:
+      tags: [Catalog]
+      summary: NCR Voyix List Catalog Items
+      description: List catalog items, optionally filtered by status and paged/sorted.
+      operationId: listCatalogItems
+      parameters:
+      - name: itemStatus
+        in: query
+        description: Filter by item status.
+        schema:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+        example: ACTIVE
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: sortField
+        in: query
+        schema:
+          type: string
+        example: example
+      - name: sortDirection
+        in: query
+        schema:
+          type: string
+          enum: [ASC, DESC]
+        example: ASC
+      responses:
+        '200':
+          description: A page of catalog items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPage'
+              examples:
+                ListCatalogItems200Example:
+                  summary: Default listCatalogItems 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - version: 1
+                      itemId: {}
+                      shortDescription:
+                        values: {}
+                      longDescription:
+                        values: {}
+                      status: ACTIVE
+                      merchandiseCategory: example
+                      departmentId: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Catalog]
+      summary: NCR Voyix Create Catalog Items
+      description: Bulk create or update catalog items. There is no delete; mark INACTIVE to retire.
+      operationId: createCatalogItems
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemInput'
+            examples:
+              CreateCatalogItemsRequestExample:
+                summary: Default createCatalogItems request
+                x-microcks-default: true
+                value:
+                  version: 1
+                  itemId: {}
+                  shortDescription:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  longDescription:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  status: ACTIVE
+                  merchandiseCategory: example
+                  departmentId: example
+      responses:
+        '200':
+          description: The created or updated catalog items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+              examples:
+                CreateCatalogItems200Example:
+                  summary: Default createCatalogItems 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 1
+                    itemId: {}
+                    shortDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    longDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    status: ACTIVE
+                    merchandiseCategory: example
+                    departmentId: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/items/{itemCode}:
+    parameters:
+    - $ref: '#/components/parameters/ItemCode'
+    get:
+      tags: [Catalog]
+      summary: NCR Voyix Get Catalog Item
+      description: Retrieve the details of a single catalog item by its item code.
+      operationId: getCatalogItem
+      responses:
+        '200':
+          description: The catalog item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+              examples:
+                GetCatalogItem200Example:
+                  summary: Default getCatalogItem 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 1
+                    itemId: {}
+                    shortDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    longDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    status: ACTIVE
+                    merchandiseCategory: example
+                    departmentId: example
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Catalog]
+      summary: NCR Voyix Create or Update Catalog Item
+      description: Create or update a catalog item. The version must increase on each update.
+      operationId: putCatalogItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemInput'
+            examples:
+              PutCatalogItemRequestExample:
+                summary: Default putCatalogItem request
+                x-microcks-default: true
+                value:
+                  version: 1
+                  itemId: {}
+                  shortDescription:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  longDescription:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  status: ACTIVE
+                  merchandiseCategory: example
+                  departmentId: example
+      responses:
+        '200':
+          description: The created or updated catalog item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+              examples:
+                PutCatalogItem200Example:
+                  summary: Default putCatalogItem 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 1
+                    itemId: {}
+                    shortDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    longDescription:
+                      values:
+                      - locale: {}
+                        value: {}
+                    status: ACTIVE
+                    merchandiseCategory: example
+                    departmentId: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-prices:
+    put:
+      tags: [Catalog]
+      summary: NCR Voyix Create or Update Item Prices
+      description: Bulk create or update item prices for catalog items.
+      operationId: createCatalogItemPrices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemPriceInput'
+            examples:
+              CreateCatalogItemPricesRequestExample:
+                summary: Default createCatalogItemPrices request
+                x-microcks-default: true
+                value:
+                  version: 1
+                  price: 9.99
+                  currency: USD
+                  effectiveDate: '2026-06-02T14:30:00Z'
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The created or updated item prices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPrice'
+              examples:
+                CreateCatalogItemPrices200Example:
+                  summary: Default createCatalogItemPrices 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 1
+                    price: 9.99
+                    currency: USD
+                    effectiveDate: '2026-06-02T14:30:00Z'
+                    status: ACTIVE
+                    priceId:
+                      itemCode: BURGER-001
+                      priceCode: BASE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-prices/{itemCode}/{priceCode}:
+    parameters:
+    - $ref: '#/components/parameters/ItemCode'
+    - name: priceCode
+      in: path
+      required: true
+      description: Unique identifier for the item price.
+      schema:
+        type: string
+    put:
+      tags: [Catalog]
+      summary: NCR Voyix Update Item Price by Item Code
+      description: Create or update the price for a catalog item at a site. The version must increase on each update.
+      operationId: updateItemPriceByItemCode
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemPriceInput'
+            examples:
+              UpdateItemPriceByItemCodeRequestExample:
+                summary: Default updateItemPriceByItemCode request
+                x-microcks-default: true
+                value:
+                  version: 1
+                  price: 9.99
+                  currency: USD
+                  effectiveDate: '2026-06-02T14:30:00Z'
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The updated item price.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPrice'
+              examples:
+                UpdateItemPriceByItemCode200Example:
+                  summary: Default updateItemPriceByItemCode 200 response
+                  x-microcks-default: true
+                  value:
+                    version: 1
+                    price: 9.99
+                    currency: USD
+                    effectiveDate: '2026-06-02T14:30:00Z'
+                    status: ACTIVE
+                    priceId:
+                      itemCode: BURGER-001
+                      priceCode: BASE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-prices/get-multiple:
+    post:
+      tags: [Catalog]
+      summary: NCR Voyix Get Multiple Item Prices
+      description: Retrieve prices for a list of catalog items in a single request, scoped to a site.
+      operationId: getMultipleItemPrices
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCodeList'
+            examples:
+              GetMultipleItemPricesRequestExample:
+                summary: Default getMultipleItemPrices request
+                x-microcks-default: true
+                value:
+                  itemIds:
+                  - itemCode: BURGER-001
+      responses:
+        '200':
+          description: The requested item prices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  itemPrices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ItemPrice'
+              examples:
+                GetMultipleItemPrices200Example:
+                  summary: Default getMultipleItemPrices 200 response
+                  x-microcks-default: true
+                  value:
+                    itemPrices:
+                    - version: 1
+                      price: 9.99
+                      currency: USD
+                      effectiveDate: '2026-06-02T14:30:00Z'
+                      status: ACTIVE
+                      priceId:
+                        itemCode: {}
+                        priceCode: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-attributes/get-multiple:
+    post:
+      tags: [Catalog]
+      summary: NCR Voyix Get Multiple Item Attributes
+      description: Retrieve attributes for a list of catalog items in a single request, scoped to a site.
+      operationId: getMultipleItemAttributes
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCodeList'
+            examples:
+              GetMultipleItemAttributesRequestExample:
+                summary: Default getMultipleItemAttributes request
+                x-microcks-default: true
+                value:
+                  itemIds:
+                  - itemCode: BURGER-001
+      responses:
+        '200':
+          description: The requested item attributes.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                GetMultipleItemAttributes200Example:
+                  summary: Default getMultipleItemAttributes 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-attributes/{itemCode}:
+    parameters:
+    - $ref: '#/components/parameters/ItemCode'
+    put:
+      tags: [Catalog]
+      summary: NCR Voyix Update Item Attributes by Item Code
+      description: Create or update attributes for a catalog item at a site.
+      operationId: updateItemAttributesByItemCode
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              UpdateItemAttributesByItemCodeRequestExample:
+                summary: Default updateItemAttributesByItemCode request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: The updated item attributes.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UpdateItemAttributesByItemCode200Example:
+                  summary: Default updateItemAttributesByItemCode 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-details/{itemCode}:
+    parameters:
+    - $ref: '#/components/parameters/ItemCode'
+    get:
+      tags: [Catalog]
+      summary: NCR Voyix Get Item Details by Item Code
+      description: Retrieve the consolidated item details (item, price, attributes) for a single item at a site.
+      operationId: getItemDetailsByItemCode
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '200':
+          description: The item details.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                GetItemDetailsByItemCode200Example:
+                  summary: Default getItemDetailsByItemCode 200 response
+                  x-microcks-default: true
+                  value: {}
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/item-details/search:
+    get:
+      tags: [Catalog]
+      summary: NCR Voyix Search Item Details
+      description: Search consolidated item details at a site by description pattern, merchandise category, group, and status, with sorting.
+      operationId: searchItemDetails
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      - name: shortDescriptionPattern
+        in: query
+        description: Wildcard pattern matched against the item short description.
+        schema:
+          type: string
+        example: example
+      - name: merchandiseCategoryId
+        in: query
+        schema:
+          type: string
+        example: example
+      - name: groupCode
+        in: query
+        schema:
+          type: string
+        example: example
+      - name: itemStatus
+        in: query
+        schema:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+        example: ACTIVE
+      - name: sortField
+        in: query
+        schema:
+          type: string
+        example: example
+      - name: sortDirection
+        in: query
+        schema:
+          type: string
+          enum: [ASC, DESC]
+        example: ASC
+      responses:
+        '200':
+          description: A page of matching item details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      type: object
+              examples:
+                SearchItemDetails200Example:
+                  summary: Default searchItemDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/category-nodes:
+    get:
+      tags: [Category]
+      summary: NCR Voyix List Category Nodes
+      description: List catalog category nodes, optionally filtered by parent node.
+      operationId: listCategoryNodes
+      parameters:
+      - name: parentId
+        in: query
+        description: Filter to children of the supplied parent category node.
+        schema:
+          type: string
+        example: example
+      responses:
+        '200':
+          description: The category nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categoryNodes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CategoryNode'
+              examples:
+                ListCategoryNodes200Example:
+                  summary: Default listCategoryNodes 200 response
+                  x-microcks-default: true
+                  value:
+                    categoryNodes:
+                    - id: '500123'
+                      version: 1
+                      name:
+                        values:
+                        - {}
+                      parentId: example
+                      nodeType: CATEGORY
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Category]
+      summary: NCR Voyix Create or Update Category Node
+      description: Create or update a catalog category node in the category hierarchy.
+      operationId: putCategoryNode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryNode'
+            examples:
+              PutCategoryNodeRequestExample:
+                summary: Default putCategoryNode request
+                x-microcks-default: true
+                value:
+                  id: '500123'
+                  version: 1
+                  name:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  parentId: example
+                  nodeType: CATEGORY
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The created or updated category node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryNode'
+              examples:
+                PutCategoryNode200Example:
+                  summary: Default putCategoryNode 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    name:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    parentId: example
+                    nodeType: CATEGORY
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/category-nodes/{nodeId}:
+    parameters:
+    - name: nodeId
+      in: path
+      required: true
+      description: The category node identifier.
+      schema:
+        type: string
+    get:
+      tags: [Category]
+      summary: NCR Voyix Get Category Node
+      description: Retrieve a single category node by its identifier.
+      operationId: getCategoryNode
+      responses:
+        '200':
+          description: The category node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryNode'
+              examples:
+                GetCategoryNode200Example:
+                  summary: Default getCategoryNode 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    name:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    parentId: example
+                    nodeType: CATEGORY
+                    status: ACTIVE
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/category-nodes/{nodeId}/ancestors:
+    parameters:
+    - name: nodeId
+      in: path
+      required: true
+      description: The category node identifier.
+      schema:
+        type: string
+    get:
+      tags: [Category]
+      summary: NCR Voyix Get Category Node Ancestors
+      description: Retrieve the ancestor chain for a category node up to the root.
+      operationId: getCategoryNodeAncestors
+      responses:
+        '200':
+          description: The ancestor category nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ancestors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CategoryNode'
+              examples:
+                GetCategoryNodeAncestors200Example:
+                  summary: Default getCategoryNodeAncestors 200 response
+                  x-microcks-default: true
+                  value:
+                    ancestors:
+                    - id: '500123'
+                      version: 1
+                      name:
+                        values:
+                        - {}
+                      parentId: example
+                      nodeType: CATEGORY
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/groups:
+    get:
+      tags: [Category]
+      summary: NCR Voyix List Groups
+      description: List catalog groups, optionally paged and filtered by title pattern.
+      operationId: listGroups
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: titlePattern
+        in: query
+        schema:
+          type: string
+        example: example
+      responses:
+        '200':
+          description: The catalog groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+              examples:
+                ListGroups200Example:
+                  summary: Default listGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - id: '500123'
+                      version: 1
+                      title:
+                        values:
+                        - {}
+                      itemCodes:
+                      - example
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Category]
+      summary: NCR Voyix Create or Update Group
+      description: Create or update a catalog group used to merchandise items together.
+      operationId: putGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+            examples:
+              PutGroupRequestExample:
+                summary: Default putGroup request
+                x-microcks-default: true
+                value:
+                  id: '500123'
+                  version: 1
+                  title:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  itemCodes:
+                  - example
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The created or updated group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                PutGroup200Example:
+                  summary: Default putGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    title:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    itemCodes:
+                    - example
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/groups/{groupId}:
+    parameters:
+    - name: groupId
+      in: path
+      required: true
+      description: The group identifier.
+      schema:
+        type: string
+    get:
+      tags: [Category]
+      summary: NCR Voyix Get Group
+      description: Retrieve a single catalog group by its identifier.
+      operationId: getGroup
+      responses:
+        '200':
+          description: The group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                GetGroup200Example:
+                  summary: Default getGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    title:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    itemCodes:
+                    - example
+                    status: ACTIVE
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts:
+    post:
+      tags: [Selling]
+      summary: NCR Voyix Create Cart
+      description: Create a new shopping cart at a site via the Selling Service.
+      operationId: createCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '201':
+          description: The created cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                CreateCart201Example:
+                  summary: Default createCart 201 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    get:
+      tags: [Selling]
+      summary: NCR Voyix Get Cart by Id
+      description: Retrieve a shopping cart by its identifier.
+      operationId: getCartById
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '200':
+          description: The cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                GetCartById200Example:
+                  summary: Default getCartById 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags: [Selling]
+      summary: NCR Voyix Update Cart Status
+      description: Update mutable cart fields such as status.
+      operationId: updateCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+            examples:
+              UpdateCartRequestExample:
+                summary: Default updateCart request
+                x-microcks-default: true
+                value:
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                UpdateCart200Example:
+                  summary: Default updateCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Selling]
+      summary: NCR Voyix Delete Cart
+      description: Delete a shopping cart by its identifier.
+      operationId: deleteCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '204':
+          description: The cart was deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}/items:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    get:
+      tags: [Selling]
+      summary: NCR Voyix Get Cart Items
+      description: Retrieve the line items in a shopping cart.
+      operationId: getCartItems
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '200':
+          description: The cart line items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CartLine'
+              examples:
+                GetCartItems200Example:
+                  summary: Default getCartItems 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Selling]
+      summary: NCR Voyix Add Item to Cart
+      description: Add a line item to a shopping cart.
+      operationId: addItemToCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartLineInput'
+            examples:
+              AddItemToCartRequestExample:
+                summary: Default addItemToCart request
+                x-microcks-default: true
+                value:
+                  productId:
+                    type: example
+                    value: Cheeseburger
+                  quantity:
+                    unitOfMeasure: EA
+                    unitOfMeasureLabel: example
+                    value: 9.99
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                AddItemToCart200Example:
+                  summary: Default addItemToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}/items/{lineId}:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    - name: lineId
+      in: path
+      required: true
+      description: The cart line identifier.
+      schema:
+        type: string
+    patch:
+      tags: [Selling]
+      summary: NCR Voyix Update Item in Cart
+      description: Update a line item in a shopping cart (e.g. quantity).
+      operationId: updateItemInCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartLineInput'
+            examples:
+              UpdateItemInCartRequestExample:
+                summary: Default updateItemInCart request
+                x-microcks-default: true
+                value:
+                  productId:
+                    type: example
+                    value: Cheeseburger
+                  quantity:
+                    unitOfMeasure: EA
+                    unitOfMeasureLabel: example
+                    value: 9.99
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                UpdateItemInCart200Example:
+                  summary: Default updateItemInCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Selling]
+      summary: NCR Voyix Remove Item from Cart
+      description: Remove a line item from a shopping cart, supplying a void reason.
+      operationId: removeItemFromCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voidReason:
+                  type: string
+            examples:
+              RemoveItemFromCartRequestExample:
+                summary: Default removeItemFromCart request
+                x-microcks-default: true
+                value:
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                RemoveItemFromCart200Example:
+                  summary: Default removeItemFromCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /order/3/orders/1:
+    post:
+      tags: [Order]
+      summary: NCR Voyix Create Order
+      description: Create a new order at a site. Requires the nep-enterprise-unit header identifying the location.
+      operationId: createOrder
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              CreateOrderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  channel: Web
+                  comments: Customer request
+                  customer:
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                  orderLines:
+                  - productId:
+                      type: example
+                      value: Cheeseburger
+                    quantity:
+                      unitOfMeasure: EA
+                      unitOfMeasureLabel: example
+                      value: 9.99
+                    unitPrice: 9.99
+      responses:
+        '201':
+          description: The created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                CreateOrder201Example:
+                  summary: Default createOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    channel: Web
+                    comments: Customer request
+                    customer:
+                      email: jsmith@example.com
+                      firstName: Downtown Store
+                      lastName: Downtown Store
+                    orderLines:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      unitPrice: 9.99
+                    id: '500123'
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /order/3/orders/1/{orderId}:
+    parameters:
+    - name: orderId
+      in: path
+      required: true
+      description: The order identifier.
+      schema:
+        type: string
+    get:
+      tags: [Order]
+      summary: NCR Voyix Get Order by Id
+      description: Retrieve a single order by its identifier.
+      operationId: getOrderById
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                GetOrderById200Example:
+                  summary: Default getOrderById 200 response
+                  x-microcks-default: true
+                  value:
+                    channel: Web
+                    comments: Customer request
+                    customer:
+                      email: jsmith@example.com
+                      firstName: Downtown Store
+                      lastName: Downtown Store
+                    orderLines:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      unitPrice: 9.99
+                    id: '500123'
+                    status: ACTIVE
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags: [Order]
+      summary: NCR Voyix Update Order by Id
+      description: Update mutable fields on an existing order at a site.
+      operationId: updateOrderById
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              UpdateOrderByIdRequestExample:
+                summary: Default updateOrderById request
+                x-microcks-default: true
+                value:
+                  channel: Web
+                  comments: Customer request
+                  customer:
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                  orderLines:
+                  - productId:
+                      type: example
+                      value: Cheeseburger
+                    quantity:
+                      unitOfMeasure: EA
+                      unitOfMeasureLabel: example
+                      value: 9.99
+                    unitPrice: 9.99
+      responses:
+        '200':
+          description: The updated order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                UpdateOrderById200Example:
+                  summary: Default updateOrderById 200 response
+                  x-microcks-default: true
+                  value:
+                    channel: Web
+                    comments: Customer request
+                    customer:
+                      email: jsmith@example.com
+                      firstName: Downtown Store
+                      lastName: Downtown Store
+                    orderLines:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      unitPrice: 9.99
+                    id: '500123'
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /order/3/orders/1/find:
+    post:
+      tags: [Order]
+      summary: NCR Voyix Find Orders
+      description: Search for orders by criteria such as customer email, with paging.
+      operationId: findOrders
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderSearch'
+            examples:
+              FindOrdersRequestExample:
+                summary: Default findOrders request
+                x-microcks-default: true
+                value:
+                  customerEmail: jsmith@example.com
+                  returnFullOrders: true
+      responses:
+        '200':
+          description: A page of matching orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+              examples:
+                FindOrders200Example:
+                  summary: Default findOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - channel: Web
+                      comments: Customer request
+                      customer:
+                        email: {}
+                        firstName: {}
+                        lastName: {}
+                      orderLines:
+                      - {}
+                      id: '500123'
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites:
+    post:
+      tags: [Site]
+      summary: NCR Voyix Create Site
+      description: Create a new site (location) on the NCR Voyix Commerce Platform.
+      operationId: createSite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteInput'
+            examples:
+              CreateSiteRequestExample:
+                summary: Default createSite request
+                x-microcks-default: true
+                value:
+                  siteName: Downtown Store
+                  enterpriseUnitName: Downtown Store
+                  referenceId: example
+                  address:
+                    address1: example
+                    city: example
+                    state: example
+                    postalCode: example
+                    country: US
+                  coordinates:
+                    latitude: 9.99
+                    longitude: 9.99
+                  currency: USD
+                  timeZone: America/New_York
+                  status: ACTIVE
+      responses:
+        '201':
+          description: The created site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                CreateSite201Example:
+                  summary: Default createSite 201 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/{siteId}:
+    parameters:
+    - name: siteId
+      in: path
+      required: true
+      description: The alphanumeric site identifier (not the site name).
+      schema:
+        type: string
+    get:
+      tags: [Site]
+      summary: NCR Voyix Get Site by Id
+      description: Retrieve a single site by its identifier.
+      operationId: getSiteById
+      responses:
+        '200':
+          description: The site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                GetSiteById200Example:
+                  summary: Default getSiteById 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Site]
+      summary: NCR Voyix Update Site
+      description: Update a site by its identifier. Set status to INACTIVE to logically delete the site.
+      operationId: updateSite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteInput'
+            examples:
+              UpdateSiteRequestExample:
+                summary: Default updateSite request
+                x-microcks-default: true
+                value:
+                  siteName: Downtown Store
+                  enterpriseUnitName: Downtown Store
+                  referenceId: example
+                  address:
+                    address1: example
+                    city: example
+                    state: example
+                    postalCode: example
+                    country: US
+                  coordinates:
+                    latitude: 9.99
+                    longitude: 9.99
+                  currency: USD
+                  timeZone: America/New_York
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The updated site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                UpdateSite200Example:
+                  summary: Default updateSite 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/find-by-criteria:
+    post:
+      tags: [Site]
+      summary: NCR Voyix Find Sites by Criteria
+      description: Search for sites matching the supplied criteria, selecting a field projection, with paging.
+      operationId: findSitesByCriteria
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteSearch'
+            examples:
+              FindSitesByCriteriaRequestExample:
+                summary: Default findSitesByCriteria request
+                x-microcks-default: true
+                value:
+                  criteria:
+                    status: ACTIVE
+                  fields:
+                  - example
+      responses:
+        '200':
+          description: A page of matching sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Site'
+              examples:
+                FindSitesByCriteria200Example:
+                  summary: Default findSitesByCriteria 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - siteName: Downtown Store
+                      enterpriseUnitName: Downtown Store
+                      referenceId: example
+                      address:
+                        address1: {}
+                        city: {}
+                        state: {}
+                        postalCode: {}
+                        country: {}
+                      coordinates:
+                        latitude: {}
+                        longitude: {}
+                      currency: USD
+                      timeZone: America/New_York
+                      status: ACTIVE
+                      id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/find-nearby/{coordinates}:
+    parameters:
+    - name: coordinates
+      in: path
+      required: true
+      description: Latitude and longitude as "{latitude},{longitude}".
+      schema:
+        type: string
+    get:
+      tags: [Site]
+      summary: NCR Voyix Find Nearby Sites
+      description: Find sites within a radius of a geographic coordinate.
+      operationId: findNearbySites
+      parameters:
+      - name: radius
+        in: query
+        description: Search radius in meters.
+        schema:
+          type: integer
+        example: 1
+      - name: numSites
+        in: query
+        description: Maximum number of sites to return.
+        schema:
+          type: integer
+        example: 1
+      responses:
+        '200':
+          description: The nearby sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Site'
+              examples:
+                FindNearbySites200Example:
+                  summary: Default findNearbySites 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - siteName: Downtown Store
+                      enterpriseUnitName: Downtown Store
+                      referenceId: example
+                      address:
+                        address1: {}
+                        city: {}
+                        state: {}
+                        postalCode: {}
+                        country: {}
+                      coordinates:
+                        latitude: {}
+                        longitude: {}
+                      currency: USD
+                      timeZone: America/New_York
+                      status: ACTIVE
+                      id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/by-reference-id/{referenceId}:
+    parameters:
+    - name: referenceId
+      in: path
+      required: true
+      description: The external reference identifier for the site.
+      schema:
+        type: string
+    get:
+      tags: [Site]
+      summary: NCR Voyix Get Site by Reference Id
+      description: Retrieve a site by its external reference identifier.
+      operationId: getSiteByReferenceId
+      responses:
+        '200':
+          description: The site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                GetSiteByReferenceId200Example:
+                  summary: Default getSiteByReferenceId 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/authentication/login:
+    post:
+      tags: [Security]
+      summary: NCR Voyix Authenticate User
+      description: Authenticate a platform user with username and password against an organization, returning a session token.
+      operationId: authenticateUser
+      parameters:
+      - $ref: '#/components/parameters/NepOrganization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              AuthenticateUserRequestExample:
+                summary: Default authenticateUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  password: s3cr3t-passw0rd
+      responses:
+        '200':
+          description: The authentication result with a session token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                AuthenticateUser200Example:
+                  summary: Default authenticateUser 200 response
+                  x-microcks-default: true
+                  value:
+                    token: eyJhbGciOiJIUzI1Ni1.abc123.def456
+                    expiresAt: '2026-06-02T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/authorization:
+    post:
+      tags: [Security]
+      summary: NCR Voyix Exchange Authorization Token
+      description: Exchange a session token for an authorization token scoped to the organization.
+      operationId: exchangeToken
+      parameters:
+      - $ref: '#/components/parameters/NepOrganization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ExchangeTokenRequestExample:
+                summary: Default exchangeToken request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: The authorization token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                ExchangeToken200Example:
+                  summary: Default exchangeToken 200 response
+                  x-microcks-default: true
+                  value:
+                    token: eyJhbGciOiJIUzI1Ni1.abc123.def456
+                    expiresAt: '2026-06-02T14:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/security-user-passwords/{username}:
+    parameters:
+    - name: username
+      in: path
+      required: true
+      description: The platform username whose password is being set.
+      schema:
+        type: string
+    put:
+      tags: [Security]
+      summary: NCR Voyix Set User Password
+      description: Set or reset the password for a platform user.
+      operationId: setUserPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  format: password
+              required: [password]
+            examples:
+              SetUserPasswordRequestExample:
+                summary: Default setUserPassword request
+                x-microcks-default: true
+                value:
+                  password: s3cr3t-passw0rd
+      responses:
+        '204':
+          description: The password was updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/role-grants/user-grants/self/effective-roles:
+    get:
+      tags: [Security]
+      summary: NCR Voyix Get Self Effective Roles
+      description: Retrieve the effective role grants for the currently authenticated user.
+      operationId: getSelfEffectiveRoles
+      responses:
+        '200':
+          description: The effective roles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  effectiveRoles:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                GetSelfEffectiveRoles200Example:
+                  summary: Default getSelfEffectiveRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    effectiveRoles:
+                    - example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /provisioning/users:
+    post:
+      tags: [Provisioning]
+      summary: NCR Voyix Create User
+      description: Create a new platform user within the organization.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+            examples:
+              CreateUserRequestExample:
+                summary: Default createUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  email: jsmith@example.com
+                  firstName: Downtown Store
+                  lastName: Downtown Store
+      responses:
+        '201':
+          description: The created user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                CreateUser201Example:
+                  summary: Default createUser 201 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Provisioning]
+      summary: NCR Voyix Update Current User
+      description: Update the currently authenticated platform user.
+      operationId: updateCurrentUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+            examples:
+              UpdateCurrentUserRequestExample:
+                summary: Default updateCurrentUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  email: jsmith@example.com
+                  firstName: Downtown Store
+                  lastName: Downtown Store
+      responses:
+        '200':
+          description: The updated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                UpdateCurrentUser200Example:
+                  summary: Default updateCurrentUser 200 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /provisioning/user-profiles:
+    get:
+      tags: [Provisioning]
+      summary: NCR Voyix Get Current User Profile
+      description: Retrieve the profile data for the currently authenticated user.
+      operationId: getCurrentUserProfile
+      responses:
+        '200':
+          description: The current user profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              examples:
+                GetCurrentUserProfile200Example:
+                  summary: Default getCurrentUserProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    organization: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        AccessKey (HMAC) authentication. The Authorization header carries
+        "AccessKey {sharedKey}:{signature}", where the signature is a Base64
+        SHA-512 HMAC computed over the HTTP method, encoded request path and
+        query string, Content-Type, optional Content-MD5, optional
+        nep-application-key, and optional nep-correlation-id, keyed by the
+        secret key concatenated with the ISO-8601 request date. A Date header
+        must accompany the request. Access keys consist of a shared key and a
+        secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for
+        reference implementations in Python, JavaScript, Java, Kotlin, Go,
+        Dart, .NET, and PowerShell.
+  parameters:
+    ItemCode:
+      name: itemCode
+      in: path
+      required: true
+      description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
+    CartId:
+      name: cartId
+      in: path
+      required: true
+      description: The shopping cart identifier.
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+    NepOrganization:
+      name: nep-organization
+      in: header
+      required: true
+      description: Identifier of the organization the request is scoped to.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the AccessKey signature was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Status:
+      type: string
+      enum: [ACTIVE, INACTIVE]
+    LocalizedText:
+      type: object
+      description: A set of locale-specific values.
+      properties:
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en-US
+              value:
+                type: string
+    ItemInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          description: Optimistic-concurrency version; must increase on each update.
+          example: 1
+        itemId:
+          type: object
+          additionalProperties:
+            type: string
+        shortDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        longDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        status:
+          $ref: '#/components/schemas/Status'
+        merchandiseCategory:
+          type: string
+          example: example
+        departmentId:
+          type: string
+          example: example
+      required: [version, status]
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/ItemInput'
+      - type: object
+        properties:
+          itemId:
+            type: object
+            additionalProperties:
+              type: string
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    ItemPriceInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 9.99
+        currency:
+          type: string
+          example: USD
+        effectiveDate:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        status:
+          $ref: '#/components/schemas/Status'
+      required: [version, price]
+    ItemPrice:
+      allOf:
+      - $ref: '#/components/schemas/ItemPriceInput'
+      - type: object
+        properties:
+          priceId:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              priceCode:
+                type: string
+    ItemCodeList:
+      type: object
+      properties:
+        itemIds:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+            required: [itemCode]
+      required: [itemIds]
+    CategoryNode:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 1
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        parentId:
+          type: string
+          example: example
+        nodeType:
+          type: string
+          enum: [CATEGORY, DEPARTMENT]
+          example: CATEGORY
+        status:
+          $ref: '#/components/schemas/Status'
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 1
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        itemCodes:
+          type: array
+          items:
+            type: string
+        status:
+          $ref: '#/components/schemas/Status'
+    CartLineInput:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        voidReason:
+          type: string
+          example: Customer request
+    CartLine:
+      allOf:
+      - $ref: '#/components/schemas/CartLineInput'
+      - type: object
+        properties:
+          lineId:
+            type: string
+          unitPrice:
+            type: number
+            format: double
+    Cart:
+      type: object
+      properties:
+        cartId:
+          type: string
+          example: cart-a1b2c3d4
+        status:
+          type: string
+          example: ACTIVE
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartLine'
+        totals:
+          type: object
+          properties:
+            total:
+              type: number
+              format: double
+            currency:
+              type: string
+              example: USD
+    ProductId:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
+    Quantity:
+      type: object
+      properties:
+        unitOfMeasure:
+          type: string
+          example: EA
+        unitOfMeasureLabel:
+          type: string
+          example: example
+        value:
+          type: number
+          example: 9.99
+    OrderLine:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        unitPrice:
+          type: number
+          format: double
+          example: 9.99
+    Customer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+    OrderInput:
+      type: object
+      properties:
+        channel:
+          type: string
+          example: Web
+        comments:
+          type: string
+          example: Customer request
+        customer:
+          $ref: '#/components/schemas/Customer'
+        orderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+      required: [orderLines]
+    Order:
+      allOf:
+      - $ref: '#/components/schemas/OrderInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          status:
+            type: string
+    OrderSearch:
+      type: object
+      properties:
+        customerEmail:
+          type: string
+          format: email
+          example: jsmith@example.com
+        returnFullOrders:
+          type: boolean
+          example: true
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: example
+        city:
+          type: string
+          example: example
+        state:
+          type: string
+          example: example
+        postalCode:
+          type: string
+          example: example
+        country:
+          type: string
+          example: US
+    SiteInput:
+      type: object
+      properties:
+        siteName:
+          type: string
+          example: Downtown Store
+        enterpriseUnitName:
+          type: string
+          example: Downtown Store
+        referenceId:
+          type: string
+          example: example
+        address:
+          $ref: '#/components/schemas/Address'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        currency:
+          type: string
+          example: USD
+        timeZone:
+          type: string
+          example: America/New_York
+        status:
+          $ref: '#/components/schemas/Status'
+      required: [siteName, enterpriseUnitName, status]
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    SiteSearch:
+      type: object
+      properties:
+        criteria:
+          type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/Status'
+        fields:
+          type: array
+          items:
+            type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        password:
+          type: string
+          format: password
+          example: s3cr3t-passw0rd
+      required: [username, password]
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
+        expiresAt:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+    UserInput:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+      required: [username]
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+        organization:
+          type: string
+          example: example
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example

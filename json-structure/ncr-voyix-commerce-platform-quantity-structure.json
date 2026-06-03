@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "Quantity schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-quantity-structure.json",
+  "type": "object",
+  "properties": {
+    "unitOfMeasure": {
+      "type": "string",
+      "example": "EA"
+    },
+    "unitOfMeasureLabel": {
+      "type": "string",
+      "example": "example"
+    },
+    "value": {
+      "type": "double",
+      "example": 9.99
+    }
+  },
+  "name": "Quantity"
+}

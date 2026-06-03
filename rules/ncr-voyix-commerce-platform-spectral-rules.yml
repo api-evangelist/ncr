@@ -1,0 +1,308 @@
+# Spectral ruleset for the NCR Voyix Commerce Platform APIs
+# Derived from openapi/ncr-voyix-commerce-platform-openapi.yml. Enforces the
+# conventions observed across the NCR Voyix Business Services Platform sample
+# applications: kebab-case service-prefixed paths, camelCase operationIds with
+# verb prefixes, Title Case tags, AccessKey (HMAC) security, and the
+# nep-organization / nep-enterprise-unit scoping headers.
+rules:
+
+  # ── INFO / METADATA ────────────────────────────────────────────────
+  info-title-ncr-voyix:
+    description: API title should identify NCR Voyix.
+    message: "info.title should start with 'NCR Voyix'."
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "^NCR Voyix"
+  info-description-required:
+    description: A meaningful info.description is required.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  info-version-required:
+    description: An API version is required.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  info-contact-required:
+    description: Contact information should be present.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  info-license-required:
+    description: License information should be present.
+    severity: info
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  # ── OPENAPI VERSION ───────────────────────────────────────────────
+  openapi-version-3:
+    description: Specs must use OpenAPI 3.0.x.
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\."
+
+  # ── SERVERS ───────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $.servers
+    then:
+      function: truthy
+  server-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  server-description-required:
+    description: Each server should have a description (e.g. Production vs Staging).
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PATHS — NAMING CONVENTIONS ────────────────────────────────────
+  path-kebab-case:
+    description: Path segments should be lowercase kebab-case (parameters excepted).
+    message: "Path '{{value}}' should use lowercase kebab-case segments."
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/([a-z0-9-]+|v[0-9]+|\\{[a-zA-Z0-9]+\\}|[a-z0-9]+:[a-z0-9]+))*/?$"
+  path-no-trailing-slash:
+    description: Paths should not end with a trailing slash.
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".+/$"
+  path-no-query-string:
+    description: Paths must not contain query strings.
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  # ── OPERATIONS ────────────────────────────────────────────────────
+  operation-operationid-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  operation-operationid-camel-case:
+    description: operationId should be camelCase with a verb prefix (get/list/create/put/update/find/delete/add/remove/authenticate/exchange/set).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(get|list|create|put|update|find|delete|add|remove|search|authenticate|exchange|set)[A-Za-z0-9]*$"
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-ncr-voyix-prefix:
+    description: Operation summaries should be prefixed with 'NCR Voyix'.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^NCR Voyix "
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+  operation-tags-required:
+    description: Every operation must be tagged.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # ── TAGS ──────────────────────────────────────────────────────────
+  global-tags-defined:
+    description: A global tags array should be defined with descriptions.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+  tag-description-required:
+    description: Each global tag should have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+  tag-title-case:
+    description: Tags should be Title Case single words (Catalog, Order, Site, Security, Provisioning, Selling, Category).
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$"
+
+  # ── PARAMETERS ────────────────────────────────────────────────────
+  parameter-description-required:
+    description: Parameters should have descriptions.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+  parameter-schema-required:
+    description: Parameters must declare a schema with a type.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: schema
+      function: truthy
+  parameter-nep-headers-kebab:
+    description: NCR Voyix scoping headers use the nep- prefix (nep-organization, nep-enterprise-unit, nep-application-key, nep-correlation-id).
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='header')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(nep-[a-z-]+|Content-Type|Content-MD5|Date|Authorization)$"
+
+  # ── REQUEST BODIES ────────────────────────────────────────────────
+  request-body-json:
+    description: Request bodies should offer application/json.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── RESPONSES ─────────────────────────────────────────────────────
+  response-success-defined:
+    description: Each operation must define at least one 2xx response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^2[0-9][0-9]$": true
+          minProperties: 1
+  response-description-required:
+    description: Each response must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+  response-mutation-error-coverage:
+    description: Read/get operations should document a 404 Not Found.
+    severity: info
+    given: $.paths[*].get.responses
+    then:
+      field: "404"
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ─────────────────────────────────────
+  schema-property-camel-case:
+    description: Schema properties should be camelCase (itemCode, enterpriseUnitName, shortDescription).
+    severity: warn
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  schema-status-enum:
+    description: Status fields should be the ACTIVE/INACTIVE enum.
+    severity: info
+    given: $.components.schemas.Status
+    then:
+      field: enum
+      function: truthy
+  schema-version-for-optimistic-concurrency:
+    description: Mutable resources should carry a numeric version for optimistic concurrency.
+    severity: info
+    given: $.components.schemas[?(@.properties && @.properties.version)].properties.version
+    then:
+      field: type
+      function: truthy
+
+  # ── SECURITY ──────────────────────────────────────────────────────
+  global-security-defined:
+    description: A global security requirement must be declared.
+    severity: error
+    given: $
+    then:
+      field: security
+      function: truthy
+  security-scheme-accesskey-hmac:
+    description: The AccessKey (HMAC) security scheme must be defined and described.
+    severity: warn
+    given: $.components.securitySchemes.hmacAccessKey
+    then:
+      field: description
+      function: truthy
+
+  # ── HTTP METHOD CONVENTIONS ───────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+  delete-no-success-body-204:
+    description: DELETE operations should be able to return 204 No Content.
+    severity: info
+    given: $.paths[*].delete.responses
+    then:
+      field: "204"
+      function: truthy
+
+  # ── GENERAL QUALITY ───────────────────────────────────────────────
+  no-empty-descriptions:
+    description: Descriptions must not be empty.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
+  operation-examples-encouraged:
+    description: Operations should provide examples for mocking (Microcks).
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy

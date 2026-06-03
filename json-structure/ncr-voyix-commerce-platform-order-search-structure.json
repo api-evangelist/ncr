@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "description": "OrderSearch schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-structure/ncr-voyix-commerce-platform-order-search-structure.json",
+  "type": "object",
+  "properties": {
+    "customerEmail": {
+      "type": "string",
+      "example": "jsmith@example.com"
+    },
+    "returnFullOrders": {
+      "type": "boolean",
+      "example": true
+    }
+  },
+  "name": "OrderSearch"
+}

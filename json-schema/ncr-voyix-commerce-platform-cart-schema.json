@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cart",
+  "description": "Cart schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-schema/ncr-voyix-commerce-platform-cart-schema.json",
+  "type": "object",
+  "properties": {
+    "cartId": {
+      "type": "string",
+      "example": "cart-a1b2c3d4"
+    },
+    "status": {
+      "type": "string",
+      "example": "ACTIVE"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CartLine"
+      }
+    },
+    "totals": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD"
+        }
+      }
+    }
+  }
+}

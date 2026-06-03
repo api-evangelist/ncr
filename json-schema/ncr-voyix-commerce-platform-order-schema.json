@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "Order schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-schema/ncr-voyix-commerce-platform-order-schema.json",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "type": "string",
+      "example": "Web"
+    },
+    "comments": {
+      "type": "string",
+      "example": "Customer request"
+    },
+    "customer": {
+      "$ref": "#/components/schemas/Customer"
+    },
+    "orderLines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderLine"
+      }
+    },
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "orderLines"
+  ]
+}

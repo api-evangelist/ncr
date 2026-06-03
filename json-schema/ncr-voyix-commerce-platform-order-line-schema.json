@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderLine",
+  "description": "OrderLine schema from NCR Voyix Commerce Platform APIs",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/json-schema/ncr-voyix-commerce-platform-order-line-schema.json",
+  "type": "object",
+  "properties": {
+    "productId": {
+      "$ref": "#/components/schemas/ProductId"
+    },
+    "quantity": {
+      "$ref": "#/components/schemas/Quantity"
+    },
+    "unitPrice": {
+      "type": "number",
+      "format": "double",
+      "example": 9.99
+    }
+  }
+}
