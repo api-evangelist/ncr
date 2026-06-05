@@ -8,6 +8,7 @@ tags:
   - ATM
   - Point of Sale
   - Commerce
+  - Fortune 500
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -15,13 +16,11 @@ created: '2026-03-24'
 modified: '2026-06-02'
 position: Consuming
 description: >-
-  NCR Corporation separated in October 2023 into two independent public companies: NCR
-  Voyix, a global provider of digital commerce solutions for retailers and restaurants,
-  and NCR Atleos, a leader in expanding self-directed banking through ATM networks. NCR
-  Voyix operates the Voyix Commerce Platform, an API-based cloud architecture (the
-  Business Services Platform) that powers unified-commerce POS, ecommerce, and payments
-  for retail and restaurants. Developers access it at developer.ncrvoyix.com using
-  AccessKey (HMAC SHA-512) authentication against api.ncr.com.
+  NCR Corporation separated in October 2023 into two independent public companies: NCR Voyix, a global provider of
+  digital commerce solutions for retailers and restaurants, and NCR Atleos, a leader in expanding self-directed banking
+  through ATM networks. NCR Voyix operates the Voyix Commerce Platform, an API-based cloud architecture (the Business
+  Services Platform) that powers unified-commerce POS, ecommerce, and payments for retail and restaurants. Developers
+  access it at developer.ncrvoyix.com using AccessKey (HMAC SHA-512) authentication against api.ncr.com.
 specificationVersion: '0.19'
 maintainers:
   - FN: Kin Lane
@@ -30,13 +29,12 @@ apis:
   - aid: ncr:ncr-voyix-commerce-platform
     name: NCR Voyix Commerce Platform APIs
     description: >-
-      REST APIs for the NCR Voyix Commerce Platform (Business Services Platform) covering
-      Catalog (items, item-prices, item-attributes, item-details search), Category and Group
-      management, Selling Service shopping carts, Order creation/lookup/search, Site (location)
-      provisioning and geospatial search, Security (authentication, authorization, passwords,
-      roles), and Provisioning (users and user profiles). Requests are signed with AccessKey
-      (HMAC SHA-512) authentication and scoped with nep-organization and nep-enterprise-unit
-      headers against api.ncr.com (production) / gateway-staging.ncrcloud.com (staging).
+      REST APIs for the NCR Voyix Commerce Platform (Business Services Platform) covering Catalog (items, item-prices,
+      item-attributes, item-details search), Category and Group management, Selling Service shopping carts, Order
+      creation/lookup/search, Site (location) provisioning and geospatial search, Security (authentication,
+      authorization, passwords, roles), and Provisioning (users and user profiles). Requests are signed with AccessKey
+      (HMAC SHA-512) authentication and scoped with nep-organization and nep-enterprise-unit headers against api.ncr.com
+      (production) / gateway-staging.ncrcloud.com (staging).
     humanURL: https://developer.ncrvoyix.com/
     baseURL: https://api.ncr.com
     tags:
@@ -68,20 +66,6 @@ apis:
       - type: CodeExamples
         url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
         title: BSP HMAC Authentication Examples
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-catalog.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-category.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-selling.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-order.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-site.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-security.yaml
-      - type: NaftikoCapability
-        url: capabilities/ncr-voyix-commerce-platform-provisioning.yaml
 common:
   - type: GitHubOrganization
     url: https://github.com/NCRVoyix-Corporation
