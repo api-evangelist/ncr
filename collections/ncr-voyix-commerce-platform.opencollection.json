@@ -1,0 +1,1047 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/items",
+            "params": [
+              {
+                "name": "itemStatus",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "Filter by item status."
+              },
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "sortField",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "sortDirection",
+                "value": "ASC",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List catalog items, optionally filtered by status and paged/sorted."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create or update catalog items. There is no delete; mark INACTIVE to retire."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/items/:itemCode",
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a single catalog item by its item code."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/items/:itemCode",
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog item. The version must increase on each update."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Item Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-prices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create or update item prices for catalog items."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item Price by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-prices/:itemCode/:priceCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              },
+              {
+                "name": "priceCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the item price."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update the price for a catalog item at a site. The version must increase on each update."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Multiple Item Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/catalog/item-prices/get-multiple",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve prices for a list of catalog items in a single request, scoped to a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Multiple Item Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/catalog/item-attributes/get-multiple",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve attributes for a list of catalog items in a single request, scoped to a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item Attributes by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-attributes/:itemCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update attributes for a catalog item at a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Item Details by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/item-details/:itemCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ]
+          },
+          "docs": "Retrieve the consolidated item details (item, price, attributes) for a single item at a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Search Item Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/item-details/search",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "shortDescriptionPattern",
+                "value": "example",
+                "type": "query",
+                "description": "Wildcard pattern matched against the item short description."
+              },
+              {
+                "name": "merchandiseCategoryId",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "groupCode",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "itemStatus",
+                "value": "ACTIVE",
+                "type": "query"
+              },
+              {
+                "name": "sortField",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "sortDirection",
+                "value": "ASC",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search consolidated item details at a site by description pattern, merchandise category, group, and status, with sorting."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Category",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix List Category Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes",
+            "params": [
+              {
+                "name": "parentId",
+                "value": "example",
+                "type": "query",
+                "description": "Filter to children of the supplied parent category node."
+              }
+            ]
+          },
+          "docs": "List catalog category nodes, optionally filtered by parent node."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Category Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog category node in the category hierarchy."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Category Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes/:nodeId",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The category node identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single category node by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Category Node Ancestors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes/:nodeId/ancestors",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The category node identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the ancestor chain for a category node up to the root."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/groups",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "titlePattern",
+                "value": "example",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List catalog groups, optionally paged and filtered by title pattern."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/v2/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog group used to merchandise items together."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The group identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single catalog group by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Selling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new shopping cart at a site via the Selling Service."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Cart by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a shopping cart by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Cart Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update mutable cart fields such as status."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Delete Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Delete a shopping cart by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Cart Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the line items in a shopping cart."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Add Item to Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a line item to a shopping cart."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item in Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items/:lineId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path",
+                "description": "The cart line identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a line item in a shopping cart (e.g. quantity)."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Remove Item from Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items/:lineId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path",
+                "description": "The cart line identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a line item from a shopping cart, supplying a void reason."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/order/3/orders/1",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new order at a site. Requires the nep-enterprise-unit header identifying the location."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Order by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/order/3/orders/1/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The order identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single order by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Order by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.ncr.com/order/3/orders/1/:orderId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The order identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update mutable fields on an existing order at a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Find Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/order/3/orders/1/find",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for orders by criteria such as customer email, with paging."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Site",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/site/sites",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new site (location) on the NCR Voyix Commerce Platform."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Site by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The alphanumeric site identifier (not the site name)."
+              }
+            ]
+          },
+          "docs": "Retrieve a single site by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/site/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The alphanumeric site identifier (not the site name)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a site by its identifier. Set status to INACTIVE to logically delete the site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Find Sites by Criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/site/sites/find-by-criteria",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for sites matching the supplied criteria, selecting a field projection, with paging."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Find Nearby Sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/find-nearby/:coordinates",
+            "params": [
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "path",
+                "description": "Latitude and longitude as \"{latitude},{longitude}\"."
+              },
+              {
+                "name": "radius",
+                "value": "1",
+                "type": "query",
+                "description": "Search radius in meters."
+              },
+              {
+                "name": "numSites",
+                "value": "1",
+                "type": "query",
+                "description": "Maximum number of sites to return."
+              }
+            ]
+          },
+          "docs": "Find sites within a radius of a geographic coordinate."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Site by Reference Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/by-reference-id/:referenceId",
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The external reference identifier for the site."
+              }
+            ]
+          },
+          "docs": "Retrieve a site by its external reference identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Authenticate User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/security/authentication/login",
+            "headers": [
+              {
+                "name": "nep-organization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate a platform user with username and password against an organization, returning a session token."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Exchange Authorization Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/security/authorization",
+            "headers": [
+              {
+                "name": "nep-organization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a session token for an authorization token scoped to the organization."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Set User Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/security/security-user-passwords/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The platform username whose password is being set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set or reset the password for a platform user."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Self Effective Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/security/role-grants/user-grants/self/effective-roles"
+          },
+          "docs": "Retrieve the effective role grants for the currently authenticated user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Provisioning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/provisioning/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new platform user within the organization."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/provisioning/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the currently authenticated platform user."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Current User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/provisioning/user-profiles"
+          },
+          "docs": "Retrieve the profile data for the currently authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
