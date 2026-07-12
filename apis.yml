@@ -67,6 +67,10 @@ apis:
         url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
         title: BSP HMAC Authentication Examples
 common:
+  - type: DomainSecurity
+    url: security/ncr-domain-security.yml
+  - type: Authentication
+    url: authentication/ncr-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/NCRVoyix-Corporation
   - type: LinkedIn
