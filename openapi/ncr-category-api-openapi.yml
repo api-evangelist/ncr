@@ -1,0 +1,419 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs Catalog Category API
+  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Category
+  description: Catalog category-node hierarchy and group management.
+paths:
+  /catalog/v2/category-nodes:
+    get:
+      tags:
+      - Category
+      summary: NCR Voyix List Category Nodes
+      description: List catalog category nodes, optionally filtered by parent node.
+      operationId: listCategoryNodes
+      parameters:
+      - name: parentId
+        in: query
+        description: Filter to children of the supplied parent category node.
+        schema:
+          type: string
+        example: example
+      responses:
+        '200':
+          description: The category nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categoryNodes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CategoryNode'
+              examples:
+                ListCategoryNodes200Example:
+                  summary: Default listCategoryNodes 200 response
+                  x-microcks-default: true
+                  value:
+                    categoryNodes:
+                    - id: '500123'
+                      version: 1
+                      name:
+                        values:
+                        - {}
+                      parentId: example
+                      nodeType: CATEGORY
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags:
+      - Category
+      summary: NCR Voyix Create or Update Category Node
+      description: Create or update a catalog category node in the category hierarchy.
+      operationId: putCategoryNode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryNode'
+            examples:
+              PutCategoryNodeRequestExample:
+                summary: Default putCategoryNode request
+                x-microcks-default: true
+                value:
+                  id: '500123'
+                  version: 1
+                  name:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  parentId: example
+                  nodeType: CATEGORY
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The created or updated category node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryNode'
+              examples:
+                PutCategoryNode200Example:
+                  summary: Default putCategoryNode 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    name:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    parentId: example
+                    nodeType: CATEGORY
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/category-nodes/{nodeId}:
+    parameters:
+    - name: nodeId
+      in: path
+      required: true
+      description: The category node identifier.
+      schema:
+        type: string
+    get:
+      tags:
+      - Category
+      summary: NCR Voyix Get Category Node
+      description: Retrieve a single category node by its identifier.
+      operationId: getCategoryNode
+      responses:
+        '200':
+          description: The category node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryNode'
+              examples:
+                GetCategoryNode200Example:
+                  summary: Default getCategoryNode 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    name:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    parentId: example
+                    nodeType: CATEGORY
+                    status: ACTIVE
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/category-nodes/{nodeId}/ancestors:
+    parameters:
+    - name: nodeId
+      in: path
+      required: true
+      description: The category node identifier.
+      schema:
+        type: string
+    get:
+      tags:
+      - Category
+      summary: NCR Voyix Get Category Node Ancestors
+      description: Retrieve the ancestor chain for a category node up to the root.
+      operationId: getCategoryNodeAncestors
+      responses:
+        '200':
+          description: The ancestor category nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ancestors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CategoryNode'
+              examples:
+                GetCategoryNodeAncestors200Example:
+                  summary: Default getCategoryNodeAncestors 200 response
+                  x-microcks-default: true
+                  value:
+                    ancestors:
+                    - id: '500123'
+                      version: 1
+                      name:
+                        values:
+                        - {}
+                      parentId: example
+                      nodeType: CATEGORY
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/groups:
+    get:
+      tags:
+      - Category
+      summary: NCR Voyix List Groups
+      description: List catalog groups, optionally paged and filtered by title pattern.
+      operationId: listGroups
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: titlePattern
+        in: query
+        schema:
+          type: string
+        example: example
+      responses:
+        '200':
+          description: The catalog groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+              examples:
+                ListGroups200Example:
+                  summary: Default listGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - id: '500123'
+                      version: 1
+                      title:
+                        values:
+                        - {}
+                      itemCodes:
+                      - example
+                      status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags:
+      - Category
+      summary: NCR Voyix Create or Update Group
+      description: Create or update a catalog group used to merchandise items together.
+      operationId: putGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+            examples:
+              PutGroupRequestExample:
+                summary: Default putGroup request
+                x-microcks-default: true
+                value:
+                  id: '500123'
+                  version: 1
+                  title:
+                    values:
+                    - locale: en-US
+                      value: Cheeseburger
+                  itemCodes:
+                  - example
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The created or updated group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                PutGroup200Example:
+                  summary: Default putGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    title:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    itemCodes:
+                    - example
+                    status: ACTIVE
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalog/v2/groups/{groupId}:
+    parameters:
+    - name: groupId
+      in: path
+      required: true
+      description: The group identifier.
+      schema:
+        type: string
+    get:
+      tags:
+      - Category
+      summary: NCR Voyix Get Group
+      description: Retrieve a single catalog group by its identifier.
+      operationId: getGroup
+      responses:
+        '200':
+          description: The group.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                GetGroup200Example:
+                  summary: Default getGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    version: 1
+                    title:
+                      values:
+                      - locale: en-US
+                        value: Cheeseburger
+                    itemCodes:
+                    - example
+                    status: ACTIVE
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 1
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        itemCodes:
+          type: array
+          items:
+            type: string
+        status:
+          $ref: '#/components/schemas/Status'
+    LocalizedText:
+      type: object
+      description: A set of locale-specific values.
+      properties:
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en-US
+              value:
+                type: string
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    CategoryNode:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 1
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        parentId:
+          type: string
+          example: example
+        nodeType:
+          type: string
+          enum:
+          - CATEGORY
+          - DEPARTMENT
+          example: CATEGORY
+        status:
+          $ref: '#/components/schemas/Status'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AccessKey (HMAC) authentication. The Authorization header carries "AccessKey {sharedKey}:{signature}", where the signature is a Base64 SHA-512 HMAC computed over the HTTP method, encoded request path and query string, Content-Type, optional Content-MD5, optional nep-application-key, and optional nep-correlation-id, keyed by the secret key concatenated with the ISO-8601 request date. A Date header must accompany the request. Access keys consist of a shared key and a secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for reference implementations in Python, JavaScript, Java, Kotlin, Go, Dart, .NET, and PowerShell.

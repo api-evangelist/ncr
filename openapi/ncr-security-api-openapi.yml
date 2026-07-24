@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs Catalog Security API
+  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Security
+  description: Authentication, authorization, and user password management.
+paths:
+  /security/authentication/login:
+    post:
+      tags:
+      - Security
+      summary: NCR Voyix Authenticate User
+      description: Authenticate a platform user with username and password against an organization, returning a session token.
+      operationId: authenticateUser
+      parameters:
+      - $ref: '#/components/parameters/NepOrganization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              AuthenticateUserRequestExample:
+                summary: Default authenticateUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  password: s3cr3t-passw0rd
+      responses:
+        '200':
+          description: The authentication result with a session token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                AuthenticateUser200Example:
+                  summary: Default authenticateUser 200 response
+                  x-microcks-default: true
+                  value:
+                    token: eyJhbGciOiJIUzI1Ni1.abc123.def456
+                    expiresAt: '2026-06-02T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/authorization:
+    post:
+      tags:
+      - Security
+      summary: NCR Voyix Exchange Authorization Token
+      description: Exchange a session token for an authorization token scoped to the organization.
+      operationId: exchangeToken
+      parameters:
+      - $ref: '#/components/parameters/NepOrganization'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ExchangeTokenRequestExample:
+                summary: Default exchangeToken request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: The authorization token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                ExchangeToken200Example:
+                  summary: Default exchangeToken 200 response
+                  x-microcks-default: true
+                  value:
+                    token: eyJhbGciOiJIUzI1Ni1.abc123.def456
+                    expiresAt: '2026-06-02T14:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/security-user-passwords/{username}:
+    parameters:
+    - name: username
+      in: path
+      required: true
+      description: The platform username whose password is being set.
+      schema:
+        type: string
+    put:
+      tags:
+      - Security
+      summary: NCR Voyix Set User Password
+      description: Set or reset the password for a platform user.
+      operationId: setUserPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  format: password
+              required:
+              - password
+            examples:
+              SetUserPasswordRequestExample:
+                summary: Default setUserPassword request
+                x-microcks-default: true
+                value:
+                  password: s3cr3t-passw0rd
+      responses:
+        '204':
+          description: The password was updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /security/role-grants/user-grants/self/effective-roles:
+    get:
+      tags:
+      - Security
+      summary: NCR Voyix Get Self Effective Roles
+      description: Retrieve the effective role grants for the currently authenticated user.
+      operationId: getSelfEffectiveRoles
+      responses:
+        '200':
+          description: The effective roles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  effectiveRoles:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                GetSelfEffectiveRoles200Example:
+                  summary: Default getSelfEffectiveRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    effectiveRoles:
+                    - example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        password:
+          type: string
+          format: password
+          example: s3cr3t-passw0rd
+      required:
+      - username
+      - password
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
+        expiresAt:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+  responses:
+    Unauthorized:
+      description: Authentication failed or the AccessKey signature was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    NepOrganization:
+      name: nep-organization
+      in: header
+      required: true
+      description: Identifier of the organization the request is scoped to.
+      schema:
+        type: string
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AccessKey (HMAC) authentication. The Authorization header carries "AccessKey {sharedKey}:{signature}", where the signature is a Base64 SHA-512 HMAC computed over the HTTP method, encoded request path and query string, Content-Type, optional Content-MD5, optional nep-application-key, and optional nep-correlation-id, keyed by the secret key concatenated with the ISO-8601 request date. A Date header must accompany the request. Access keys consist of a shared key and a secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for reference implementations in Python, JavaScript, Java, Kotlin, Go, Dart, .NET, and PowerShell.

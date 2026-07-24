@@ -1,0 +1,498 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs Catalog Selling API
+  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Selling
+  description: Selling Service shopping carts and cart line items.
+paths:
+  /emerald/selling-service/cart/v1/carts:
+    post:
+      tags:
+      - Selling
+      summary: NCR Voyix Create Cart
+      description: Create a new shopping cart at a site via the Selling Service.
+      operationId: createCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '201':
+          description: The created cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                CreateCart201Example:
+                  summary: Default createCart 201 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    get:
+      tags:
+      - Selling
+      summary: NCR Voyix Get Cart by Id
+      description: Retrieve a shopping cart by its identifier.
+      operationId: getCartById
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '200':
+          description: The cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                GetCartById200Example:
+                  summary: Default getCartById 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Selling
+      summary: NCR Voyix Update Cart Status
+      description: Update mutable cart fields such as status.
+      operationId: updateCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+            examples:
+              UpdateCartRequestExample:
+                summary: Default updateCart request
+                x-microcks-default: true
+                value:
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                UpdateCart200Example:
+                  summary: Default updateCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Selling
+      summary: NCR Voyix Delete Cart
+      description: Delete a shopping cart by its identifier.
+      operationId: deleteCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '204':
+          description: The cart was deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}/items:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    get:
+      tags:
+      - Selling
+      summary: NCR Voyix Get Cart Items
+      description: Retrieve the line items in a shopping cart.
+      operationId: getCartItems
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      responses:
+        '200':
+          description: The cart line items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CartLine'
+              examples:
+                GetCartItems200Example:
+                  summary: Default getCartItems 200 response
+                  x-microcks-default: true
+                  value:
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Selling
+      summary: NCR Voyix Add Item to Cart
+      description: Add a line item to a shopping cart.
+      operationId: addItemToCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartLineInput'
+            examples:
+              AddItemToCartRequestExample:
+                summary: Default addItemToCart request
+                x-microcks-default: true
+                value:
+                  productId:
+                    type: example
+                    value: Cheeseburger
+                  quantity:
+                    unitOfMeasure: EA
+                    unitOfMeasureLabel: example
+                    value: 9.99
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                AddItemToCart200Example:
+                  summary: Default addItemToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /emerald/selling-service/cart/v1/carts/{cartId}/items/{lineId}:
+    parameters:
+    - $ref: '#/components/parameters/CartId'
+    - name: lineId
+      in: path
+      required: true
+      description: The cart line identifier.
+      schema:
+        type: string
+    patch:
+      tags:
+      - Selling
+      summary: NCR Voyix Update Item in Cart
+      description: Update a line item in a shopping cart (e.g. quantity).
+      operationId: updateItemInCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartLineInput'
+            examples:
+              UpdateItemInCartRequestExample:
+                summary: Default updateItemInCart request
+                x-microcks-default: true
+                value:
+                  productId:
+                    type: example
+                    value: Cheeseburger
+                  quantity:
+                    unitOfMeasure: EA
+                    unitOfMeasureLabel: example
+                    value: 9.99
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                UpdateItemInCart200Example:
+                  summary: Default updateItemInCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Selling
+      summary: NCR Voyix Remove Item from Cart
+      description: Remove a line item from a shopping cart, supplying a void reason.
+      operationId: removeItemFromCart
+      parameters:
+      - $ref: '#/components/parameters/NepEnterpriseUnit'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                voidReason:
+                  type: string
+            examples:
+              RemoveItemFromCartRequestExample:
+                summary: Default removeItemFromCart request
+                x-microcks-default: true
+                value:
+                  voidReason: Customer request
+      responses:
+        '200':
+          description: The updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                RemoveItemFromCart200Example:
+                  summary: Default removeItemFromCart 200 response
+                  x-microcks-default: true
+                  value:
+                    cartId: cart-a1b2c3d4
+                    status: ACTIVE
+                    items:
+                    - productId:
+                        type: {}
+                        value: {}
+                      quantity:
+                        unitOfMeasure: {}
+                        unitOfMeasureLabel: {}
+                        value: {}
+                      voidReason: Customer request
+                      lineId: line-001
+                      unitPrice: 9.99
+                    totals:
+                      total: 9.99
+                      currency: USD
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProductId:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
+    CartLine:
+      allOf:
+      - $ref: '#/components/schemas/CartLineInput'
+      - type: object
+        properties:
+          lineId:
+            type: string
+          unitPrice:
+            type: number
+            format: double
+    Cart:
+      type: object
+      properties:
+        cartId:
+          type: string
+          example: cart-a1b2c3d4
+        status:
+          type: string
+          example: ACTIVE
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartLine'
+        totals:
+          type: object
+          properties:
+            total:
+              type: number
+              format: double
+            currency:
+              type: string
+              example: USD
+    CartLineInput:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        voidReason:
+          type: string
+          example: Customer request
+    Quantity:
+      type: object
+      properties:
+        unitOfMeasure:
+          type: string
+          example: EA
+        unitOfMeasureLabel:
+          type: string
+          example: example
+        value:
+          type: number
+          example: 9.99
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+  parameters:
+    CartId:
+      name: cartId
+      in: path
+      required: true
+      description: The shopping cart identifier.
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AccessKey (HMAC) authentication. The Authorization header carries "AccessKey {sharedKey}:{signature}", where the signature is a Base64 SHA-512 HMAC computed over the HTTP method, encoded request path and query string, Content-Type, optional Content-MD5, optional nep-application-key, and optional nep-correlation-id, keyed by the secret key concatenated with the ISO-8601 request date. A Date header must accompany the request. Access keys consist of a shared key and a secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for reference implementations in Python, JavaScript, Java, Kotlin, Go, Dart, .NET, and PowerShell.

@@ -1,0 +1,479 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs Catalog Site API
+  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Site
+  description: Site (location) provisioning, lookup, and geospatial search.
+paths:
+  /site/sites:
+    post:
+      tags:
+      - Site
+      summary: NCR Voyix Create Site
+      description: Create a new site (location) on the NCR Voyix Commerce Platform.
+      operationId: createSite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteInput'
+            examples:
+              CreateSiteRequestExample:
+                summary: Default createSite request
+                x-microcks-default: true
+                value:
+                  siteName: Downtown Store
+                  enterpriseUnitName: Downtown Store
+                  referenceId: example
+                  address:
+                    address1: example
+                    city: example
+                    state: example
+                    postalCode: example
+                    country: US
+                  coordinates:
+                    latitude: 9.99
+                    longitude: 9.99
+                  currency: USD
+                  timeZone: America/New_York
+                  status: ACTIVE
+      responses:
+        '201':
+          description: The created site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                CreateSite201Example:
+                  summary: Default createSite 201 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/{siteId}:
+    parameters:
+    - name: siteId
+      in: path
+      required: true
+      description: The alphanumeric site identifier (not the site name).
+      schema:
+        type: string
+    get:
+      tags:
+      - Site
+      summary: NCR Voyix Get Site by Id
+      description: Retrieve a single site by its identifier.
+      operationId: getSiteById
+      responses:
+        '200':
+          description: The site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                GetSiteById200Example:
+                  summary: Default getSiteById 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags:
+      - Site
+      summary: NCR Voyix Update Site
+      description: Update a site by its identifier. Set status to INACTIVE to logically delete the site.
+      operationId: updateSite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteInput'
+            examples:
+              UpdateSiteRequestExample:
+                summary: Default updateSite request
+                x-microcks-default: true
+                value:
+                  siteName: Downtown Store
+                  enterpriseUnitName: Downtown Store
+                  referenceId: example
+                  address:
+                    address1: example
+                    city: example
+                    state: example
+                    postalCode: example
+                    country: US
+                  coordinates:
+                    latitude: 9.99
+                    longitude: 9.99
+                  currency: USD
+                  timeZone: America/New_York
+                  status: ACTIVE
+      responses:
+        '200':
+          description: The updated site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                UpdateSite200Example:
+                  summary: Default updateSite 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/find-by-criteria:
+    post:
+      tags:
+      - Site
+      summary: NCR Voyix Find Sites by Criteria
+      description: Search for sites matching the supplied criteria, selecting a field projection, with paging.
+      operationId: findSitesByCriteria
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+        example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteSearch'
+            examples:
+              FindSitesByCriteriaRequestExample:
+                summary: Default findSitesByCriteria request
+                x-microcks-default: true
+                value:
+                  criteria:
+                    status: ACTIVE
+                  fields:
+                  - example
+      responses:
+        '200':
+          description: A page of matching sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Site'
+              examples:
+                FindSitesByCriteria200Example:
+                  summary: Default findSitesByCriteria 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - siteName: Downtown Store
+                      enterpriseUnitName: Downtown Store
+                      referenceId: example
+                      address:
+                        address1: {}
+                        city: {}
+                        state: {}
+                        postalCode: {}
+                        country: {}
+                      coordinates:
+                        latitude: {}
+                        longitude: {}
+                      currency: USD
+                      timeZone: America/New_York
+                      status: ACTIVE
+                      id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/find-nearby/{coordinates}:
+    parameters:
+    - name: coordinates
+      in: path
+      required: true
+      description: Latitude and longitude as "{latitude},{longitude}".
+      schema:
+        type: string
+    get:
+      tags:
+      - Site
+      summary: NCR Voyix Find Nearby Sites
+      description: Find sites within a radius of a geographic coordinate.
+      operationId: findNearbySites
+      parameters:
+      - name: radius
+        in: query
+        description: Search radius in meters.
+        schema:
+          type: integer
+        example: 1
+      - name: numSites
+        in: query
+        description: Maximum number of sites to return.
+        schema:
+          type: integer
+        example: 1
+      responses:
+        '200':
+          description: The nearby sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pageContent:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Site'
+              examples:
+                FindNearbySites200Example:
+                  summary: Default findNearbySites 200 response
+                  x-microcks-default: true
+                  value:
+                    pageContent:
+                    - siteName: Downtown Store
+                      enterpriseUnitName: Downtown Store
+                      referenceId: example
+                      address:
+                        address1: {}
+                        city: {}
+                        state: {}
+                        postalCode: {}
+                        country: {}
+                      coordinates:
+                        latitude: {}
+                        longitude: {}
+                      currency: USD
+                      timeZone: America/New_York
+                      status: ACTIVE
+                      id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /site/sites/by-reference-id/{referenceId}:
+    parameters:
+    - name: referenceId
+      in: path
+      required: true
+      description: The external reference identifier for the site.
+      schema:
+        type: string
+    get:
+      tags:
+      - Site
+      summary: NCR Voyix Get Site by Reference Id
+      description: Retrieve a site by its external reference identifier.
+      operationId: getSiteByReferenceId
+      responses:
+        '200':
+          description: The site.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
+              examples:
+                GetSiteByReferenceId200Example:
+                  summary: Default getSiteByReferenceId 200 response
+                  x-microcks-default: true
+                  value:
+                    siteName: Downtown Store
+                    enterpriseUnitName: Downtown Store
+                    referenceId: example
+                    address:
+                      address1: example
+                      city: example
+                      state: example
+                      postalCode: example
+                      country: US
+                    coordinates:
+                      latitude: 9.99
+                      longitude: 9.99
+                    currency: USD
+                    timeZone: America/New_York
+                    status: ACTIVE
+                    id: '500123'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: example
+        city:
+          type: string
+          example: example
+        state:
+          type: string
+          example: example
+        postalCode:
+          type: string
+          example: example
+        country:
+          type: string
+          example: US
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    SiteInput:
+      type: object
+      properties:
+        siteName:
+          type: string
+          example: Downtown Store
+        enterpriseUnitName:
+          type: string
+          example: Downtown Store
+        referenceId:
+          type: string
+          example: example
+        address:
+          $ref: '#/components/schemas/Address'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        currency:
+          type: string
+          example: USD
+        timeZone:
+          type: string
+          example: America/New_York
+        status:
+          $ref: '#/components/schemas/Status'
+      required:
+      - siteName
+      - enterpriseUnitName
+      - status
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
+    SiteSearch:
+      type: object
+      properties:
+        criteria:
+          type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/Status'
+        fields:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AccessKey (HMAC) authentication. The Authorization header carries "AccessKey {sharedKey}:{signature}", where the signature is a Base64 SHA-512 HMAC computed over the HTTP method, encoded request path and query string, Content-Type, optional Content-MD5, optional nep-application-key, and optional nep-correlation-id, keyed by the secret key concatenated with the ISO-8601 request date. A Date header must accompany the request. Access keys consist of a shared key and a secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for reference implementations in Python, JavaScript, Java, Kotlin, Go, Dart, .NET, and PowerShell.

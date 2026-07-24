@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: NCR Voyix Commerce Platform APIs Catalog Provisioning API
+  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  version: '1.0'
+  contact:
+    name: NCR Voyix Developer Experience
+    url: https://developer.ncrvoyix.com/
+  license:
+    name: Proprietary
+    url: https://www.ncrvoyix.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.ncr.com
+  description: Production (Business Services Platform)
+- url: https://gateway-staging.ncrcloud.com
+  description: Staging
+security:
+- hmacAccessKey: []
+tags:
+- name: Provisioning
+  description: Platform user creation and user profile management.
+paths:
+  /provisioning/users:
+    post:
+      tags:
+      - Provisioning
+      summary: NCR Voyix Create User
+      description: Create a new platform user within the organization.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+            examples:
+              CreateUserRequestExample:
+                summary: Default createUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  email: jsmith@example.com
+                  firstName: Downtown Store
+                  lastName: Downtown Store
+      responses:
+        '201':
+          description: The created user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                CreateUser201Example:
+                  summary: Default createUser 201 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags:
+      - Provisioning
+      summary: NCR Voyix Update Current User
+      description: Update the currently authenticated platform user.
+      operationId: updateCurrentUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+            examples:
+              UpdateCurrentUserRequestExample:
+                summary: Default updateCurrentUser request
+                x-microcks-default: true
+                value:
+                  username: jsmith
+                  email: jsmith@example.com
+                  firstName: Downtown Store
+                  lastName: Downtown Store
+      responses:
+        '200':
+          description: The updated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                UpdateCurrentUser200Example:
+                  summary: Default updateCurrentUser 200 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /provisioning/user-profiles:
+    get:
+      tags:
+      - Provisioning
+      summary: NCR Voyix Get Current User Profile
+      description: Retrieve the profile data for the currently authenticated user.
+      operationId: getCurrentUserProfile
+      responses:
+        '200':
+          description: The current user profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              examples:
+                GetCurrentUserProfile200Example:
+                  summary: Default getCurrentUserProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    username: jsmith
+                    email: jsmith@example.com
+                    firstName: Downtown Store
+                    lastName: Downtown Store
+                    organization: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    User:
+      allOf:
+      - $ref: '#/components/schemas/UserInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    UserProfile:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+        organization:
+          type: string
+          example: example
+    UserInput:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+      required:
+      - username
+  securitySchemes:
+    hmacAccessKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AccessKey (HMAC) authentication. The Authorization header carries "AccessKey {sharedKey}:{signature}", where the signature is a Base64 SHA-512 HMAC computed over the HTTP method, encoded request path and query string, Content-Type, optional Content-MD5, optional nep-application-key, and optional nep-correlation-id, keyed by the secret key concatenated with the ISO-8601 request date. A Date header must accompany the request. Access keys consist of a shared key and a secret key issued by NCR Voyix. See the ncr-bsp-hmac repository for reference implementations in Python, JavaScript, Java, Kotlin, Go, Dart, .NET, and PowerShell.
