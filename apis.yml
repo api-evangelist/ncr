@@ -10,7 +10,20 @@ tags:
   - Commerce
   - Fortune 500
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ncr.png
 access: 3rd-Party
 created: '2026-03-24'
 modified: '2026-06-02'
@@ -26,46 +39,181 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 apis:
-  - aid: ncr:ncr-voyix-commerce-platform
-    name: NCR Voyix Commerce Platform APIs
-    description: >-
-      REST APIs for the NCR Voyix Commerce Platform (Business Services Platform) covering Catalog (items, item-prices,
-      item-attributes, item-details search), Category and Group management, Selling Service shopping carts, Order
-      creation/lookup/search, Site (location) provisioning and geospatial search, Security (authentication,
-      authorization, passwords, roles), and Provisioning (users and user profiles). Requests are signed with AccessKey
-      (HMAC SHA-512) authentication and scoped with nep-organization and nep-enterprise-unit headers against api.ncr.com
-      (production) / gateway-staging.ncrcloud.com (staging).
-    humanURL: https://developer.ncrvoyix.com/
-    baseURL: https://api.ncr.com
-    tags:
-      - REST
-      - Commerce
-      - Retail
-      - Restaurant
-      - Catalog
-      - Order
-      - Site
-      - Point of Sale
-    properties:
-      - type: Documentation
-        url: https://developer.ncrvoyix.com/
-      - type: OpenAPI
-        url: openapi/ncr-voyix-commerce-platform-openapi.yml
-      - type: Postman
-        url: postman/ncr-bsp-hmac-examples.postman_collection.json
-      - type: GettingStarted
-        url: https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
-      - type: APIExplorer
-        url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
-      - type: CodeExamples
-        url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
-        title: Retail Demo App (JavaScript)
-      - type: CodeExamples
-        url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
-        title: Hospitality Sample App (Python)
-      - type: CodeExamples
-        url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
-        title: BSP HMAC Authentication Examples
+- aid: ncr:ncr-catalog-api
+  name: NCR Catalog API
+  description: Item, item-price, and item-attribute management plus item-details search.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-category-api
+  name: NCR Category API
+  description: Catalog category-node hierarchy and group management.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Category
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-category-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-order-api
+  name: NCR Order API
+  description: Order creation, lookup, update, and search.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-order-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-provisioning-api
+  name: NCR Provisioning API
+  description: Platform user creation and user profile management.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Provisioning
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-provisioning-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-security-api
+  name: NCR Security API
+  description: Authentication, authorization, and user password management.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-security-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-selling-api
+  name: NCR Selling API
+  description: Selling Service shopping carts and cart line items.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Selling
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-selling-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
+- aid: ncr:ncr-site-api
+  name: NCR Site API
+  description: Site (location) provisioning, lookup, and geospatial search.
+  humanURL: https://developer.ncrvoyix.com/
+  baseURL: https://api.ncr.com
+  tags:
+  - Site
+  properties:
+  - type: OpenAPI
+    url: openapi/ncr-site-api-openapi.yml
+  - type: Documentation
+    url: https://developer.ncrvoyix.com/
+  - type: Postman
+    url: postman/ncr-bsp-hmac-examples.postman_collection.json
+  - type: GettingStarted
+    url: >-
+      https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here
+  - type: APIExplorer
+    url: https://developer.ncrvoyix.com/portals/dev-portal/api-explorer
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-retail-demo
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/sample-app-burgers
+  - type: CodeExamples
+    url: https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac
 common:
   - type: AgenticAccess
     url: agentic-access/ncr-agentic-access.yml
