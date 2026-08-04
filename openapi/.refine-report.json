@@ -1,0 +1,26 @@
+{
+  "provider": "ncr",
+  "sources": [
+    "ncr-catalog-api-openapi.yml",
+    "ncr-category-api-openapi.yml",
+    "ncr-order-api-openapi.yml",
+    "ncr-provisioning-api-openapi.yml",
+    "ncr-security-api-openapi.yml",
+    "ncr-selling-api-openapi.yml",
+    "ncr-site-api-openapi.yml"
+  ],
+  "outputs": [
+    "ncr-catalog-api-openapi.yml",
+    "ncr-category-api-openapi.yml",
+    "ncr-order-api-openapi.yml",
+    "ncr-provisioning-api-openapi.yml",
+    "ncr-security-api-openapi.yml",
+    "ncr-selling-api-openapi.yml",
+    "ncr-site-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
