@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog Provisioning API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provisioning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/provisioning/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new platform user within the organization."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/provisioning/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the currently authenticated platform user."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Current User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/provisioning/user-profiles"
+          },
+          "docs": "Retrieve the profile data for the currently authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

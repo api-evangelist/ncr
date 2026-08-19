@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/items",
+            "params": [
+              {
+                "name": "itemStatus",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "Filter by item status."
+              },
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "sortField",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "sortDirection",
+                "value": "ASC",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List catalog items, optionally filtered by status and paged/sorted."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create or update catalog items. There is no delete; mark INACTIVE to retire."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/items/:itemCode",
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a single catalog item by its item code."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/items/:itemCode",
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog item. The version must increase on each update."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Item Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-prices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create or update item prices for catalog items."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item Price by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-prices/:itemCode/:priceCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              },
+              {
+                "name": "priceCode",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the item price."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update the price for a catalog item at a site. The version must increase on each update."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Multiple Item Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/catalog/item-prices/get-multiple",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve prices for a list of catalog items in a single request, scoped to a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Multiple Item Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/catalog/item-attributes/get-multiple",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve attributes for a list of catalog items in a single request, scoped to a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item Attributes by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/item-attributes/:itemCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update attributes for a catalog item at a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Item Details by Item Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/item-details/:itemCode",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "itemCode",
+                "value": "",
+                "type": "path",
+                "description": "The catalog item code (spaces are not permitted)."
+              }
+            ]
+          },
+          "docs": "Retrieve the consolidated item details (item, price, attributes) for a single item at a site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Search Item Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/item-details/search",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "shortDescriptionPattern",
+                "value": "example",
+                "type": "query",
+                "description": "Wildcard pattern matched against the item short description."
+              },
+              {
+                "name": "merchandiseCategoryId",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "groupCode",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "itemStatus",
+                "value": "ACTIVE",
+                "type": "query"
+              },
+              {
+                "name": "sortField",
+                "value": "example",
+                "type": "query"
+              },
+              {
+                "name": "sortDirection",
+                "value": "ASC",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search consolidated item details at a site by description pattern, merchandise category, group, and status, with sorting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

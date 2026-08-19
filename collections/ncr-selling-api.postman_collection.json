@@ -1,0 +1,1137 @@
+{
+  "item": [
+    {
+      "id": "ad636b1d-2cb3-4ab0-b9a2-5cf14a1be162",
+      "name": "Selling",
+      "description": {
+        "content": "Selling Service shopping carts and cart line items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c81e03f4-229d-4c03-81ef-8b2a3224d58e",
+          "name": "NCR Voyix Create Cart",
+          "request": {
+            "name": "NCR Voyix Create Cart",
+            "description": {
+              "content": "Create a new shopping cart at a site via the Selling Service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f9a19ad-e7ea-41be-abcb-ae1429d7c699",
+              "name": "The created cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29e4cc12-feb9-4bdb-b22a-d6044983a83d",
+          "name": "NCR Voyix Get Cart by Id",
+          "request": {
+            "name": "NCR Voyix Get Cart by Id",
+            "description": {
+              "content": "Retrieve a shopping cart by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d006a147-bb77-42bd-bb9a-f4c907be5c36",
+              "name": "The cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79ac817b-d353-4e5b-9b0b-61ded7298530",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c601622-1c73-49bb-98c7-8ba4932d1b64",
+          "name": "NCR Voyix Update Cart Status",
+          "request": {
+            "name": "NCR Voyix Update Cart Status",
+            "description": {
+              "content": "Update mutable cart fields such as status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80095521-38af-479c-9aeb-c222a9a1cd84",
+              "name": "The updated cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3fde747-3861-4d8b-b90c-a48ec40dce2c",
+          "name": "NCR Voyix Delete Cart",
+          "request": {
+            "name": "NCR Voyix Delete Cart",
+            "description": {
+              "content": "Delete a shopping cart by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a36344cb-a30a-4e26-a97b-e83ac1de464a",
+              "name": "The cart was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29add4cb-0220-460f-b801-21d5f351ed1c",
+          "name": "NCR Voyix Get Cart Items",
+          "request": {
+            "name": "NCR Voyix Get Cart Items",
+            "description": {
+              "content": "Retrieve the line items in a shopping cart.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "784a25b8-1067-4e5a-a0c1-6b013fa40ba9",
+              "name": "The cart line items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acc852b0-e5de-466b-81a1-76c1d10d6c0c",
+          "name": "NCR Voyix Add Item to Cart",
+          "request": {
+            "name": "NCR Voyix Add Item to Cart",
+            "description": {
+              "content": "Add a line item to a shopping cart.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": {\n    \"type\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  \"quantity\": {\n    \"unitOfMeasure\": \"<string>\",\n    \"unitOfMeasureLabel\": \"<string>\",\n    \"value\": \"<number>\"\n  },\n  \"voidReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8064b68e-b637-43d4-9a22-bed40cc100ff",
+              "name": "The updated cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": {\n    \"type\": \"example\",\n    \"value\": \"Cheeseburger\"\n  },\n  \"quantity\": {\n    \"unitOfMeasure\": \"EA\",\n    \"unitOfMeasureLabel\": \"example\",\n    \"value\": 9.99\n  },\n  \"voidReason\": \"Customer request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04d61274-8585-4bb0-8683-c69e9d2fe047",
+          "name": "NCR Voyix Update Item in Cart",
+          "request": {
+            "name": "NCR Voyix Update Item in Cart",
+            "description": {
+              "content": "Update a line item in a shopping cart (e.g. quantity).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId",
+                "items",
+                ":lineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lineId",
+                  "description": "(Required) The cart line identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": {\n    \"type\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  \"quantity\": {\n    \"unitOfMeasure\": \"<string>\",\n    \"unitOfMeasureLabel\": \"<string>\",\n    \"value\": \"<number>\"\n  },\n  \"voidReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "085873e6-7877-4823-95b7-694589dd8555",
+              "name": "The updated cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId",
+                    "items",
+                    ":lineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineId",
+                      "description": "(Required) The cart line identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": {\n    \"type\": \"example\",\n    \"value\": \"Cheeseburger\"\n  },\n  \"quantity\": {\n    \"unitOfMeasure\": \"EA\",\n    \"unitOfMeasureLabel\": \"example\",\n    \"value\": 9.99\n  },\n  \"voidReason\": \"Customer request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89a043a5-ea73-4c2d-be2d-60eb10d4393f",
+          "name": "NCR Voyix Remove Item from Cart",
+          "request": {
+            "name": "NCR Voyix Remove Item from Cart",
+            "description": {
+              "content": "Remove a line item from a shopping cart, supplying a void reason.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "emerald",
+                "selling-service",
+                "cart",
+                "v1",
+                "carts",
+                ":cartId",
+                "items",
+                ":lineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cartId",
+                  "description": "(Required) The shopping cart identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lineId",
+                  "description": "(Required) The cart line identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voidReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f23019b-4c87-4f3c-85a6-727915b73237",
+              "name": "The updated cart.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "emerald",
+                    "selling-service",
+                    "cart",
+                    "v1",
+                    "carts",
+                    ":cartId",
+                    "items",
+                    ":lineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cartId",
+                      "description": "(Required) The shopping cart identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lineId",
+                      "description": "(Required) The cart line identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voidReason\": \"Customer request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cartId\": \"cart-a1b2c3d4\",\n  \"status\": \"ACTIVE\",\n  \"items\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"voidReason\": \"Customer request\",\n      \"lineId\": \"line-001\",\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"totals\": {\n    \"total\": 9.99,\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ed74b616-f649-4422-88b3-bea7c72da20b",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Selling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

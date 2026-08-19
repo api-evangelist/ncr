@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog Security API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Security",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Authenticate User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/security/authentication/login",
+            "headers": [
+              {
+                "name": "nep-organization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate a platform user with username and password against an organization, returning a session token."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Exchange Authorization Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/security/authorization",
+            "headers": [
+              {
+                "name": "nep-organization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a session token for an authorization token scoped to the organization."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Set User Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/security/security-user-passwords/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The platform username whose password is being set."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set or reset the password for a platform user."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Self Effective Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/security/role-grants/user-grants/self/effective-roles"
+          },
+          "docs": "Retrieve the effective role grants for the currently authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog Category API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Category",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix List Category Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes",
+            "params": [
+              {
+                "name": "parentId",
+                "value": "example",
+                "type": "query",
+                "description": "Filter to children of the supplied parent category node."
+              }
+            ]
+          },
+          "docs": "List catalog category nodes, optionally filtered by parent node."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Category Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog category node in the category hierarchy."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Category Node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes/:nodeId",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The category node identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single category node by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Category Node Ancestors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/category-nodes/:nodeId/ancestors",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The category node identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the ancestor chain for a category node up to the root."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/groups",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "titlePattern",
+                "value": "example",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List catalog groups, optionally paged and filtered by title pattern."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Create or Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/catalog/v2/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a catalog group used to merchandise items together."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/catalog/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The group identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single catalog group by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

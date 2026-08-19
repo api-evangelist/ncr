@@ -1,0 +1,576 @@
+{
+  "item": [
+    {
+      "id": "9d31a442-433f-4934-90f7-cbf032b03d57",
+      "name": "Order",
+      "description": {
+        "content": "Order creation, lookup, update, and search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "673bfbea-35dc-4af3-b1c5-7517f62072eb",
+          "name": "NCR Voyix Create Order",
+          "request": {
+            "name": "NCR Voyix Create Order",
+            "description": {
+              "content": "Create a new order at a site. Requires the nep-enterprise-unit header identifying the location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "3",
+                "orders",
+                "1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"<string>\",\n        \"unitOfMeasureLabel\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"unitPrice\": \"<double>\"\n    },\n    {\n      \"productId\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"<string>\",\n        \"unitOfMeasureLabel\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"unitPrice\": \"<double>\"\n    }\n  ],\n  \"channel\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customer\": {\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5cb2af3-01de-4d54-98d7-379d925aa034",
+              "name": "The created order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "3",
+                    "orders",
+                    "1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"Web\",\n  \"comments\": \"Customer request\",\n  \"customer\": {\n    \"email\": \"jsmith@example.com\",\n    \"firstName\": \"Downtown Store\",\n    \"lastName\": \"Downtown Store\"\n  },\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": \"example\",\n        \"value\": \"Cheeseburger\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"EA\",\n        \"unitOfMeasureLabel\": \"example\",\n        \"value\": 9.99\n      },\n      \"unitPrice\": 9.99\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel\": \"Web\",\n  \"comments\": \"Customer request\",\n  \"customer\": {\n    \"email\": \"jsmith@example.com\",\n    \"firstName\": \"Downtown Store\",\n    \"lastName\": \"Downtown Store\"\n  },\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"id\": \"500123\",\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "763f8759-03af-4ece-870c-3b7cd626a950",
+          "name": "NCR Voyix Get Order by Id",
+          "request": {
+            "name": "NCR Voyix Get Order by Id",
+            "description": {
+              "content": "Retrieve a single order by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "3",
+                "orders",
+                "1",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The order identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8565f0de-7dd7-465a-a643-ebf2162f5265",
+              "name": "The order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "3",
+                    "orders",
+                    "1",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The order identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel\": \"Web\",\n  \"comments\": \"Customer request\",\n  \"customer\": {\n    \"email\": \"jsmith@example.com\",\n    \"firstName\": \"Downtown Store\",\n    \"lastName\": \"Downtown Store\"\n  },\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"id\": \"500123\",\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c86bbe-684c-4a9f-86e1-4d82b5e3b6e1",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "3",
+                    "orders",
+                    "1",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The order identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68b83a5e-473a-4a78-99f3-7101a74d7999",
+          "name": "NCR Voyix Update Order by Id",
+          "request": {
+            "name": "NCR Voyix Update Order by Id",
+            "description": {
+              "content": "Update mutable fields on an existing order at a site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "3",
+                "orders",
+                "1",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The order identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"<string>\",\n        \"unitOfMeasureLabel\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"unitPrice\": \"<double>\"\n    },\n    {\n      \"productId\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"<string>\",\n        \"unitOfMeasureLabel\": \"<string>\",\n        \"value\": \"<number>\"\n      },\n      \"unitPrice\": \"<double>\"\n    }\n  ],\n  \"channel\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customer\": {\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8a32c2a-17cf-4c52-8aec-c365afe7fa10",
+              "name": "The updated order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "3",
+                    "orders",
+                    "1",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The order identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"Web\",\n  \"comments\": \"Customer request\",\n  \"customer\": {\n    \"email\": \"jsmith@example.com\",\n    \"firstName\": \"Downtown Store\",\n    \"lastName\": \"Downtown Store\"\n  },\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": \"example\",\n        \"value\": \"Cheeseburger\"\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": \"EA\",\n        \"unitOfMeasureLabel\": \"example\",\n        \"value\": 9.99\n      },\n      \"unitPrice\": 9.99\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel\": \"Web\",\n  \"comments\": \"Customer request\",\n  \"customer\": {\n    \"email\": \"jsmith@example.com\",\n    \"firstName\": \"Downtown Store\",\n    \"lastName\": \"Downtown Store\"\n  },\n  \"orderLines\": [\n    {\n      \"productId\": {\n        \"type\": {},\n        \"value\": {}\n      },\n      \"quantity\": {\n        \"unitOfMeasure\": {},\n        \"unitOfMeasureLabel\": {},\n        \"value\": {}\n      },\n      \"unitPrice\": 9.99\n    }\n  ],\n  \"id\": \"500123\",\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7cce9c5-6d4c-4ae3-860d-271ff7a03f7c",
+          "name": "NCR Voyix Find Orders",
+          "request": {
+            "name": "NCR Voyix Find Orders",
+            "description": {
+              "content": "Search for orders by criteria such as customer email, with paging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                "3",
+                "orders",
+                "1",
+                "find"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerEmail\": \"<email>\",\n  \"returnFullOrders\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e4add12-0e75-4b31-96ed-069ce1ba2acf",
+              "name": "A page of matching orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    "3",
+                    "orders",
+                    "1",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerEmail\": \"jsmith@example.com\",\n  \"returnFullOrders\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {\n      \"channel\": \"Web\",\n      \"comments\": \"Customer request\",\n      \"customer\": {\n        \"email\": {},\n        \"firstName\": {},\n        \"lastName\": {}\n      },\n      \"orderLines\": [\n        {}\n      ],\n      \"id\": \"500123\",\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c903f35e-eeeb-411b-b3b3-0f743b50d9dc",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Order API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog Site API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Site",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/site/sites",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new site (location) on the NCR Voyix Commerce Platform."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Site by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The alphanumeric site identifier (not the site name)."
+              }
+            ]
+          },
+          "docs": "Retrieve a single site by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ncr.com/site/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path",
+                "description": "The alphanumeric site identifier (not the site name)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a site by its identifier. Set status to INACTIVE to logically delete the site."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Find Sites by Criteria",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/site/sites/find-by-criteria",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "1",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for sites matching the supplied criteria, selecting a field projection, with paging."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Find Nearby Sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/find-nearby/:coordinates",
+            "params": [
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "path",
+                "description": "Latitude and longitude as \"{latitude},{longitude}\"."
+              },
+              {
+                "name": "radius",
+                "value": "1",
+                "type": "query",
+                "description": "Search radius in meters."
+              },
+              {
+                "name": "numSites",
+                "value": "1",
+                "type": "query",
+                "description": "Maximum number of sites to return."
+              }
+            ]
+          },
+          "docs": "Find sites within a radius of a geographic coordinate."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Site by Reference Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/site/sites/by-reference-id/:referenceId",
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The external reference identifier for the site."
+              }
+            ]
+          },
+          "docs": "Retrieve a site by its external reference identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

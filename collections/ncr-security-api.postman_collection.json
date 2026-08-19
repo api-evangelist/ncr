@@ -1,0 +1,533 @@
+{
+  "item": [
+    {
+      "id": "489aabde-1c1a-4755-ba38-10dc50636cb0",
+      "name": "Security",
+      "description": {
+        "content": "Authentication, authorization, and user password management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "50964853-6aac-41df-9348-95e740e21637",
+          "name": "NCR Voyix Authenticate User",
+          "request": {
+            "name": "NCR Voyix Authenticate User",
+            "description": {
+              "content": "Authenticate a platform user with username and password against an organization, returning a session token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "authentication",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the organization the request is scoped to.",
+                "key": "nep-organization",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0602aa1-faef-45cc-8372-7c0e13bcfa1f",
+              "name": "The authentication result with a session token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "authentication",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the organization the request is scoped to.",
+                    "key": "nep-organization",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jsmith\",\n  \"password\": \"s3cr3t-passw0rd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1Ni1.abc123.def456\",\n  \"expiresAt\": \"2026-06-02T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa440a98-fb48-4c73-a09c-76b428183cbb",
+              "name": "Authentication failed or the AccessKey signature was invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "authentication",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the organization the request is scoped to.",
+                    "key": "nep-organization",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jsmith\",\n  \"password\": \"s3cr3t-passw0rd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f433960-390f-4f02-87b8-5380e36cb17d",
+          "name": "NCR Voyix Exchange Authorization Token",
+          "request": {
+            "name": "NCR Voyix Exchange Authorization Token",
+            "description": {
+              "content": "Exchange a session token for an authorization token scoped to the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "authorization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the organization the request is scoped to.",
+                "key": "nep-organization",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6dde15b4-bde0-4e5e-a5a4-8b50b0a02344",
+              "name": "The authorization token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the organization the request is scoped to.",
+                    "key": "nep-organization",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1Ni1.abc123.def456\",\n  \"expiresAt\": \"2026-06-02T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9e2d312-c135-4824-abf8-fab869b642eb",
+          "name": "NCR Voyix Set User Password",
+          "request": {
+            "name": "NCR Voyix Set User Password",
+            "description": {
+              "content": "Set or reset the password for a platform user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "security-user-passwords",
+                ":username"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) The platform username whose password is being set."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8df95ff-70d5-4bb3-9593-1fc0702451d4",
+              "name": "The password was updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "security-user-passwords",
+                    ":username"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) The platform username whose password is being set."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"s3cr3t-passw0rd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b23ec909-b02f-498b-a855-84ad2b99fa82",
+          "name": "NCR Voyix Get Self Effective Roles",
+          "request": {
+            "name": "NCR Voyix Get Self Effective Roles",
+            "description": {
+              "content": "Retrieve the effective role grants for the currently authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "role-grants",
+                "user-grants",
+                "self",
+                "effective-roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b03dea21-13f6-41a8-b1b0-b44e575e1157",
+              "name": "The effective roles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "role-grants",
+                    "user-grants",
+                    "self",
+                    "effective-roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"effectiveRoles\": [\n    \"example\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "219561d1-d123-4985-9208-a64c797facec",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Security API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

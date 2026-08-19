@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "043ab255-0561-4632-a41a-a36352698aa3",
+      "name": "Provisioning",
+      "description": {
+        "content": "Platform user creation and user profile management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e314af3f-d689-4f56-91f4-25e08bb551db",
+          "name": "NCR Voyix Create User",
+          "request": {
+            "name": "NCR Voyix Create User",
+            "description": {
+              "content": "Create a new platform user within the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "provisioning",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "464f00fb-0235-40b4-a061-f35f996da389",
+              "name": "The created user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provisioning",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jsmith\",\n  \"email\": \"jsmith@example.com\",\n  \"firstName\": \"Downtown Store\",\n  \"lastName\": \"Downtown Store\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"username\": \"jsmith\",\n  \"email\": \"jsmith@example.com\",\n  \"firstName\": \"Downtown Store\",\n  \"lastName\": \"Downtown Store\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91ae35ec-1858-4b37-a2d0-04348148e38c",
+          "name": "NCR Voyix Update Current User",
+          "request": {
+            "name": "NCR Voyix Update Current User",
+            "description": {
+              "content": "Update the currently authenticated platform user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "provisioning",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4d83d1e-5770-4e4d-ae7a-c8faa617976a",
+              "name": "The updated user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provisioning",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"jsmith\",\n  \"email\": \"jsmith@example.com\",\n  \"firstName\": \"Downtown Store\",\n  \"lastName\": \"Downtown Store\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"username\": \"jsmith\",\n  \"email\": \"jsmith@example.com\",\n  \"firstName\": \"Downtown Store\",\n  \"lastName\": \"Downtown Store\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "908941f6-3995-462b-b18e-4ada6187bcbe",
+          "name": "NCR Voyix Get Current User Profile",
+          "request": {
+            "name": "NCR Voyix Get Current User Profile",
+            "description": {
+              "content": "Retrieve the profile data for the currently authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "provisioning",
+                "user-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2f27a43-f37e-4baa-988d-7284a6abd6f2",
+              "name": "The current user profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provisioning",
+                    "user-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"username\": \"jsmith\",\n  \"email\": \"jsmith@example.com\",\n  \"firstName\": \"Downtown Store\",\n  \"lastName\": \"Downtown Store\",\n  \"organization\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4d3ea7bb-0cec-401e-b880-2b5bd27fb9d5",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Provisioning API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

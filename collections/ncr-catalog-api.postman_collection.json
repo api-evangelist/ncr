@@ -1,0 +1,1468 @@
+{
+  "item": [
+    {
+      "id": "4b0d1ab1-8cc0-4565-8561-bc7f0b8cb614",
+      "name": "Catalog",
+      "description": {
+        "content": "Item, item-price, and item-attribute management plus item-details search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c9f0a80-6d34-4794-8119-4ffd1cdd07f1",
+          "name": "NCR Voyix List Catalog Items",
+          "request": {
+            "name": "NCR Voyix List Catalog Items",
+            "description": {
+              "content": "List catalog items, optionally filtered by status and paged/sorted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "itemStatus",
+                  "value": "<string>",
+                  "description": "Filter by item status."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortField",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDirection",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5408c8db-e9f7-4448-a4d4-ba8c3d76b851",
+              "name": "A page of catalog items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "itemStatus",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "example"
+                    },
+                    {
+                      "key": "sortDirection",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {\n      \"version\": 1,\n      \"itemId\": {},\n      \"shortDescription\": {\n        \"values\": {}\n      },\n      \"longDescription\": {\n        \"values\": {}\n      },\n      \"status\": \"ACTIVE\",\n      \"merchandiseCategory\": \"example\",\n      \"departmentId\": \"example\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53ae5c29-2f79-44e0-8572-d616efb402ba",
+          "name": "NCR Voyix Create Catalog Items",
+          "request": {
+            "name": "NCR Voyix Create Catalog Items",
+            "description": {
+              "content": "Bulk create or update catalog items. There is no delete; mark INACTIVE to retire.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"itemId\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"merchandiseCategory\": \"<string>\",\n  \"departmentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee3871a4-f572-43c7-a07d-383768bcf9ae",
+              "name": "The created or updated catalog items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": 1,\n  \"itemId\": {},\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"status\": \"ACTIVE\",\n  \"merchandiseCategory\": \"example\",\n  \"departmentId\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": 1,\n  \"itemId\": {},\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"status\": \"ACTIVE\",\n  \"merchandiseCategory\": \"example\",\n  \"departmentId\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1710f5ae-c6cc-4dce-abf5-52294e951a6c",
+          "name": "NCR Voyix Get Catalog Item",
+          "request": {
+            "name": "NCR Voyix Get Catalog Item",
+            "description": {
+              "content": "Retrieve the details of a single catalog item by its item code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "items",
+                ":itemCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemCode",
+                  "description": "(Required) The catalog item code (spaces are not permitted)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5c8295c-40e0-4c84-8d92-7b4227d844e3",
+              "name": "The catalog item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "items",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": 1,\n  \"itemId\": {},\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"status\": \"ACTIVE\",\n  \"merchandiseCategory\": \"example\",\n  \"departmentId\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6bb7e98-3081-4c9e-964e-9d0373026ef6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "items",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e92ff3a3-07e5-4b11-b89b-6b5197d44c10",
+          "name": "NCR Voyix Create or Update Catalog Item",
+          "request": {
+            "name": "NCR Voyix Create or Update Catalog Item",
+            "description": {
+              "content": "Create or update a catalog item. The version must increase on each update.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "items",
+                ":itemCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemCode",
+                  "description": "(Required) The catalog item code (spaces are not permitted)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"itemId\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"merchandiseCategory\": \"<string>\",\n  \"departmentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0735f4f6-7d2a-44bf-837c-8e120504ad4b",
+              "name": "The created or updated catalog item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "items",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": 1,\n  \"itemId\": {},\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"status\": \"ACTIVE\",\n  \"merchandiseCategory\": \"example\",\n  \"departmentId\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": 1,\n  \"itemId\": {},\n  \"shortDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"longDescription\": {\n    \"values\": [\n      {\n        \"locale\": {},\n        \"value\": {}\n      }\n    ]\n  },\n  \"status\": \"ACTIVE\",\n  \"merchandiseCategory\": \"example\",\n  \"departmentId\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13e80e45-ad94-470e-810a-148ea5b456a4",
+          "name": "NCR Voyix Create or Update Item Prices",
+          "request": {
+            "name": "NCR Voyix Create or Update Item Prices",
+            "description": {
+              "content": "Bulk create or update item prices for catalog items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf81415a-4447-4e93-b295-5308b04a6805",
+              "name": "The created or updated item prices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": 1,\n  \"price\": 9.99,\n  \"currency\": \"USD\",\n  \"effectiveDate\": \"2026-06-02T14:30:00Z\",\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": 1,\n  \"price\": 9.99,\n  \"currency\": \"USD\",\n  \"effectiveDate\": \"2026-06-02T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"priceId\": {\n    \"itemCode\": \"BURGER-001\",\n    \"priceCode\": \"BASE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d006a9a6-f5bd-4177-b0ae-1b81cc08ffde",
+          "name": "NCR Voyix Update Item Price by Item Code",
+          "request": {
+            "name": "NCR Voyix Update Item Price by Item Code",
+            "description": {
+              "content": "Create or update the price for a catalog item at a site. The version must increase on each update.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-prices",
+                ":itemCode",
+                ":priceCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemCode",
+                  "description": "(Required) The catalog item code (spaces are not permitted)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "priceCode",
+                  "description": "(Required) Unique identifier for the item price."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"version\": \"<integer>\",\n  \"price\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"effectiveDate\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c542e230-186e-4952-9ee4-622b3f177527",
+              "name": "The updated item price.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-prices",
+                    ":itemCode",
+                    ":priceCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "priceCode",
+                      "description": "(Required) Unique identifier for the item price."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"version\": 1,\n  \"price\": 9.99,\n  \"currency\": \"USD\",\n  \"effectiveDate\": \"2026-06-02T14:30:00Z\",\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": 1,\n  \"price\": 9.99,\n  \"currency\": \"USD\",\n  \"effectiveDate\": \"2026-06-02T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"priceId\": {\n    \"itemCode\": \"BURGER-001\",\n    \"priceCode\": \"BASE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d22df02-2248-41be-b6f1-eb9d2adb4bd7",
+          "name": "NCR Voyix Get Multiple Item Prices",
+          "request": {
+            "name": "NCR Voyix Get Multiple Item Prices",
+            "description": {
+              "content": "Retrieve prices for a list of catalog items in a single request, scoped to a site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-prices",
+                "get-multiple"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemIds\": [\n    {\n      \"itemCode\": \"<string>\"\n    },\n    {\n      \"itemCode\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba6fbaff-b323-4dd7-8f50-edd43fcd6067",
+              "name": "The requested item prices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-prices",
+                    "get-multiple"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIds\": [\n    {\n      \"itemCode\": \"BURGER-001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"itemPrices\": [\n    {\n      \"version\": 1,\n      \"price\": 9.99,\n      \"currency\": \"USD\",\n      \"effectiveDate\": \"2026-06-02T14:30:00Z\",\n      \"status\": \"ACTIVE\",\n      \"priceId\": {\n        \"itemCode\": {},\n        \"priceCode\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27305a41-c4df-4870-8971-1415627f8ead",
+          "name": "NCR Voyix Get Multiple Item Attributes",
+          "request": {
+            "name": "NCR Voyix Get Multiple Item Attributes",
+            "description": {
+              "content": "Retrieve attributes for a list of catalog items in a single request, scoped to a site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-attributes",
+                "get-multiple"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemIds\": [\n    {\n      \"itemCode\": \"<string>\"\n    },\n    {\n      \"itemCode\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2aa14608-6bbb-4e36-9a21-0688330d2d21",
+              "name": "The requested item attributes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-attributes",
+                    "get-multiple"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIds\": [\n    {\n      \"itemCode\": \"BURGER-001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abedae71-0977-4447-81d8-a5337a059de1",
+          "name": "NCR Voyix Update Item Attributes by Item Code",
+          "request": {
+            "name": "NCR Voyix Update Item Attributes by Item Code",
+            "description": {
+              "content": "Create or update attributes for a catalog item at a site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-attributes",
+                ":itemCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemCode",
+                  "description": "(Required) The catalog item code (spaces are not permitted)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fde32fd3-1c1a-48fd-982b-1a8e02831c49",
+              "name": "The updated item attributes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-attributes",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2d37b08-94de-4a60-b367-6ede42b14318",
+          "name": "NCR Voyix Get Item Details by Item Code",
+          "request": {
+            "name": "NCR Voyix Get Item Details by Item Code",
+            "description": {
+              "content": "Retrieve the consolidated item details (item, price, attributes) for a single item at a site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-details",
+                ":itemCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemCode",
+                  "description": "(Required) The catalog item code (spaces are not permitted)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bd191a7-de19-49e8-ad9b-f4239cdd09a0",
+              "name": "The item details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-details",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33d40c55-aef4-47dc-beeb-a2726dfcb537",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-details",
+                    ":itemCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemCode",
+                      "description": "(Required) The catalog item code (spaces are not permitted)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eed7a5f6-9ebc-4f41-8b41-6c18ed9db60d",
+          "name": "NCR Voyix Search Item Details",
+          "request": {
+            "name": "NCR Voyix Search Item Details",
+            "description": {
+              "content": "Search consolidated item details at a site by description pattern, merchandise category, group, and status, with sorting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "item-details",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shortDescriptionPattern",
+                  "value": "<string>",
+                  "description": "Wildcard pattern matched against the item short description."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchandiseCategoryId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupCode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemStatus",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortField",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDirection",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                "key": "nep-enterprise-unit",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "148f7689-a411-4ced-9156-93cdb8c1f4ff",
+              "name": "A page of matching item details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "item-details",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shortDescriptionPattern",
+                      "value": "example"
+                    },
+                    {
+                      "key": "merchandiseCategoryId",
+                      "value": "example"
+                    },
+                    {
+                      "key": "groupCode",
+                      "value": "example"
+                    },
+                    {
+                      "key": "itemStatus",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "sortField",
+                      "value": "example"
+                    },
+                    {
+                      "key": "sortDirection",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifier of the enterprise unit (site/location) the request applies to.",
+                    "key": "nep-enterprise-unit",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {}\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21f91618-b5d3-46c8-a216-e3fa24eb21f4",
+    "name": "NCR Voyix Commerce Platform APIs Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,861 @@
+{
+  "item": [
+    {
+      "id": "ceabf050-52ae-434e-827c-598e862d0b49",
+      "name": "Category",
+      "description": {
+        "content": "Catalog category-node hierarchy and group management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ae64a25-e8fa-49bd-b462-84d03f579c78",
+          "name": "NCR Voyix List Category Nodes",
+          "request": {
+            "name": "NCR Voyix List Category Nodes",
+            "description": {
+              "content": "List catalog category nodes, optionally filtered by parent node.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "category-nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<string>",
+                  "description": "Filter to children of the supplied parent category node."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f83e6f43-8c92-471b-a9ce-119d6c76e68e",
+              "name": "The category nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "category-nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentId",
+                      "value": "example"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categoryNodes\": [\n    {\n      \"id\": \"500123\",\n      \"version\": 1,\n      \"name\": {\n        \"values\": [\n          {}\n        ]\n      },\n      \"parentId\": \"example\",\n      \"nodeType\": \"CATEGORY\",\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "768cb781-8356-4c4d-bf92-49fa671ce648",
+          "name": "NCR Voyix Create or Update Category Node",
+          "request": {
+            "name": "NCR Voyix Create or Update Category Node",
+            "description": {
+              "content": "Create or update a catalog category node in the category hierarchy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "category-nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"name\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"parentId\": \"<string>\",\n  \"nodeType\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e5d25fb-97e8-4190-a420-297afb2c6cd5",
+              "name": "The created or updated category node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "category-nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"name\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"parentId\": \"example\",\n  \"nodeType\": \"CATEGORY\",\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"name\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"parentId\": \"example\",\n  \"nodeType\": \"CATEGORY\",\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f01a2c91-7df0-40fd-bbf3-73fa1a031af7",
+          "name": "NCR Voyix Get Category Node",
+          "request": {
+            "name": "NCR Voyix Get Category Node",
+            "description": {
+              "content": "Retrieve a single category node by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "category-nodes",
+                ":nodeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) The category node identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d16bde1-3d2b-40c1-bdaa-cd479565b9a6",
+              "name": "The category node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "category-nodes",
+                    ":nodeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) The category node identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"name\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"parentId\": \"example\",\n  \"nodeType\": \"CATEGORY\",\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e0573b0-adb7-4071-9a2c-af757c594b57",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "category-nodes",
+                    ":nodeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) The category node identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e17c1a-43f5-4d1f-9e10-5c0984256618",
+          "name": "NCR Voyix Get Category Node Ancestors",
+          "request": {
+            "name": "NCR Voyix Get Category Node Ancestors",
+            "description": {
+              "content": "Retrieve the ancestor chain for a category node up to the root.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "category-nodes",
+                ":nodeId",
+                "ancestors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) The category node identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03dde509-bec5-4808-aa89-4f1dd80c6803",
+              "name": "The ancestor category nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "category-nodes",
+                    ":nodeId",
+                    "ancestors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) The category node identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ancestors\": [\n    {\n      \"id\": \"500123\",\n      \"version\": 1,\n      \"name\": {\n        \"values\": [\n          {}\n        ]\n      },\n      \"parentId\": \"example\",\n      \"nodeType\": \"CATEGORY\",\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92c6b5fc-f95a-43d3-89b9-b51289bd8e2e",
+          "name": "NCR Voyix List Groups",
+          "request": {
+            "name": "NCR Voyix List Groups",
+            "description": {
+              "content": "List catalog groups, optionally paged and filtered by title pattern.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "titlePattern",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6756b494-6b84-48e1-8e74-1010ed33d3ce",
+              "name": "The catalog groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "1"
+                    },
+                    {
+                      "key": "titlePattern",
+                      "value": "example"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {\n      \"id\": \"500123\",\n      \"version\": 1,\n      \"title\": {\n        \"values\": [\n          {}\n        ]\n      },\n      \"itemCodes\": [\n        \"example\"\n      ],\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4c9559f-6641-49eb-aba6-c40168b7c47e",
+          "name": "NCR Voyix Create or Update Group",
+          "request": {
+            "name": "NCR Voyix Create or Update Group",
+            "description": {
+              "content": "Create or update a catalog group used to merchandise items together.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"version\": \"<integer>\",\n  \"title\": {\n    \"values\": [\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"locale\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"itemCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f383601-fc80-4d7f-8367-9703accb628a",
+              "name": "The created or updated group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"title\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"itemCodes\": [\n    \"example\"\n  ],\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"title\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"itemCodes\": [\n    \"example\"\n  ],\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f28dc440-fd59-48ce-b69b-f9513e8f811c",
+          "name": "NCR Voyix Get Group",
+          "request": {
+            "name": "NCR Voyix Get Group",
+            "description": {
+              "content": "Retrieve a single catalog group by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "v2",
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The group identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a63755a-992d-4e1d-8cfc-0ae1b2981a3a",
+              "name": "The group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The group identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"version\": 1,\n  \"title\": {\n    \"values\": [\n      {\n        \"locale\": \"en-US\",\n        \"value\": \"Cheeseburger\"\n      }\n    ]\n  },\n  \"itemCodes\": [\n    \"example\"\n  ],\n  \"status\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0e3203-c330-4fb2-9548-4b5e15de01d4",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "v2",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The group identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de25f3e6-edde-498e-804c-2b75a4b14e34",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Category API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

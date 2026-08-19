@@ -1,0 +1,810 @@
+{
+  "item": [
+    {
+      "id": "7caa8ab4-6d81-4107-a114-d2216c541edb",
+      "name": "Site",
+      "description": {
+        "content": "Site (location) provisioning, lookup, and geospatial search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3188dbd4-9a38-4d66-a0d5-04003bb8c179",
+          "name": "NCR Voyix Create Site",
+          "request": {
+            "name": "NCR Voyix Create Site",
+            "description": {
+              "content": "Create a new site (location) on the NCR Voyix Commerce Platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"siteName\": \"<string>\",\n  \"enterpriseUnitName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"address\": {\n    \"address1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"coordinates\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"currency\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f030df3-1077-479e-9463-1c27a961e554",
+              "name": "The created site.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e647588-f133-490a-b794-4ab37d566142",
+          "name": "NCR Voyix Get Site by Id",
+          "request": {
+            "name": "NCR Voyix Get Site by Id",
+            "description": {
+              "content": "Retrieve a single site by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "siteId",
+                  "description": "(Required) The alphanumeric site identifier (not the site name)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9e2f769-3a08-45cc-ba3a-29b7d297dc2a",
+              "name": "The site.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "siteId",
+                      "description": "(Required) The alphanumeric site identifier (not the site name)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbcd1921-3a23-491a-a8f7-0040b60a5ddb",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "siteId",
+                      "description": "(Required) The alphanumeric site identifier (not the site name)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f085bc96-a7b2-47ec-a805-6dba5285f696",
+          "name": "NCR Voyix Update Site",
+          "request": {
+            "name": "NCR Voyix Update Site",
+            "description": {
+              "content": "Update a site by its identifier. Set status to INACTIVE to logically delete the site.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites",
+                ":siteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "siteId",
+                  "description": "(Required) The alphanumeric site identifier (not the site name)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"siteName\": \"<string>\",\n  \"enterpriseUnitName\": \"<string>\",\n  \"status\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"address\": {\n    \"address1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"coordinates\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"currency\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d88c5ab0-b4de-47f3-aaea-f760b37d673f",
+              "name": "The updated site.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    ":siteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "siteId",
+                      "description": "(Required) The alphanumeric site identifier (not the site name)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cab40c36-3502-4d30-88d4-c926d2b224bf",
+          "name": "NCR Voyix Find Sites by Criteria",
+          "request": {
+            "name": "NCR Voyix Find Sites by Criteria",
+            "description": {
+              "content": "Search for sites matching the supplied criteria, selecting a field projection, with paging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites",
+                "find-by-criteria"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"criteria\": {\n    \"status\": \"<string>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5093d10c-0e53-4873-9900-503538c6f711",
+              "name": "A page of matching sites.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    "find-by-criteria"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"status\": \"ACTIVE\"\n  },\n  \"fields\": [\n    \"example\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {\n      \"siteName\": \"Downtown Store\",\n      \"enterpriseUnitName\": \"Downtown Store\",\n      \"referenceId\": \"example\",\n      \"address\": {\n        \"address1\": {},\n        \"city\": {},\n        \"state\": {},\n        \"postalCode\": {},\n        \"country\": {}\n      },\n      \"coordinates\": {\n        \"latitude\": {},\n        \"longitude\": {}\n      },\n      \"currency\": \"USD\",\n      \"timeZone\": \"America/New_York\",\n      \"status\": \"ACTIVE\",\n      \"id\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2618ac14-4711-4af8-854a-4d3b5c066b2f",
+          "name": "NCR Voyix Find Nearby Sites",
+          "request": {
+            "name": "NCR Voyix Find Nearby Sites",
+            "description": {
+              "content": "Find sites within a radius of a geographic coordinate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites",
+                "find-nearby",
+                ":coordinates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<integer>",
+                  "description": "Search radius in meters."
+                },
+                {
+                  "disabled": false,
+                  "key": "numSites",
+                  "value": "<integer>",
+                  "description": "Maximum number of sites to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "coordinates",
+                  "description": "(Required) Latitude and longitude as \"{latitude},{longitude}\"."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b691e1e-2644-42ba-be5b-1a173d233c54",
+              "name": "The nearby sites.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    "find-nearby",
+                    ":coordinates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "radius",
+                      "value": "1"
+                    },
+                    {
+                      "key": "numSites",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "coordinates",
+                      "description": "(Required) Latitude and longitude as \"{latitude},{longitude}\"."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageContent\": [\n    {\n      \"siteName\": \"Downtown Store\",\n      \"enterpriseUnitName\": \"Downtown Store\",\n      \"referenceId\": \"example\",\n      \"address\": {\n        \"address1\": {},\n        \"city\": {},\n        \"state\": {},\n        \"postalCode\": {},\n        \"country\": {}\n      },\n      \"coordinates\": {\n        \"latitude\": {},\n        \"longitude\": {}\n      },\n      \"currency\": \"USD\",\n      \"timeZone\": \"America/New_York\",\n      \"status\": \"ACTIVE\",\n      \"id\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2083622-b8e6-4abb-9ed8-1051c7cb606e",
+          "name": "NCR Voyix Get Site by Reference Id",
+          "request": {
+            "name": "NCR Voyix Get Site by Reference Id",
+            "description": {
+              "content": "Retrieve a site by its external reference identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "site",
+                "sites",
+                "by-reference-id",
+                ":referenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referenceId",
+                  "description": "(Required) The external reference identifier for the site."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e83fe32-c39a-4915-845c-c4f3ca16cccc",
+              "name": "The site.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    "by-reference-id",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The external reference identifier for the site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"siteName\": \"Downtown Store\",\n  \"enterpriseUnitName\": \"Downtown Store\",\n  \"referenceId\": \"example\",\n  \"address\": {\n    \"address1\": \"example\",\n    \"city\": \"example\",\n    \"state\": \"example\",\n    \"postalCode\": \"example\",\n    \"country\": \"US\"\n  },\n  \"coordinates\": {\n    \"latitude\": 9.99,\n    \"longitude\": 9.99\n  },\n  \"currency\": \"USD\",\n  \"timeZone\": \"America/New_York\",\n  \"status\": \"ACTIVE\",\n  \"id\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f55676ac-689e-44eb-9efa-0eef53d2439b",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "site",
+                    "sites",
+                    "by-reference-id",
+                    ":referenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referenceId",
+                      "description": "(Required) The external reference identifier for the site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example\",\n  \"message\": \"example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ncr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d1aa9ea5-64be-41e0-8c30-dd6db62be112",
+    "name": "NCR Voyix Commerce Platform APIs Catalog Site API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.\n\nContact Support:\n Name: NCR Voyix Developer Experience",
+      "type": "text/plain"
+    }
+  }
+}

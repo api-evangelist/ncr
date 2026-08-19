@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NCR Voyix Commerce Platform APIs Catalog Selling API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Selling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "NCR Voyix Create Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new shopping cart at a site via the Selling Service."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Cart by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a shopping cart by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Cart Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update mutable cart fields such as status."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Delete Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Delete a shopping cart by its identifier."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Get Cart Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the line items in a shopping cart."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Add Item to Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a line item to a shopping cart."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Update Item in Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items/:lineId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path",
+                "description": "The cart line identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a line item in a shopping cart (e.g. quantity)."
+        },
+        {
+          "info": {
+            "name": "NCR Voyix Remove Item from Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ncr.com/emerald/selling-service/cart/v1/carts/:cartId/items/:lineId",
+            "headers": [
+              {
+                "name": "nep-enterprise-unit",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cartId",
+                "value": "",
+                "type": "path",
+                "description": "The shopping cart identifier."
+              },
+              {
+                "name": "lineId",
+                "value": "",
+                "type": "path",
+                "description": "The cart line identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a line item from a shopping cart, supplying a void reason."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
