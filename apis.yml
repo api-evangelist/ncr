@@ -46,7 +46,7 @@ description: >-
   through ATM networks. NCR Voyix operates the Voyix Commerce Platform, an API-based cloud architecture (the Business
   Services Platform) that powers unified-commerce POS, ecommerce, and payments for retail and restaurants. Developers
   access it at developer.ncrvoyix.com using AccessKey (HMAC SHA-512) authentication against api.ncr.com.
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
