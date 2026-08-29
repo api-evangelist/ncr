@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform APIs Catalog Security API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
@@ -169,6 +169,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
+        expiresAt:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
     LoginRequest:
       type: object
       properties:
@@ -182,16 +192,6 @@ components:
       required:
       - username
       - password
-    TokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
-        expiresAt:
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
     Error:
       type: object
       properties:
@@ -201,13 +201,6 @@ components:
         message:
           type: string
           example: example
-  responses:
-    Unauthorized:
-      description: Authentication failed or the AccessKey signature was invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     NepOrganization:
       name: nep-organization
@@ -216,6 +209,13 @@ components:
       description: Identifier of the organization the request is scoped to.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or the AccessKey signature was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

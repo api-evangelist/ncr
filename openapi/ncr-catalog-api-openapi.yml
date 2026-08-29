@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NCR Voyix Commerce Platform APIs Catalog API
+  title: NCR Voyix Commerce Platform Catalog API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
   version: '1.0'
   contact:
@@ -561,29 +561,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    ItemCode:
-      name: itemCode
-      in: path
-      required: true
-      description: The catalog item code (spaces are not permitted).
-      schema:
-        type: string
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
   schemas:
-    ItemPage:
-      type: object
-      properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
     ItemInput:
       type: object
       properties:
@@ -610,15 +588,15 @@ components:
       required:
       - version
       - status
-    Item:
-      allOf:
-      - $ref: '#/components/schemas/ItemInput'
-      - type: object
-        properties:
-          itemId:
-            type: object
-            additionalProperties:
-              type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
     ItemPrice:
       allOf:
       - $ref: '#/components/schemas/ItemPriceInput'
@@ -631,48 +609,11 @@ components:
                 type: string
               priceCode:
                 type: string
-    LocalizedText:
-      type: object
-      description: A set of locale-specific values.
-      properties:
-        values:
-          type: array
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                example: en-US
-              value:
-                type: string
     Status:
       type: string
       enum:
       - ACTIVE
       - INACTIVE
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    ItemCodeList:
-      type: object
-      properties:
-        itemIds:
-          type: array
-          items:
-            type: object
-            properties:
-              itemCode:
-                type: string
-            required:
-            - itemCode
-      required:
-      - itemIds
     ItemPriceInput:
       type: object
       properties:
@@ -695,6 +636,65 @@ components:
       required:
       - version
       - price
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/ItemInput'
+      - type: object
+        properties:
+          itemId:
+            type: object
+            additionalProperties:
+              type: string
+    ItemCodeList:
+      type: object
+      properties:
+        itemIds:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+            required:
+            - itemCode
+      required:
+      - itemIds
+    LocalizedText:
+      type: object
+      description: A set of locale-specific values.
+      properties:
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en-US
+              value:
+                type: string
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+  parameters:
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+    ItemCode:
+      name: itemCode
+      in: path
+      required: true
+      description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
   responses:
     NotFound:
       description: The requested resource was not found.

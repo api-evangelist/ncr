@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform APIs Catalog Category API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
@@ -354,20 +354,15 @@ components:
             type: string
         status:
           $ref: '#/components/schemas/Status'
-    LocalizedText:
+    Error:
       type: object
-      description: A set of locale-specific values.
       properties:
-        values:
-          type: array
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                example: en-US
-              value:
-                type: string
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
     Status:
       type: string
       enum:
@@ -395,15 +390,20 @@ components:
           example: CATEGORY
         status:
           $ref: '#/components/schemas/Status'
-    Error:
+    LocalizedText:
       type: object
+      description: A set of locale-specific values.
       properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en-US
+              value:
+                type: string
   responses:
     NotFound:
       description: The requested resource was not found.

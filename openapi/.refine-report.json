@@ -21,6 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "ncr-catalog-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-category-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-order-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-provisioning-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-security-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-selling-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ncr-site-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

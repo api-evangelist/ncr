@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform APIs Catalog Site API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
@@ -374,36 +374,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Site:
-      allOf:
-      - $ref: '#/components/schemas/SiteInput'
-      - type: object
-        properties:
-          id:
-            type: string
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          example: example
-        city:
-          type: string
-          example: example
-        state:
-          type: string
-          example: example
-        postalCode:
-          type: string
-          example: example
-        country:
-          type: string
-          example: US
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
     SiteInput:
       type: object
       properties:
@@ -432,17 +402,29 @@ components:
       - siteName
       - enterpriseUnitName
       - status
-    Coordinates:
+    Address:
       type: object
       properties:
-        latitude:
-          type: number
-          format: double
-          example: 9.99
-        longitude:
-          type: number
-          format: double
-          example: 9.99
+        address1:
+          type: string
+          example: example
+        city:
+          type: string
+          example: example
+        state:
+          type: string
+          example: example
+        postalCode:
+          type: string
+          example: example
+        country:
+          type: string
+          example: US
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     SiteSearch:
       type: object
       properties:
@@ -455,6 +437,24 @@ components:
           type: array
           items:
             type: string
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
     Error:
       type: object
       properties:

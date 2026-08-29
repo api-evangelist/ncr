@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform APIs Catalog Order API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
@@ -262,26 +262,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProductId:
+    OrderSearch:
       type: object
       properties:
-        type:
+        customerEmail:
           type: string
-          example: example
-        value:
-          type: string
-          example: Cheeseburger
-    OrderLine:
-      type: object
-      properties:
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        unitPrice:
-          type: number
-          format: double
-          example: 9.99
+          format: email
+          example: jsmith@example.com
+        returnFullOrders:
+          type: boolean
+          example: true
     Order:
       allOf:
       - $ref: '#/components/schemas/OrderInput'
@@ -304,25 +294,26 @@ components:
         lastName:
           type: string
           example: Downtown Store
-    OrderSearch:
+    ProductId:
       type: object
       properties:
-        customerEmail:
+        type:
           type: string
-          format: email
-          example: jsmith@example.com
-        returnFullOrders:
-          type: boolean
-          example: true
-    Error:
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
+    OrderLine:
       type: object
       properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        unitPrice:
+          type: number
+          format: double
+          example: 9.99
     Quantity:
       type: object
       properties:
@@ -352,13 +343,15 @@ components:
             $ref: '#/components/schemas/OrderLine'
       required:
       - orderLines
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
   parameters:
     NepEnterpriseUnit:
       name: nep-enterprise-unit
@@ -367,6 +360,13 @@ components:
       description: Identifier of the enterprise unit (site/location) the request applies to.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform APIs Catalog Selling API
   description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
@@ -396,15 +396,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ProductId:
+    Error:
       type: object
       properties:
-        type:
+        code:
           type: string
           example: example
-        value:
+        message:
           type: string
-          example: Cheeseburger
+          example: example
     CartLine:
       allOf:
       - $ref: '#/components/schemas/CartLineInput'
@@ -415,6 +415,15 @@ components:
           unitPrice:
             type: number
             format: double
+    ProductId:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
     Cart:
       type: object
       properties:
@@ -437,16 +446,6 @@ components:
             currency:
               type: string
               example: USD
-    CartLineInput:
-      type: object
-      properties:
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        voidReason:
-          type: string
-          example: Customer request
     Quantity:
       type: object
       properties:
@@ -459,15 +458,16 @@ components:
         value:
           type: number
           example: 9.99
-    Error:
+    CartLineInput:
       type: object
       properties:
-        code:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        voidReason:
           type: string
-          example: example
-        message:
-          type: string
-          example: example
+          example: Customer request
   parameters:
     CartId:
       name: cartId
