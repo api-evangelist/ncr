@@ -1,7 +1,9 @@
 ---
 title: Buffalo Wild Wings renews NCR Voyix partnership for POS platform | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/buffalo-wild-wings-renews-partnership-with-ncr-voyix-as-partner-for-pos-platform
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

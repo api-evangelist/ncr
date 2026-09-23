@@ -1,7 +1,9 @@
 ---
 title: Morrisons transforms retail experience with NCR Voyix solutions | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/morrisons-transforms-the-shopping-experience-with-ncr-voyix-retail-solutions
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

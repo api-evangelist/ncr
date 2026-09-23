@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: NCR Voyix Commerce Platform Catalog API
-  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  description: REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants.
   version: '1.0'
   contact:
     name: NCR Voyix Developer Experience
@@ -562,6 +562,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
     ItemInput:
       type: object
       properties:
@@ -588,54 +595,6 @@ components:
       required:
       - version
       - status
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    ItemPrice:
-      allOf:
-      - $ref: '#/components/schemas/ItemPriceInput'
-      - type: object
-        properties:
-          priceId:
-            type: object
-            properties:
-              itemCode:
-                type: string
-              priceCode:
-                type: string
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-    ItemPriceInput:
-      type: object
-      properties:
-        version:
-          type: integer
-          example: 1
-        price:
-          type: number
-          format: double
-          example: 9.99
-        currency:
-          type: string
-          example: USD
-        effectiveDate:
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        status:
-          $ref: '#/components/schemas/Status'
-      required:
-      - version
-      - price
     Item:
       allOf:
       - $ref: '#/components/schemas/ItemInput'
@@ -645,6 +604,15 @@ components:
             type: object
             additionalProperties:
               type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
     ItemCodeList:
       type: object
       properties:
@@ -673,26 +641,58 @@ components:
                 example: en-US
               value:
                 type: string
-    ItemPage:
+    ItemPriceInput:
       type: object
       properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
+        version:
+          type: integer
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 9.99
+        currency:
+          type: string
+          example: USD
+        effectiveDate:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        status:
+          $ref: '#/components/schemas/Status'
+      required:
+      - version
+      - price
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    ItemPrice:
+      allOf:
+      - $ref: '#/components/schemas/ItemPriceInput'
+      - type: object
+        properties:
+          priceId:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              priceCode:
+                type: string
   parameters:
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
     ItemCode:
       name: itemCode
       in: path
       required: true
       description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
       schema:
         type: string
   responses:

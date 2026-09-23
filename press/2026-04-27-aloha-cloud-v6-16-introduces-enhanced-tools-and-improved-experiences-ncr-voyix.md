@@ -2,7 +2,9 @@
 title: Aloha Cloud v6.16 introduces enhanced tools and improved experiences | NCR
   Voyix
 url: https://collections.ncrvoyix.com/newsroom/aloha-cloud-v6-16-debuts-with-enhanced-tools-and-seamless-experiences
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

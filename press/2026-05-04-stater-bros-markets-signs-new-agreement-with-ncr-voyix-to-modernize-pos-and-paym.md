@@ -2,7 +2,9 @@
 title: Stater Bros. Markets Signs New Agreement with NCR Voyix to Modernize POS and
   Payments on the Voyix Commerce Platform | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/stater-bros-markets-signs-new-agreement-with-ncr-voyix-to-modernize-pos-and-payments-on-the-voyix-commerce-platform
-date: '2026-05-04'
+published: ''
+date_basis: harvested
+harvested: '2026-05-04'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

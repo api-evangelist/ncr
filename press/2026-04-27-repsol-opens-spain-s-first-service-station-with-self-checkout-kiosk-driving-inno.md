@@ -2,7 +2,9 @@
 title: Repsol Opens Spain’s First Service Station with Self-Checkout Kiosk, Driving
   Innovation in the Sector | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/repsol-opens-spains-first-service-station-with-self-checkout-kiosk-driving-innovation-in-the-sector
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

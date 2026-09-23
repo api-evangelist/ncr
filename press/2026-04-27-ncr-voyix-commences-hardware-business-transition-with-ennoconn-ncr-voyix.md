@@ -1,7 +1,9 @@
 ---
 title: NCR Voyix Commences Hardware Business Transition with Ennoconn | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/ncr-voyix-commences-hardware-business-transition-with-ennoconn
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

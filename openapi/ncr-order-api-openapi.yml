@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: NCR Voyix Commerce Platform APIs Catalog Order API
-  description: 'REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants. This specification covers the core commerce surfaces exercised by the publicly published NCR Voyix sample applications: Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service carts, Order creation and lookup, Site (location) provisioning, Security (authentication, authorization, passwords), and Provisioning (users and user profiles). Requests are signed with HMAC SHA-512 AccessKey authentication and scoped with the nep-organization and nep-enterprise-unit headers. Paths and schemas were reconstructed from the NCR Voyix sample applications (NCRVoyix-Corporation/ncr-retail-demo, NCRVoyix-Corporation/sample-app-burgers, NCRVoyix-Corporation/ncr-bsp-hmac); consult developer.ncrvoyix.com for the authoritative contract.'
+  title: NCR Voyix Commerce Platform Order API
+  description: REST APIs for the NCR Voyix Commerce Platform (Business Services Platform), the API-based cloud architecture that powers NCR Voyix unified-commerce solutions for retailers and restaurants.
   version: '1.0'
   contact:
     name: NCR Voyix Developer Experience
@@ -272,60 +272,6 @@ components:
         returnFullOrders:
           type: boolean
           example: true
-    Order:
-      allOf:
-      - $ref: '#/components/schemas/OrderInput'
-      - type: object
-        properties:
-          id:
-            type: string
-          status:
-            type: string
-    Customer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          example: jsmith@example.com
-        firstName:
-          type: string
-          example: Downtown Store
-        lastName:
-          type: string
-          example: Downtown Store
-    ProductId:
-      type: object
-      properties:
-        type:
-          type: string
-          example: example
-        value:
-          type: string
-          example: Cheeseburger
-    OrderLine:
-      type: object
-      properties:
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        unitPrice:
-          type: number
-          format: double
-          example: 9.99
-    Quantity:
-      type: object
-      properties:
-        unitOfMeasure:
-          type: string
-          example: EA
-        unitOfMeasureLabel:
-          type: string
-          example: example
-        value:
-          type: number
-          example: 9.99
     OrderInput:
       type: object
       properties:
@@ -343,6 +289,17 @@ components:
             $ref: '#/components/schemas/OrderLine'
       required:
       - orderLines
+    OrderLine:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        unitPrice:
+          type: number
+          format: double
+          example: 9.99
     Error:
       type: object
       properties:
@@ -352,6 +309,56 @@ components:
         message:
           type: string
           example: example
+    Quantity:
+      type: object
+      properties:
+        unitOfMeasure:
+          type: string
+          example: EA
+        unitOfMeasureLabel:
+          type: string
+          example: example
+        value:
+          type: number
+          example: 9.99
+    Order:
+      allOf:
+      - $ref: '#/components/schemas/OrderInput'
+      - type: object
+        properties:
+          id:
+            type: string
+          status:
+            type: string
+    ProductId:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
+    Customer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     NepEnterpriseUnit:
       name: nep-enterprise-unit
@@ -360,13 +367,6 @@ components:
       description: Identifier of the enterprise unit (site/location) the request applies to.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

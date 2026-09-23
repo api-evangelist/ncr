@@ -1,7 +1,9 @@
 ---
 title: Marco’s Pizza selects NCR Voyix to power global expansion | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/marcos-pizza-selects-ncr-voyix-to-power-international-expansion
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

@@ -1,7 +1,9 @@
 ---
 title: 'NCR: Proactive defect management with AI'
 url: https://www.fabasoft.com/en/media-center/nonconformance-reports-proactive-defect-management-ai-and-cloud
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"NCR" press release artificial intelligence'
 position: 4
 source: serpapi-google

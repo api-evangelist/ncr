@@ -2,7 +2,9 @@
 title: Pei Wei Expands NCR Voyix Relationship to Power POS Across Its Restaurants
   | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/pei-wei-expands-ncr-voyix-relationship-to-power-pos-across-its-restaurants
-date: '2026-05-06'
+published: ''
+date_basis: harvested
+harvested: '2026-05-06'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---

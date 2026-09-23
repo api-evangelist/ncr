@@ -2,7 +2,9 @@
 title: NCR Voyix maintains global leadership in self‑checkout shipments, per Datos
   Insights | NCR Voyix
 url: https://collections.ncrvoyix.com/newsroom/ncr-voyix-maintains-global-leadership-in-self-checkout-shipments-according-to-datos-insights
-date: '2026-04-27'
+published: ''
+date_basis: harvested
+harvested: '2026-04-27'
 author: ''
 feed_url: http://www.ncr.com/newsroom/rss.xml
 ---
