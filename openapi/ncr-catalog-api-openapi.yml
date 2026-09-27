@@ -562,71 +562,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ItemPage:
-      type: object
-      properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-    ItemInput:
-      type: object
-      properties:
-        version:
-          type: integer
-          description: Optimistic-concurrency version; must increase on each update.
-          example: 1
-        itemId:
-          type: object
-          additionalProperties:
-            type: string
-        shortDescription:
-          $ref: '#/components/schemas/LocalizedText'
-        longDescription:
-          $ref: '#/components/schemas/LocalizedText'
-        status:
-          $ref: '#/components/schemas/Status'
-        merchandiseCategory:
-          type: string
-          example: example
-        departmentId:
-          type: string
-          example: example
-      required:
-      - version
-      - status
-    Item:
+    ItemPrice:
       allOf:
-      - $ref: '#/components/schemas/ItemInput'
+      - $ref: '#/components/schemas/ItemPriceInput'
       - type: object
         properties:
-          itemId:
-            type: object
-            additionalProperties:
-              type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    ItemCodeList:
-      type: object
-      properties:
-        itemIds:
-          type: array
-          items:
+          priceId:
             type: object
             properties:
               itemCode:
                 type: string
-            required:
-            - itemCode
-      required:
-      - itemIds
+              priceCode:
+                type: string
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     LocalizedText:
       type: object
       description: A set of locale-specific values.
@@ -663,38 +615,71 @@ components:
       required:
       - version
       - price
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-    ItemPrice:
+    Item:
       allOf:
-      - $ref: '#/components/schemas/ItemPriceInput'
+      - $ref: '#/components/schemas/ItemInput'
       - type: object
         properties:
-          priceId:
+          itemId:
+            type: object
+            additionalProperties:
+              type: string
+    ItemInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          description: Optimistic-concurrency version; must increase on each update.
+          example: 1
+        itemId:
+          type: object
+          additionalProperties:
+            type: string
+        shortDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        longDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        status:
+          $ref: '#/components/schemas/Status'
+        merchandiseCategory:
+          type: string
+          example: example
+        departmentId:
+          type: string
+          example: example
+      required:
+      - version
+      - status
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+    ItemCodeList:
+      type: object
+      properties:
+        itemIds:
+          type: array
+          items:
             type: object
             properties:
               itemCode:
                 type: string
-              priceCode:
-                type: string
-  parameters:
-    ItemCode:
-      name: itemCode
-      in: path
-      required: true
-      description: The catalog item code (spaces are not permitted).
-      schema:
-        type: string
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
+            required:
+            - itemCode
+      required:
+      - itemIds
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -702,6 +687,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+    ItemCode:
+      name: itemCode
+      in: path
+      required: true
+      description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
   securitySchemes:
     hmacAccessKey:
       type: apiKey

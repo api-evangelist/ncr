@@ -395,22 +395,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    CartId:
-      name: cartId
-      in: path
-      required: true
-      description: The shopping cart identifier.
-      schema:
-        type: string
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
   schemas:
+    Quantity:
+      type: object
+      properties:
+        unitOfMeasure:
+          type: string
+          example: EA
+        unitOfMeasureLabel:
+          type: string
+          example: example
+        value:
+          type: number
+          example: 9.99
     Cart:
       type: object
       properties:
@@ -433,27 +430,15 @@ components:
             currency:
               type: string
               example: USD
-    Error:
+    ProductId:
       type: object
       properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    Quantity:
-      type: object
-      properties:
-        unitOfMeasure:
-          type: string
-          example: EA
-        unitOfMeasureLabel:
+        type:
           type: string
           example: example
         value:
-          type: number
-          example: 9.99
+          type: string
+          example: Cheeseburger
     CartLineInput:
       type: object
       properties:
@@ -474,15 +459,15 @@ components:
           unitPrice:
             type: number
             format: double
-    ProductId:
+    Error:
       type: object
       properties:
-        type:
+        code:
           type: string
           example: example
-        value:
+        message:
           type: string
-          example: Cheeseburger
+          example: example
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -490,6 +475,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+    CartId:
+      name: cartId
+      in: path
+      required: true
+      description: The shopping cart identifier.
+      schema:
+        type: string
   securitySchemes:
     hmacAccessKey:
       type: apiKey

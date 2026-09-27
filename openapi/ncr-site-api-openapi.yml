@@ -374,6 +374,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
     SiteInput:
       type: object
       properties:
@@ -402,6 +413,11 @@ components:
       - siteName
       - enterpriseUnitName
       - status
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     Error:
       type: object
       properties:
@@ -411,22 +427,13 @@ components:
         message:
           type: string
           example: example
-    Coordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 9.99
-        longitude:
-          type: number
-          format: double
-          example: 9.99
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
     SiteSearch:
       type: object
       properties:
@@ -457,13 +464,6 @@ components:
         country:
           type: string
           example: US
-    Site:
-      allOf:
-      - $ref: '#/components/schemas/SiteInput'
-      - type: object
-        properties:
-          id:
-            type: string
   responses:
     NotFound:
       description: The requested resource was not found.

@@ -134,24 +134,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UserInput:
-      type: object
-      properties:
-        username:
-          type: string
-          example: jsmith
-        email:
-          type: string
-          format: email
-          example: jsmith@example.com
-        firstName:
-          type: string
-          example: Downtown Store
-        lastName:
-          type: string
-          example: Downtown Store
-      required:
-      - username
     UserProfile:
       type: object
       properties:
@@ -178,6 +160,24 @@ components:
         properties:
           id:
             type: string
+    UserInput:
+      type: object
+      properties:
+        username:
+          type: string
+          example: jsmith
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
+      required:
+      - username
   securitySchemes:
     hmacAccessKey:
       type: apiKey

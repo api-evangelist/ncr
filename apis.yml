@@ -1,11 +1,10 @@
 aid: ncr
 url: https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/apis.yml
-name: NCR
+name: NCR Voyix
 tags:
   - Restaurant
   - Retail
   - Banking
-  - ATM
   - Point-of-Sale
   - Commerce
   - Fortune 500
@@ -13,7 +12,6 @@ tags_raw:
   - Restaurant
   - Retail
   - Banking
-  - ATM
   - Point of Sale
   - Commerce
   - Fortune 500
@@ -247,11 +245,7 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/ncr-corporation
   - type: Website
-    url: https://www.ncr.com
-  - type: Website
     url: https://www.ncrvoyix.com/
-  - type: Website
-    url: https://www.ncratleos.com/
   - type: DeveloperPortal
     url: https://developer.ncrvoyix.com/
   - type: Documentation
