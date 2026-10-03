@@ -562,23 +562,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ItemPrice:
-      allOf:
-      - $ref: '#/components/schemas/ItemPriceInput'
-      - type: object
-        properties:
-          priceId:
-            type: object
-            properties:
-              itemCode:
-                type: string
-              priceCode:
-                type: string
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
     LocalizedText:
       type: object
       description: A set of locale-specific values.
@@ -593,37 +576,6 @@ components:
                 example: en-US
               value:
                 type: string
-    ItemPriceInput:
-      type: object
-      properties:
-        version:
-          type: integer
-          example: 1
-        price:
-          type: number
-          format: double
-          example: 9.99
-        currency:
-          type: string
-          example: USD
-        effectiveDate:
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        status:
-          $ref: '#/components/schemas/Status'
-      required:
-      - version
-      - price
-    Item:
-      allOf:
-      - $ref: '#/components/schemas/ItemInput'
-      - type: object
-        properties:
-          itemId:
-            type: object
-            additionalProperties:
-              type: string
     ItemInput:
       type: object
       properties:
@@ -650,13 +602,6 @@ components:
       required:
       - version
       - status
-    ItemPage:
-      type: object
-      properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
     Error:
       type: object
       properties:
@@ -666,6 +611,52 @@ components:
         message:
           type: string
           example: example
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    ItemPriceInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 9.99
+        currency:
+          type: string
+          example: USD
+        effectiveDate:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        status:
+          $ref: '#/components/schemas/Status'
+      required:
+      - version
+      - price
+    ItemPrice:
+      allOf:
+      - $ref: '#/components/schemas/ItemPriceInput'
+      - type: object
+        properties:
+          priceId:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              priceCode:
+                type: string
     ItemCodeList:
       type: object
       properties:
@@ -680,6 +671,15 @@ components:
             - itemCode
       required:
       - itemIds
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/ItemInput'
+      - type: object
+        properties:
+          itemId:
+            type: object
+            additionalProperties:
+              type: string
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -688,18 +688,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
     ItemCode:
       name: itemCode
       in: path
       required: true
       description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
       schema:
         type: string
   securitySchemes:

@@ -169,16 +169,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TokenResponse:
+    Error:
       type: object
       properties:
-        token:
+        code:
           type: string
-          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
-        expiresAt:
+          example: example
+        message:
           type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
+          example: example
     LoginRequest:
       type: object
       properties:
@@ -192,15 +191,23 @@ components:
       required:
       - username
       - password
-    Error:
+    TokenResponse:
       type: object
       properties:
-        code:
+        token:
           type: string
-          example: example
-        message:
+          example: eyJhbGciOiJIUzI1Ni1.abc123.def456
+        expiresAt:
           type: string
-          example: example
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication failed or the AccessKey signature was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     NepOrganization:
       name: nep-organization
@@ -209,13 +216,6 @@ components:
       description: Identifier of the organization the request is scoped to.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or the AccessKey signature was invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

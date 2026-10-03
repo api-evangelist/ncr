@@ -374,17 +374,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Coordinates:
+    Error:
       type: object
       properties:
-        latitude:
-          type: number
-          format: double
-          example: 9.99
-        longitude:
-          type: number
-          format: double
-          example: 9.99
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
     SiteInput:
       type: object
       properties:
@@ -413,39 +411,6 @@ components:
       - siteName
       - enterpriseUnitName
       - status
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    Site:
-      allOf:
-      - $ref: '#/components/schemas/SiteInput'
-      - type: object
-        properties:
-          id:
-            type: string
-    SiteSearch:
-      type: object
-      properties:
-        criteria:
-          type: object
-          properties:
-            status:
-              $ref: '#/components/schemas/Status'
-        fields:
-          type: array
-          items:
-            type: string
     Address:
       type: object
       properties:
@@ -464,6 +429,41 @@ components:
         country:
           type: string
           example: US
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
+    SiteSearch:
+      type: object
+      properties:
+        criteria:
+          type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/Status'
+        fields:
+          type: array
+          items:
+            type: string
   responses:
     NotFound:
       description: The requested resource was not found.

@@ -395,7 +395,41 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    CartId:
+      name: cartId
+      in: path
+      required: true
+      description: The shopping cart identifier.
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+    CartLine:
+      allOf:
+      - $ref: '#/components/schemas/CartLineInput'
+      - type: object
+        properties:
+          lineId:
+            type: string
+          unitPrice:
+            type: number
+            format: double
     Quantity:
       type: object
       properties:
@@ -408,6 +442,25 @@ components:
         value:
           type: number
           example: 9.99
+    ProductId:
+      type: object
+      properties:
+        type:
+          type: string
+          example: example
+        value:
+          type: string
+          example: Cheeseburger
+    CartLineInput:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        voidReason:
+          type: string
+          example: Customer request
     Cart:
       type: object
       properties:
@@ -430,44 +483,6 @@ components:
             currency:
               type: string
               example: USD
-    ProductId:
-      type: object
-      properties:
-        type:
-          type: string
-          example: example
-        value:
-          type: string
-          example: Cheeseburger
-    CartLineInput:
-      type: object
-      properties:
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        voidReason:
-          type: string
-          example: Customer request
-    CartLine:
-      allOf:
-      - $ref: '#/components/schemas/CartLineInput'
-      - type: object
-        properties:
-          lineId:
-            type: string
-          unitPrice:
-            type: number
-            format: double
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -475,21 +490,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
-    CartId:
-      name: cartId
-      in: path
-      required: true
-      description: The shopping cart identifier.
-      schema:
-        type: string
   securitySchemes:
     hmacAccessKey:
       type: apiKey
