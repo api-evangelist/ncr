@@ -336,7 +336,28 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     LocalizedText:
       type: object
       description: A set of locale-specific values.
@@ -351,6 +372,23 @@ components:
                 example: en-US
               value:
                 type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '500123'
+        version:
+          type: integer
+          example: 1
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        itemCodes:
+          type: array
+          items:
+            type: string
+        status:
+          $ref: '#/components/schemas/Status'
     CategoryNode:
       type: object
       properties:
@@ -373,44 +411,6 @@ components:
           example: CATEGORY
         status:
           $ref: '#/components/schemas/Status'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-    Group:
-      type: object
-      properties:
-        id:
-          type: string
-          example: '500123'
-        version:
-          type: integer
-          example: 1
-        title:
-          $ref: '#/components/schemas/LocalizedText'
-        itemCodes:
-          type: array
-          items:
-            type: string
-        status:
-          $ref: '#/components/schemas/Status'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

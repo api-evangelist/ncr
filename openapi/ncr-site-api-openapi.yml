@@ -373,7 +373,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    SiteSearch:
+      type: object
+      properties:
+        criteria:
+          type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/Status'
+        fields:
+          type: array
+          items:
+            type: string
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     Error:
       type: object
       properties:
@@ -411,6 +435,17 @@ components:
       - siteName
       - enterpriseUnitName
       - status
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 9.99
+        longitude:
+          type: number
+          format: double
+          example: 9.99
     Address:
       type: object
       properties:
@@ -429,11 +464,6 @@ components:
         country:
           type: string
           example: US
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
     Site:
       allOf:
       - $ref: '#/components/schemas/SiteInput'
@@ -441,36 +471,6 @@ components:
         properties:
           id:
             type: string
-    Coordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 9.99
-        longitude:
-          type: number
-          format: double
-          example: 9.99
-    SiteSearch:
-      type: object
-      properties:
-        criteria:
-          type: object
-          properties:
-            status:
-              $ref: '#/components/schemas/Status'
-        fields:
-          type: array
-          items:
-            type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

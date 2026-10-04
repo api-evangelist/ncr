@@ -261,6 +261,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -271,27 +278,6 @@ components:
         message:
           type: string
           example: example
-    OrderSearch:
-      type: object
-      properties:
-        customerEmail:
-          type: string
-          format: email
-          example: jsmith@example.com
-        returnFullOrders:
-          type: boolean
-          example: true
-    OrderLine:
-      type: object
-      properties:
-        productId:
-          $ref: '#/components/schemas/ProductId'
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        unitPrice:
-          type: number
-          format: double
-          example: 9.99
     Quantity:
       type: object
       properties:
@@ -313,6 +299,30 @@ components:
         value:
           type: string
           example: Cheeseburger
+    OrderLine:
+      type: object
+      properties:
+        productId:
+          $ref: '#/components/schemas/ProductId'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        unitPrice:
+          type: number
+          format: double
+          example: 9.99
+    Customer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: jsmith@example.com
+        firstName:
+          type: string
+          example: Downtown Store
+        lastName:
+          type: string
+          example: Downtown Store
     OrderInput:
       type: object
       properties:
@@ -330,19 +340,16 @@ components:
             $ref: '#/components/schemas/OrderLine'
       required:
       - orderLines
-    Customer:
+    OrderSearch:
       type: object
       properties:
-        email:
+        customerEmail:
           type: string
           format: email
           example: jsmith@example.com
-        firstName:
-          type: string
-          example: Downtown Store
-        lastName:
-          type: string
-          example: Downtown Store
+        returnFullOrders:
+          type: boolean
+          example: true
     Order:
       allOf:
       - $ref: '#/components/schemas/OrderInput'
@@ -352,13 +359,6 @@ components:
             type: string
           status:
             type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     NepEnterpriseUnit:
       name: nep-enterprise-unit

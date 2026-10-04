@@ -561,7 +561,42 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    ItemCodeList:
+      type: object
+      properties:
+        itemIds:
+          type: array
+          items:
+            type: object
+            properties:
+              itemCode:
+                type: string
+            required:
+            - itemCode
+      required:
+      - itemIds
     LocalizedText:
       type: object
       description: A set of locale-specific values.
@@ -575,6 +610,18 @@ components:
                 type: string
                 example: en-US
               value:
+                type: string
+    ItemPrice:
+      allOf:
+      - $ref: '#/components/schemas/ItemPriceInput'
+      - type: object
+        properties:
+          priceId:
+            type: object
+            properties:
+              itemCode:
+                type: string
+              priceCode:
                 type: string
     ItemInput:
       type: object
@@ -602,27 +649,6 @@ components:
       required:
       - version
       - status
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
-    ItemPage:
-      type: object
-      properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
     ItemPriceInput:
       type: object
       properties:
@@ -645,32 +671,13 @@ components:
       required:
       - version
       - price
-    ItemPrice:
-      allOf:
-      - $ref: '#/components/schemas/ItemPriceInput'
-      - type: object
-        properties:
-          priceId:
-            type: object
-            properties:
-              itemCode:
-                type: string
-              priceCode:
-                type: string
-    ItemCodeList:
+    ItemPage:
       type: object
       properties:
-        itemIds:
+        pageContent:
           type: array
           items:
-            type: object
-            properties:
-              itemCode:
-                type: string
-            required:
-            - itemCode
-      required:
-      - itemIds
+            $ref: '#/components/schemas/Item'
     Item:
       allOf:
       - $ref: '#/components/schemas/ItemInput'
@@ -680,26 +687,19 @@ components:
             type: object
             additionalProperties:
               type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    ItemCode:
-      name: itemCode
-      in: path
-      required: true
-      description: The catalog item code (spaces are not permitted).
-      schema:
-        type: string
     NepEnterpriseUnit:
       name: nep-enterprise-unit
       in: header
       required: true
       description: Identifier of the enterprise unit (site/location) the request applies to.
+      schema:
+        type: string
+    ItemCode:
+      name: itemCode
+      in: path
+      required: true
+      description: The catalog item code (spaces are not permitted).
       schema:
         type: string
   securitySchemes:
