@@ -5,20 +5,29 @@ front_door_ai:
   slug: ncr
   lexicon_version: '1.0'
   probed_at: '2026-09-17'
-  host: www.ncr.com
-  final_host: www.ncr.com
-  ownership: own
-  owner: ncr
-  shares_host_with: null
+  host: www.ncrvoyix.com
+  final_host: www.ncrvoyix.com
+  ownership: unresolved
+  owner: null
+  shares_host_with:
+  - aloha-pos
   inherited_from: null
-  verdict: silent
-  score: 0
-  host_score: 0
-  density: 0.0
-  words: 160
+  alias_of: null
+  verdict: scored
+  score: null
+  band: null
+  band_label: null
+  host_score: 12
+  density: null
+  words: 1246
   tiers:
-    agentic: 0
-    core: 0
+    agentic: 3
+    core: 9
     model: 0
-  ambiguous: 0
-  top_terms: null
+  ambiguous: 2
+  top_terms:
+    AI: 9
+    agentic: 2
+    AI agent: 1
+    agent: 1
+    intelligence: 1
