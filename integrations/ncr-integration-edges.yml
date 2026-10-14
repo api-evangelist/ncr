@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/ncr/integrations
 - https://zapier.com/apps/ncr-voyix/integrations
@@ -10,9 +10,18 @@ checked:
 - https://composio.dev/toolkits/ncr
 - https://monid.ai/tools/ncr
 - https://n8n.io/integrations/ncr/
+- https://www.ncrvoyix.com/marketplace
 - https://zapier.com/apps/ncr-voyix/integrations
 - https://zapier.com/apps/ncr/integrations
 summary: null
-marketplace_apps: []
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: ncr
+  url: https://www.ncrvoyix.com/marketplace
+  app_count: null
+  adapter: sweep-restaurant-pos.py:unreadable
+  listed: 0
+  status: not-machine-readable (no public partner directory (404))
 edges: []
 templates: []
