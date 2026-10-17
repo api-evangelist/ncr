@@ -395,23 +395,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          example: example
-        message:
-          type: string
-          example: example
     Quantity:
       type: object
       properties:
@@ -424,6 +408,25 @@ components:
         value:
           type: number
           example: 9.99
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          example: example
+        message:
+          type: string
+          example: example
+    CartLine:
+      allOf:
+      - $ref: '#/components/schemas/CartLineInput'
+      - type: object
+        properties:
+          lineId:
+            type: string
+          unitPrice:
+            type: number
+            format: double
     CartLineInput:
       type: object
       properties:
@@ -465,16 +468,13 @@ components:
         value:
           type: string
           example: Cheeseburger
-    CartLine:
-      allOf:
-      - $ref: '#/components/schemas/CartLineInput'
-      - type: object
-        properties:
-          lineId:
-            type: string
-          unitPrice:
-            type: number
-            format: double
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     CartId:
       name: cartId

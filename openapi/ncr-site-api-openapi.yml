@@ -373,26 +373,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    SiteSearch:
-      type: object
-      properties:
-        criteria:
-          type: object
-          properties:
-            status:
-              $ref: '#/components/schemas/Status'
-        fields:
-          type: array
-          items:
-            type: string
     Status:
       type: string
       enum:
@@ -407,6 +388,24 @@ components:
         message:
           type: string
           example: example
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: example
+        city:
+          type: string
+          example: example
+        state:
+          type: string
+          example: example
+        postalCode:
+          type: string
+          example: example
+        country:
+          type: string
+          example: US
     SiteInput:
       type: object
       properties:
@@ -435,6 +434,25 @@ components:
       - siteName
       - enterpriseUnitName
       - status
+    SiteSearch:
+      type: object
+      properties:
+        criteria:
+          type: object
+          properties:
+            status:
+              $ref: '#/components/schemas/Status'
+        fields:
+          type: array
+          items:
+            type: string
+    Site:
+      allOf:
+      - $ref: '#/components/schemas/SiteInput'
+      - type: object
+        properties:
+          id:
+            type: string
     Coordinates:
       type: object
       properties:
@@ -446,31 +464,13 @@ components:
           type: number
           format: double
           example: 9.99
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          example: example
-        city:
-          type: string
-          example: example
-        state:
-          type: string
-          example: example
-        postalCode:
-          type: string
-          example: example
-        country:
-          type: string
-          example: US
-    Site:
-      allOf:
-      - $ref: '#/components/schemas/SiteInput'
-      - type: object
-        properties:
-          id:
-            type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

@@ -336,14 +336,12 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
     Error:
       type: object
       properties:
@@ -353,25 +351,6 @@ components:
         message:
           type: string
           example: example
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-    LocalizedText:
-      type: object
-      description: A set of locale-specific values.
-      properties:
-        values:
-          type: array
-          items:
-            type: object
-            properties:
-              locale:
-                type: string
-                example: en-US
-              value:
-                type: string
     Group:
       type: object
       properties:
@@ -411,6 +390,27 @@ components:
           example: CATEGORY
         status:
           $ref: '#/components/schemas/Status'
+    LocalizedText:
+      type: object
+      description: A set of locale-specific values.
+      properties:
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              locale:
+                type: string
+                example: en-US
+              value:
+                type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     hmacAccessKey:
       type: apiKey

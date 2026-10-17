@@ -561,14 +561,47 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Item:
+      allOf:
+      - $ref: '#/components/schemas/ItemInput'
+      - type: object
+        properties:
+          itemId:
+            type: object
+            additionalProperties:
+              type: string
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+    ItemInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          description: Optimistic-concurrency version; must increase on each update.
+          example: 1
+        itemId:
+          type: object
+          additionalProperties:
+            type: string
+        shortDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        longDescription:
+          $ref: '#/components/schemas/LocalizedText'
+        status:
+          $ref: '#/components/schemas/Status'
+        merchandiseCategory:
+          type: string
+          example: example
+        departmentId:
+          type: string
+          example: example
+      required:
+      - version
+      - status
     Error:
       type: object
       properties:
@@ -578,11 +611,28 @@ components:
         message:
           type: string
           example: example
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
+    ItemPriceInput:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 9.99
+        currency:
+          type: string
+          example: USD
+        effectiveDate:
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        status:
+          $ref: '#/components/schemas/Status'
+      required:
+      - version
+      - price
     ItemCodeList:
       type: object
       properties:
@@ -611,6 +661,13 @@ components:
                 example: en-US
               value:
                 type: string
+    ItemPage:
+      type: object
+      properties:
+        pageContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
     ItemPrice:
       allOf:
       - $ref: '#/components/schemas/ItemPriceInput'
@@ -623,83 +680,26 @@ components:
                 type: string
               priceCode:
                 type: string
-    ItemInput:
-      type: object
-      properties:
-        version:
-          type: integer
-          description: Optimistic-concurrency version; must increase on each update.
-          example: 1
-        itemId:
-          type: object
-          additionalProperties:
-            type: string
-        shortDescription:
-          $ref: '#/components/schemas/LocalizedText'
-        longDescription:
-          $ref: '#/components/schemas/LocalizedText'
-        status:
-          $ref: '#/components/schemas/Status'
-        merchandiseCategory:
-          type: string
-          example: example
-        departmentId:
-          type: string
-          example: example
-      required:
-      - version
-      - status
-    ItemPriceInput:
-      type: object
-      properties:
-        version:
-          type: integer
-          example: 1
-        price:
-          type: number
-          format: double
-          example: 9.99
-        currency:
-          type: string
-          example: USD
-        effectiveDate:
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        status:
-          $ref: '#/components/schemas/Status'
-      required:
-      - version
-      - price
-    ItemPage:
-      type: object
-      properties:
-        pageContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-    Item:
-      allOf:
-      - $ref: '#/components/schemas/ItemInput'
-      - type: object
-        properties:
-          itemId:
-            type: object
-            additionalProperties:
-              type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    NepEnterpriseUnit:
-      name: nep-enterprise-unit
-      in: header
-      required: true
-      description: Identifier of the enterprise unit (site/location) the request applies to.
-      schema:
-        type: string
     ItemCode:
       name: itemCode
       in: path
       required: true
       description: The catalog item code (spaces are not permitted).
+      schema:
+        type: string
+    NepEnterpriseUnit:
+      name: nep-enterprise-unit
+      in: header
+      required: true
+      description: Identifier of the enterprise unit (site/location) the request applies to.
       schema:
         type: string
   securitySchemes:
