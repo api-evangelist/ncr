@@ -1,11 +1,12 @@
-generated: '2026-10-12'
-method: searched
+generated: '2026-10-20'
+method: none
 source:
 - https://zapier.com/apps/ncr/integrations
 - https://zapier.com/apps/ncr-voyix/integrations
 - https://n8n.io/integrations/ncr/
 - https://composio.dev/toolkits/ncr
 - https://monid.ai/tools/ncr
+- https://www.ncrvoyix.com/marketplace
 checked:
 - https://composio.dev/toolkits/ncr
 - https://monid.ai/tools/ncr
