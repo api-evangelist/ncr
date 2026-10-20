@@ -1,5 +1,5 @@
 generated: '2026-10-20'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/ncr/integrations
 - https://zapier.com/apps/ncr-voyix/integrations
@@ -14,6 +14,7 @@ checked:
 - https://www.ncrvoyix.com/marketplace
 - https://zapier.com/apps/ncr-voyix/integrations
 - https://zapier.com/apps/ncr/integrations
+- https://listings.pcisecuritystandards.org/assessors_and_solutions
 summary: null
 marketplace_apps:
 - marketplace: own
@@ -24,5 +25,45 @@ marketplace_apps:
   adapter: sweep-restaurant-pos.py:unreadable
   listed: 0
   status: not-machine-readable (no public partner directory (404))
-edges: []
+edges:
+- partner_name: PCI Security Standards Council (program listings)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://listings.pcisecuritystandards.org/assessors_and_solutions/payment_software
+  category: Payment security validation
+  contract_reference:
+    register: PCI SSC program listings (listings.pcisecuritystandards.org / pcisecuritystandards.org)
+    spec_file: null
+    standard: PCI SSC
+    role: pci-validated-vendor
+    registered_name: NCR Voyix
+    website: www.ncrvoyix.com
+    matched_domain: ncrvoyix.com
+    matched_by: domain
+    identity_source: the vendor website on the PCI SSC listing (no lookup)
+    certified_products:
+    - product: PCI Secure Software (Validated Secure Software)
+      lapsed: false
+      latest_expiry: '2029-09-11'
+      listed: 42
+    - product: PCI P2PE Solution
+      lapsed: false
+      latest_expiry: '2028-08-26'
+      listed: 2
+    - product: PCI Secure SLC Qualified Vendor
+      lapsed: false
+      latest_expiry: '2029-01-21'
+      listed: 1
+    signal_note: one certified_products entry per PCI SSC program (Secure Software, PA-DSS, P2PE solution / component
+      / application, 3DS SDK, SPoC, CPoC, MPoC, PTS device, Secure SLC); lapsed = every listed product in that program
+      is past its expiry / reassessment date or marked expired; `listed` is context only. List Access Agreement
+      accepted on Kin's instruction 2026-10-20
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
 templates: []
