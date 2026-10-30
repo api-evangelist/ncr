@@ -1,4 +1,4 @@
-# NCR (ncr)
+# NCR Voyix
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,81 +66,242 @@
 
 NCR Corporation separated in October 2023 into two independent public companies: NCR Voyix, a global provider of digital commerce solutions for retailers and restaurants, and NCR Atleos, a leader in expanding self-directed banking through ATM networks. NCR Voyix operates the Voyix Commerce Platform, an API-based cloud architecture (the Business Services Platform) that powers unified-commerce POS, ecommerce, and payments for retail and restaurants. Developers access it at developer.ncrvoyix.com using AccessKey (HMAC SHA-512) authentication against api.ncr.com.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ncr/refs/heads/main/apis.yml)
+**Areas:** Restaurant · Retail · Banking · Point-of-Sale · Commerce · Fortune 500
 
-## Scope
+## NCR Voyix on APIs.io
 
-- **Type:** Index
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for NCR Voyix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ncr/](https://apis.io/providers/ncr/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Restaurant
-- Retail
-- Banking
-- ATM
-- Point of Sale
-- Commerce
+- [NCR Catalog API](https://apis.io/apis/ncr/ncr-catalog-api/) — Item, item-price, and item-attribute management plus item-details search.
+- [NCR Category API](https://apis.io/apis/ncr/ncr-category-api/) — Catalog category-node hierarchy and group management.
+- [NCR Order API](https://apis.io/apis/ncr/ncr-order-api/) — Order creation, lookup, update, and search.
+- [NCR Provisioning API](https://apis.io/apis/ncr/ncr-provisioning-api/) — Platform user creation and user profile management.
+- [NCR Security API](https://apis.io/apis/ncr/ncr-security-api/) — Authentication, authorization, and user password management.
+- [NCR Selling API](https://apis.io/apis/ncr/ncr-selling-api/) — Selling Service shopping carts and cart line items.
+- [NCR Site API](https://apis.io/apis/ncr/ncr-site-api/) — Site (location) provisioning, lookup, and geospatial search.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-24
-- **Modified:** 2026-06-02
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### NCR Voyix Commerce Platform APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST APIs for the NCR Voyix Commerce Platform (Business Services Platform) covering Catalog (items, item-prices, item-attributes, item-details search), Category and Group management, Selling Service shopping carts, Order creation/lookup/search, Site (location) provisioning and geospatial search, Security (authentication, authorization, passwords, roles), and Provisioning (users and user profiles). Requests are signed with AccessKey (HMAC SHA-512) authentication and scoped with nep-organization and nep-enterprise-unit headers against api.ncr.com (production) / gateway-staging.ncrcloud.com (staging).
+- [Ncr Agentic Access](https://apis.io/agentic-access/ncr/ncr-agentic-access/)
 
-- **Human URL:** [https://developer.ncrvoyix.com/](https://developer.ncrvoyix.com/)
-- **Base URL:** `https://api.ncr.com`
+#### JSON Schema (30)
 
-#### Tags
+The data models the API reads and writes.
 
-- REST
-- Commerce
-- Retail
-- Restaurant
-- Catalog
-- Order
-- Site
-- Point of Sale
+- [Address](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-address/)
+- [Cart](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-cart/)
+- [CartLine](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-cart-line/)
+- [CartLineInput](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-cart-line-input/)
+- [CategoryNode](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-category-node/)
+- [Coordinates](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-coordinates/)
+- [Customer](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-customer/)
+- [Group](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-group/)
+- [Item](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item/)
+- [ItemCodeList](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item-code-list/)
+- [ItemInput](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item-input/)
+- [ItemPage](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item-page/)
+- [ItemPrice](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item-price/)
+- [ItemPriceInput](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-item-price-input/)
+- [LocalizedText](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-localized-text/)
+- [LoginRequest](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-login-request/)
+- [Order](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-order/)
+- [OrderInput](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-order-input/)
+- [OrderLine](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-order-line/)
+- [OrderSearch](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-order-search/)
+- [ProductId](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-product-id/)
+- [Quantity](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-quantity/)
+- [Site](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-site/)
+- [SiteInput](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-site-input/)
+- [SiteSearch](https://apis.io/schemas/ncr/ncr-voyix-commerce-platform-site-search/)
+- …and 5 more published on APIs.io
 
-#### Properties
+#### JSON Structure (30)
 
-- [Documentation](https://developer.ncrvoyix.com/)
-- [OpenAPI](openapi/ncr-voyix-commerce-platform-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/ncr-voyix-commerce-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ncr-voyix-commerce-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman](postman/ncr-bsp-hmac-examples.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Getting Started](https://developer.ncrvoyix.com/portals/dev-portal/help-center/topics?topic=All+New+Users+Start+Here)
-- [A P I Explorer](https://developer.ncrvoyix.com/portals/dev-portal/api-explorer)
-- [Code Examples](https://github.com/NCRVoyix-Corporation/ncr-retail-demo)
-- [Code Examples](https://github.com/NCRVoyix-Corporation/sample-app-burgers)
-- [Code Examples](https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Ncr Voyix Commerce Platform Address Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-address-structure/)
+- [Ncr Voyix Commerce Platform Cart Line Input Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-cart-line-input-structure/)
+- [Ncr Voyix Commerce Platform Cart Line Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-cart-line-structure/)
+- [Ncr Voyix Commerce Platform Cart Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-cart-structure/)
+- [Ncr Voyix Commerce Platform Category Node Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-category-node-structure/)
+- [Ncr Voyix Commerce Platform Coordinates Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-coordinates-structure/)
+- [Ncr Voyix Commerce Platform Customer Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-customer-structure/)
+- [Ncr Voyix Commerce Platform Group Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-group-structure/)
+- [Ncr Voyix Commerce Platform Item Code List Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-code-list-structure/)
+- [Ncr Voyix Commerce Platform Item Input Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-input-structure/)
+- [Ncr Voyix Commerce Platform Item Page Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-page-structure/)
+- [Ncr Voyix Commerce Platform Item Price Input Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-price-input-structure/)
+- [Ncr Voyix Commerce Platform Item Price Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-price-structure/)
+- [Ncr Voyix Commerce Platform Item Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-item-structure/)
+- [Ncr Voyix Commerce Platform Localized Text Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-localized-text-structure/)
+- [Ncr Voyix Commerce Platform Login Request Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-login-request-structure/)
+- [Ncr Voyix Commerce Platform Order Input Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-order-input-structure/)
+- [Ncr Voyix Commerce Platform Order Line Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-order-line-structure/)
+- [Ncr Voyix Commerce Platform Order Search Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-order-search-structure/)
+- [Ncr Voyix Commerce Platform Order Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-order-structure/)
+- [Ncr Voyix Commerce Platform Product Id Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-product-id-structure/)
+- [Ncr Voyix Commerce Platform Quantity Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-quantity-structure/)
+- [Ncr Voyix Commerce Platform Site Input Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-site-input-structure/)
+- [Ncr Voyix Commerce Platform Site Search Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-site-search-structure/)
+- [Ncr Voyix Commerce Platform Site Structure](https://apis.io/json-structure/ncr/ncr-voyix-commerce-platform-site-structure/)
+- …and 5 more published on APIs.io
 
-- [GitHub Organization](https://github.com/NCRVoyix-Corporation)
-- [LinkedIn](https://www.linkedin.com/company/ncr-corporation)
-- [Website](https://www.ncr.com)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Ncr Voyix Commerce Platform Context](https://apis.io/jsonld/ncr/ncr-voyix-commerce-platform-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Ncr Vocabulary](https://apis.io/vocabularies/ncr/ncr-vocabulary/)
+
+#### Examples (29)
+
+Example requests and responses.
+
+- [Ncr Voyix Commerce Platform Address Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-address-example/)
+- [Ncr Voyix Commerce Platform Cart Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-cart-example/)
+- [Ncr Voyix Commerce Platform Cart Line Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-cart-line-example/)
+- [Ncr Voyix Commerce Platform Cart Line Input Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-cart-line-input-example/)
+- [Ncr Voyix Commerce Platform Category Node Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-category-node-example/)
+- [Ncr Voyix Commerce Platform Coordinates Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-coordinates-example/)
+- [Ncr Voyix Commerce Platform Customer Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-customer-example/)
+- [Ncr Voyix Commerce Platform Group Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-group-example/)
+- [Ncr Voyix Commerce Platform Item Code List Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-code-list-example/)
+- [Ncr Voyix Commerce Platform Item Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-example/)
+- [Ncr Voyix Commerce Platform Item Input Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-input-example/)
+- [Ncr Voyix Commerce Platform Item Page Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-page-example/)
+- [Ncr Voyix Commerce Platform Item Price Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-price-example/)
+- [Ncr Voyix Commerce Platform Item Price Input Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-item-price-input-example/)
+- [Ncr Voyix Commerce Platform Localized Text Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-localized-text-example/)
+- [Ncr Voyix Commerce Platform Login Request Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-login-request-example/)
+- [Ncr Voyix Commerce Platform Order Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-order-example/)
+- [Ncr Voyix Commerce Platform Order Input Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-order-input-example/)
+- [Ncr Voyix Commerce Platform Order Line Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-order-line-example/)
+- [Ncr Voyix Commerce Platform Order Search Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-order-search-example/)
+- [Ncr Voyix Commerce Platform Product Id Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-product-id-example/)
+- [Ncr Voyix Commerce Platform Quantity Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-quantity-example/)
+- [Ncr Voyix Commerce Platform Site Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-site-example/)
+- [Ncr Voyix Commerce Platform Site Input Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-site-input-example/)
+- [Ncr Voyix Commerce Platform Site Search Example](https://apis.io/examples/ncr/ncr-voyix-commerce-platform-site-search-example/)
+- …and 4 more published on APIs.io
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [NCR Voyix Commerce Platform APIs Catalog API](https://apis.io/collections/ncr/open-ncr-catalog-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Category API](https://apis.io/collections/ncr/open-ncr-category-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Order API](https://apis.io/collections/ncr/open-ncr-order-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Provisioning API](https://apis.io/collections/ncr/open-ncr-provisioning-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Security API](https://apis.io/collections/ncr/open-ncr-security-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Selling API](https://apis.io/collections/ncr/open-ncr-selling-api/)
+- [NCR Voyix Commerce Platform APIs Catalog Site API](https://apis.io/collections/ncr/open-ncr-site-api/)
+- [NCR Voyix Commerce Platform APIs](https://apis.io/collections/ncr/open-ncr-voyix-commerce-platform/)
+- [BSP HMAC Examples](https://apis.io/collections/ncr/postman-ncr-bsp-hmac-examples/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [NCR Voyix — jsonschema rules](https://apis.io/rules/ncr/ncr-jsonschema-spectral-rules/)
+- [NCR Voyix API Rules](https://apis.io/rules/ncr/ncr-spectral-rules/)
+- [NCR Voyix — voyix commerce platform rules](https://apis.io/rules/ncr/ncr-voyix-commerce-platform-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ncr Authentication](https://apis.io/security/ncr/ncr-authentication/)
+- [Ncr Domain Security](https://apis.io/security/ncr/ncr-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ncr Plans Pricing](https://apis.io/plans/ncr/ncr-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ncr Rate Limits](https://apis.io/rate-limits/ncr/ncr-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ncr Finops](https://apis.io/finops/ncr/ncr-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.ncrvoyix.com/)
-- [Website](https://www.ncratleos.com/)
-- [Developer Portal](https://developer.ncrvoyix.com/)
 - [Documentation](https://www.docs.ncr.com/)
-- [Authentication](https://github.com/NCRVoyix-Corporation/ncr-bsp-hmac)
-- [Rules](rules/ncr-voyix-commerce-platform-spectral-rules.yml)
-- [JSON Schema](json-schema/) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/)
-- [JSON-LD](json-ld/ncr-voyix-commerce-platform-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/ncr-vocabulary.yml)
-- [Plans](plans/ncr-plans-pricing.yml)
-- [Rate Limits](rate-limits/ncr-rate-limits.yml)
-- [Fin Ops](finops/ncr-finops.yml)
+- [Blog](https://www.ncrvoyix.com/resources/blog)
+- [GitHub](https://github.com/NCRVoyix-Corporation)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 25.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 36.9 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 13.4** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ncr/](https://apis.io/providers/ncr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for NCR Voyix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ncr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
